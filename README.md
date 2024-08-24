@@ -9,5 +9,6 @@ Currently, two official plugins are available:
 
 > 只解析了血缘展示，交互分解中。
 
-[OpenMetaData](https://docs.open-metadata.org/latest/quick-start/sandbox) 解析的血缘呈现效果
+[OpenMetaData](https://docs.open-metadata.org/latest/quick-start/sandbox) 解析的血缘呈现效果，结合了 [flink-sql-lineage](https://github.com/HamaWhiteGG/flink-sql-lineage) 血缘加工字段显示效果。
+
 ![血缘](./lineage.png)
