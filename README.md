@@ -7,7 +7,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-> 只解析了血缘展示，交互分解中
+> 只解析了血缘展示，交互分解中。
 
-血缘呈现效果
+[OpenMetaData](https://docs.open-metadata.org/latest/quick-start/sandbox) 解析的血缘呈现效果
 ![血缘](./lineage.png)
