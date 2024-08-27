@@ -9,12 +9,14 @@ import {
   ZOOM_TRANSITION_DURATION, 
   NODE_WIDTH, 
   NODE_HEIGHT,
-  EntityLineageDirection
+  EntityLineageDirection,
+  EdgeTypeEnum
 } from './entity.enum'
 import { t } from 'i18next';
 import CustomEdge from './CustomEdge'
 import CustomNode from './CustomNode'
 import LoadMoreNode from './LoadMoreNode'
+import { getConnectedEdges, getIncomers, getOutgoers } from '@xyflow/react'
 
 export const nodeTypes = {
   output: CustomNode,
@@ -535,11 +537,13 @@ export const getUpstreamDownstreamNodesEdges = (edges, nodes, currentName) => {
     // 整理出上游数据
     function findUpstream(node) {
         // 直接关系的上游
-        const directDownstream = edges.filter(edge => edge.toEntity.fqn === node.fullyQualifiedName)
+        const directDownstream = edges.filter(edge => {
+            return edge.toEntity.id === node.id
+        })
         upstreamEdges.push(...directDownstream)
         // 筛选出对应的节点
         directDownstream.forEach(edge => {
-            const toNode = nodes.find(item => item.fullyQualifiedName === edge.fromEntity.fqn)
+            const toNode = nodes.find(item => item.id === edge.fromEntity.id)
             // 过滤假值
             if(!isUndefined(toNode)) {
                 // 防止节点重复
@@ -555,11 +559,11 @@ export const getUpstreamDownstreamNodesEdges = (edges, nodes, currentName) => {
     // 整理出下游数据
     function findDownstream(node) {
         // 直接关系的下游
-        const directDownstream = edges.filter(edge => edge.fromEntity.fqn === node.fullyQualifiedName)
+        const directDownstream = edges.filter(edge => edge.fromEntity.id === node.id)
         downstreamEdges.push(...directDownstream)
         // 筛选出对应的节点
         directDownstream.forEach(edge => {
-            const toNode = nodes.find(item => item.fullyQualifiedName === edge.toEntity.fqn)
+            const toNode = nodes.find(item => item.id === edge.toEntity.id)
             // 过滤假值
             if(!isUndefined(toNode)) {
                 // 防止节点重复
@@ -753,38 +757,108 @@ export const onLoad = (reactFlowInstance) => {
     reactFlowInstance.zoomTo(ZOOM_VALUE);
 };
 
-// export const getBreadcrumbsFromFqn = (fqn, includeCurrent = false) => {
-//     const fqnList = Fqn.split(fqn);
-//     if (!includeCurrent) {
-//       fqnList.pop();
-//     }
-  
-//     return [
-//       ...fqnList.map((fqn) => ({
-//         name: fqn,
-//         url: '',
-//       })),
-//     ];
-//   };
+export const checkUpstreamDownstream = (id, data = []) => {
 
-// export const getServiceIcon = (source) => {
-//     const isDataAsset = NON_SERVICE_TYPE_ASSETS.includes(source.entityType);
+    const hasUpstream = data.some((edge) => edge.toEntity.id === id);
   
-//     if (isDataAsset) {
-//       return searchClassBase.getEntityIcon(
-//         source.entityType ?? '',
-//         'service-icon w-7 h-7',
-//         {
-//           color: DE_ACTIVE_COLOR,
-//         }
-//       );
-//     } else {
-//       return (
-//         <img
-//           alt="service-icon"
-//           className="inline service-icon h-7"
-//           src={serviceUtilClassBase.getServiceTypeLogo(source)}
-//         />
-//       );
-//     }
-// };
+    const hasDownstream = data.some(
+      (edge) => edge.fromEntity.id === id
+    );
+  
+    return { hasUpstream, hasDownstream };
+};
+
+export const getConnectedNodesEdges = (
+    selectedNode,
+    nodes,
+    edges,
+    direction
+  ) => {
+    const visitedNodes = new Set();
+    const outgoers = [];
+    const connectedEdges = [];
+    const stack = [selectedNode];
+    const currentNodeID = selectedNode.id;
+  
+    while (stack.length > 0) {
+      const currentNode = stack.pop();
+      if (currentNode && !visitedNodes.has(currentNode.id)) {
+        visitedNodes.add(currentNode.id);
+  
+        const { outgoers: childNodes, connectedEdges: childEdges } =
+          direction === EdgeTypeEnum.DOWN_STREAM
+            ? getOutgoersAndConnectedEdges(
+                currentNode,
+                nodes,
+                edges,
+                currentNodeID
+              )
+            : getIncomersAndConnectedEdges(
+                currentNode,
+                nodes,
+                edges,
+                currentNodeID
+              );
+  
+        stack.push(...childNodes);
+        outgoers.push(...childNodes);
+        connectedEdges.push(...childEdges);
+      }
+    }
+  
+    const childNodeFqn = outgoers.map(
+      (node) => node.data.node.fullyQualifiedName
+    );
+  
+    return {
+      nodes: outgoers,
+      edges: connectedEdges,
+      nodeFqn: childNodeFqn,
+    };
+}
+
+const getOutgoersAndConnectedEdges = (
+    node,
+    allNodes,
+    allEdges,
+    currentNodeID
+) => {
+    const outgoers = getOutgoers(node, allNodes, allEdges);
+    const connectedEdges = checkTarget(
+      getConnectedEdges([node], allEdges),
+      currentNodeID
+    );
+  
+    return { outgoers, connectedEdges };
+};
+  
+const getIncomersAndConnectedEdges = (
+    node,
+    allNodes,
+    allEdges,
+    currentNodeID
+) => {
+    const outgoers = getIncomers(node, allNodes, allEdges);
+    const connectedEdges = checkSource(
+      getConnectedEdges([node], allEdges),
+      currentNodeID
+    );
+  
+    return { outgoers, connectedEdges };
+};
+
+const checkTarget = (edgesObj, id) => {
+    const edges = edgesObj.filter((ed) => {
+        return ed.target !== id;
+    });
+
+    return edges;
+};
+
+const checkSource = (edgesObj, id) => {
+    const edges = edgesObj.filter((ed) => {
+        return ed.source !== id;
+    });
+
+    return edges;
+};

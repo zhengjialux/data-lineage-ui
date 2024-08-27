@@ -10,7 +10,8 @@ import {
   getClassifiedEdge,
   getAllTracedColumnEdge,
   getLayoutedElements,
-  onLoad
+  onLoad,
+  getConnectedNodesEdges
 } from './lineageUtils'
 import { EntityLineageNodeType, EntityLineageDirection } from './entity.enum'
 import { useNodesState, useEdgesState } from '@xyflow/react'
@@ -249,8 +250,32 @@ const LineageApp = ({ children }) => {
     }
   };
 
-  const onNodeCollapse = () => {
+  const onNodeCollapse = (node, direction) => {
+    const { nodeFqn, edges: connectedEdges } = getConnectedNodesEdges(
+      node,
+      nodes,
+      edges,
+      direction
+    );
 
+    setActiveNode(node);
+
+    const updatedNodes = (entityLineage.nodes ?? []).filter(
+      (item) => !nodeFqn.includes(item.fullyQualifiedName ?? '')
+    );
+    const updatedEdges = (entityLineage.edges ?? []).filter((val) => {
+      return !connectedEdges.some(
+        (connectedEdge) => connectedEdge.data.edge === val
+      );
+    });
+
+    setEntityLineage((pre) => {
+      return {
+        ...pre,
+        nodes: updatedNodes,
+        edges: updatedEdges,
+      };
+    });
   }
 
   const activityFeedContextValues = {

@@ -1,10 +1,10 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, useMemo } from 'react';
 import { useLineageProvider } from './LineageProvider'
 import classNames from 'classnames'
 import { EntityLineageNodeType, Position, DATATYPES_HAVING_SUBFIELDS, NODE_WIDTH, EdgeTypeEnum } from './entity.enum'
 import { Handle, getOutgoers, getIncomers } from '@xyflow/react'
 import { Button, Collapse, Divider, Typography } from 'antd';
-import { getEntityChildrenAndLabel, getEntityName, encodeLineageHandles } from './lineageUtils'
+import { getEntityChildrenAndLabel, getEntityName, encodeLineageHandles, checkUpstreamDownstream } from './lineageUtils'
 import { isEmpty } from 'lodash'
 import LineageNodeLabel from './LineageNodeLabel'
 import MinusIcon from '../../assets/control-minus.svg';
@@ -44,91 +44,81 @@ const CustomNode = (props) => {
     }, [children]);
 
 
-    const { isUpstreamNode, isDownstreamNode } = () => {
-        return {
-            isUpstreamNode: upstreamDownstreamData.upstreamNodes.some(
-                (item) => item.fullyQualifiedName === fullyQualifiedName
-            ),
-            isDownstreamNode: upstreamDownstreamData.downstreamNodes.some(
-                (item) => item.fullyQualifiedName === fullyQualifiedName
-            ),
-        }
-    }
+    const { isUpstreamNode, isDownstreamNode } = useMemo(() => {
+      return {
+        isUpstreamNode: upstreamDownstreamData.upstreamNodes.some(
+          (item) => item.fullyQualifiedName === fullyQualifiedName
+        ),
+        isDownstreamNode: upstreamDownstreamData.downstreamNodes.some(
+          (item) => item.fullyQualifiedName === fullyQualifiedName
+        ),
+      }
+    }, [fullyQualifiedName, upstreamDownstreamData])
 
     const getActiveNode = (nodeId) => {
-          return nodes.find((item) => item.id === nodeId);
-        }
-
-    const onExpand = (direction) => {
-          loadChildNodesHandler(node, direction);
-        }
-    
-      const onCollapse = (direction = EdgeTypeEnum.DOWN_STREAM) => {
-          const node = getActiveNode(id);
-          if (node) {
-            onNodeCollapse(node, direction);
-          }
-        }
-
-    const getExpandCollapseHandles = () => {
-        return (
-            <>
-                {hasOutgoers &&
-                    (isDownstreamNode || isRootNode) &&
-                    getCollapseHandle(EdgeTypeEnum.DOWN_STREAM, onCollapse)}
-                {isDownstreamLeafNode &&
-                    (isDownstreamNode || isRootNode) &&
-                    getExpandHandle(EdgeTypeEnum.DOWN_STREAM, () =>
-                        onExpand(EdgeTypeEnum.DOWN_STREAM)
-                    )}
-                {hasIncomers &&
-                    (isUpstreamNode || isRootNode) &&
-                    getCollapseHandle(EdgeTypeEnum.UP_STREAM, () =>
-                        onCollapse(EdgeTypeEnum.UP_STREAM)
-                    )}
-                {isUpstreamLeafNode &&
-                    (isUpstreamNode || isRootNode) &&
-                    getExpandHandle(EdgeTypeEnum.UP_STREAM, () =>
-                        onExpand(EdgeTypeEnum.UP_STREAM)
-                    )}
-            </>
-        )
+      return nodes.find((item) => item.id === nodeId);
     }
 
-    const { hasDownstream, hasUpstream } = () => {
-        return checkUpstreamDownstream(id, lineage ?? []);
-      };
+    const onExpand = (direction) => {
+      // loadChildNodesHandler(node, direction);
+    }
+    
+    const onCollapse = (direction = EdgeTypeEnum.DOWN_STREAM) => {
+      const node = getActiveNode(id);
+      if (node) {
+        onNodeCollapse(node, direction);
+      }
+    }
 
-      const checkUpstreamDownstream = (id, data = []) => {
-        const hasUpstream = data.some((edge) => edge.toEntity.id === id);
-      
-        const hasDownstream = data.some(
-          (edge) => edge.fromEntity.id === id
-        );
-      
-        return { hasUpstream, hasDownstream };
+    const getExpandCollapseHandles = () => {
+      return (
+        <>
+          {hasOutgoers &&
+            (isDownstreamNode || isRootNode) &&
+            getCollapseHandle(EdgeTypeEnum.DOWN_STREAM, onCollapse)}
+          {isDownstreamLeafNode &&
+            (isDownstreamNode || isRootNode) &&
+            getExpandHandle(EdgeTypeEnum.DOWN_STREAM, () =>
+              onExpand(EdgeTypeEnum.DOWN_STREAM)
+            )}
+          {hasIncomers &&
+            (isUpstreamNode || isRootNode) &&
+            getCollapseHandle(EdgeTypeEnum.UP_STREAM, () =>
+              onCollapse(EdgeTypeEnum.UP_STREAM)
+            )}
+          {isUpstreamLeafNode &&
+            (isUpstreamNode || isRootNode) &&
+            getExpandHandle(EdgeTypeEnum.UP_STREAM, () =>
+              onExpand(EdgeTypeEnum.UP_STREAM)
+            )}
+        </>
+      )
+    }
+
+    const { hasDownstream, hasUpstream } = useMemo(() => {
+      return checkUpstreamDownstream(id, lineage ?? []);
+    }, [id, lineage]);
+  
+    const { hasOutgoers, hasIncomers, isUpstreamLeafNode, isDownstreamLeafNode } = useMemo(() => {
+      const activeNode = getActiveNode(id);
+      if (!activeNode) {
+        return {
+          hasOutgoers: false,
+          hasIncomers: false,
+          isUpstreamLeafNode: false,
+          isDownstreamLeafNode: false,
+        };
+      }
+      const outgoers = getOutgoers(activeNode, nodes, edges);
+      const incomers = getIncomers(activeNode, nodes, edges);
+
+      return {
+        hasOutgoers: outgoers.length > 0,
+        hasIncomers: incomers.length > 0,
+        isUpstreamLeafNode: incomers.length === 0 && hasUpstream,
+        isDownstreamLeafNode: outgoers.length === 0 && hasDownstream,
       };
-    
-      const { hasOutgoers, hasIncomers, isUpstreamLeafNode, isDownstreamLeafNode } = () => {
-          const activeNode = getActiveNode(id);
-          if (!activeNode) {
-            return {
-              hasOutgoers: false,
-              hasIncomers: false,
-              isUpstreamLeafNode: false,
-              isDownstreamLeafNode: false,
-            };
-          }
-          const outgoers = getOutgoers(activeNode, nodes, edges);
-          const incomers = getIncomers(activeNode, nodes, edges);
-    
-          return {
-            hasOutgoers: outgoers.length > 0,
-            hasIncomers: incomers.length > 0,
-            isUpstreamLeafNode: incomers.length === 0 && hasUpstream,
-            isDownstreamLeafNode: outgoers.length === 0 && hasDownstream,
-          };
-        }
+    }, [id, nodes, edges, hasUpstream, hasDownstream])
 
     const getCollapseHandle = (
         direction,
@@ -142,7 +132,7 @@ const CustomNode = (props) => {
                 ? 'react-flow__handle-right'
                 : 'react-flow__handle-left'
             )}
-            icon={<MinusIcon className="lineage-expand-icon" />}
+            icon={<img src={MinusIcon} className="lineage-expand-icon" />}
             shape="circle"
             size="small"
             onClick={(e) => {
@@ -165,7 +155,7 @@ const CustomNode = (props) => {
                 ? 'react-flow__handle-right'
                 : 'react-flow__handle-left'
             )}
-            icon={<PlusIcon className="lineage-expand-icon" />}
+            icon={<img src={PlusIcon} className="lineage-expand-icon" />}
             shape="circle"
             size="small"
             onClick={(e) => {
@@ -343,7 +333,7 @@ const CustomNode = (props) => {
                     position={Position.Left}
                     type="target"
                   />
-                  {/* {getExpandCollapseHandles()} */}
+                  {getExpandCollapseHandles()}
                 </>
               );
       
@@ -357,7 +347,7 @@ const CustomNode = (props) => {
                     position={Position.Right}
                     type="source"
                   />
-                  {/* {getExpandCollapseHandles()} */}
+                  {getExpandCollapseHandles()}
                 </>
               );
       
@@ -381,7 +371,7 @@ const CustomNode = (props) => {
                     position={Position.Right}
                     type="source"
                   />
-                  {/* {getExpandCollapseHandles()} */}
+                  {getExpandCollapseHandles()}
                 </>
               );
           }
