@@ -131,7 +131,7 @@ export const createNodes = (
     uniqueNodesData.forEach(node => {
         const { childrenHeight } = getEntityChildrenAndLabel(node);
         const nodeHeight = isExpanded ? childrenHeight + 220 : NODE_HEIGHT
-        graph.setNode(node.id, { width: NODE_HEIGHT, height: nodeHeight })
+        graph.setNode(node.id, { width: NODE_WIDTH, height: nodeHeight })
     })
     // 对节点进行连线
     edgesData.forEach(edge => {
@@ -160,7 +160,7 @@ export const createNodes = (
             },
             position: {
                 x: position.x - NODE_WIDTH / 2,
-                y: position.y - NODE_HEIGHT / 2
+                y: position.y - position.height / 2
             }
         }
     })
@@ -588,7 +588,6 @@ export const centerNodePosition = (
   reactFlowInstance
 ) => {
   const { position, width } = node;
-  
   reactFlowInstance?.setCenter(
     position.x + (width ?? 1 / 2),
     position.y + NODE_HEIGHT / 2,

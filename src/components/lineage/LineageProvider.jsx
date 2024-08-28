@@ -84,10 +84,6 @@ const LineageApp = ({ children }) => {
     })
   }
 
-  // useEffect(() => {
-  //   repositionLayout();
-  // }, [expandAllColumns]);
-
   useEffect(() => {
     if (reactFlowInstance?.viewportInitialized) {
       repositionLayout(true); // Activate the root node
@@ -106,7 +102,6 @@ const LineageApp = ({ children }) => {
       expandAllColumns,
       columnsHavingLineage
     );
-
     setNodes(node);
     setEdges(edge);
     const rootNode = node.find((n) => n.data.isRootNode);

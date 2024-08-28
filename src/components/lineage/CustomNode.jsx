@@ -60,7 +60,7 @@ const CustomNode = (props) => {
     }
 
     const onExpand = (direction) => {
-      // loadChildNodesHandler(node, direction);
+      loadChildNodesHandler(node, direction);
     }
     
     const onCollapse = (direction = EdgeTypeEnum.DOWN_STREAM) => {
