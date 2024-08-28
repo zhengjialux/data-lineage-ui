@@ -219,12 +219,13 @@ const LineageApp = ({ children }) => {
     setExpandAllColumns(updatedVal);
   };
 
-  const onColumnHighlight = (column) => {
+  const onColumnHighlight = (column = '', targetColumn = '') => {
     setSelectedColumn(column);
     const { columnEdge } = getClassifiedEdge(edges);
     const { connectedColumnEdges } = getAllTracedColumnEdge(
       column,
-      columnEdge
+      columnEdge,
+      targetColumn
     );
 
     setTracedColumns(connectedColumnEdges);

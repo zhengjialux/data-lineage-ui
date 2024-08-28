@@ -620,9 +620,13 @@ export const getClassifiedEdge = (edges) => {
 };
 
 // 获取所有的关联的字段连接线
-export const getAllTracedColumnEdge = (column, columnEdge) => {
+export const getAllTracedColumnEdge = (column, columnEdge, targetColumn = '') => {
     const incomingColumnEdges = getAllTracedEdges(column, columnEdge, [], true);
-    const outGoingColumnEdges = getAllTracedEdges(column, columnEdge, [], false);
+    let outGoingColumnEdges = getAllTracedEdges(column, columnEdge, [], false);
+
+    if (targetColumn) {
+        outGoingColumnEdges = getAllTracedEdges(column, columnEdge, [], false, targetColumn);
+    }
   
     return {
       incomingColumnEdges,
@@ -640,9 +644,10 @@ const getAllTracedEdges = (
     selectedColumn,  // 选中的字段
     edges,  // 字段的连接线
     prevTraced = [],  // 追溯上一条连接线
-    isIncomer  // 输入还是输出
+    isIncomer,  // 输入还是输出
+    targetColumn  // 移入移出的目标
   ) => {
-    const tracedNodes = getTracedEdge(selectedColumn, edges, isIncomer);
+    const tracedNodes = getTracedEdge(selectedColumn, edges, isIncomer, targetColumn);
   
     return tracedNodes.reduce((memo, tracedNode) => {
       memo.push(tracedNode);
@@ -669,7 +674,8 @@ const getAllTracedEdges = (
 const getTracedEdge = (
     selectedColumn,
     edges,
-    isIncomer
+    isIncomer,
+    targetColumn = ''
   ) => {
     if (isEmpty(selectedColumn)) {
       return [];
@@ -678,9 +684,14 @@ const getTracedEdge = (
     const tracedEdgeIds = edges
       .filter((e) => {
         const { sourceHandle, targetHandle } = getColumnSourceTargetHandles(e);
-        const id = isIncomer ? targetHandle : sourceHandle;
-  
-        return id === selectedColumn;
+
+        if (targetColumn) {
+            return sourceHandle === selectedColumn && targetHandle === targetColumn;
+        } else {
+            const id = isIncomer ? targetHandle : sourceHandle;
+
+            return id === selectedColumn;
+        }
       })
       .map((e) => {
         const { sourceHandle, targetHandle } = getColumnSourceTargetHandles(e);

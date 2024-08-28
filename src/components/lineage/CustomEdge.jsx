@@ -163,10 +163,11 @@ const CustomEdge = ({
                                 }}
                                 onMouseEnter={() => {
                                     const fullyQualifiedName = decodeLineageHandles(sourceHandle)
-                                    onColumnHighlight(fullyQualifiedName ?? '')
+                                    const targetHandleFullyQualifiedName = decodeLineageHandles(targetHandle)
+                                    onColumnHighlight(fullyQualifiedName ?? '', targetHandleFullyQualifiedName ?? '')
                                 }}
                                 onMouseLeave={() => {
-                                    onColumnHighlight('')
+                                    onColumnHighlight()
                                 }}
                             />
                         </Tooltip>
