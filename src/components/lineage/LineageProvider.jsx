@@ -13,7 +13,7 @@ import {
   onLoad,
   getConnectedNodesEdges
 } from './lineageUtils'
-import { EntityLineageNodeType, EntityLineageDirection } from './entity.enum'
+import { EntityLineageNodeType, EntityLineageDirection, EdgeTypeEnum } from './entity.enum'
 import { useNodesState, useEdgesState } from '@xyflow/react'
 import { getLineageDataByFQN } from '../../serviceApi/getLineageDataApi'
 
@@ -44,6 +44,7 @@ const LineageApp = ({ children }) => {
   const [tracedColumns, setTracedColumns] = useState([]);
   const [tracedNodes, setTracedNodes] = useState([]);
   const [selectedColumn, setSelectedColumn] = useState('');
+  const [paginationData, setPaginationData] = useState({});
 
   useEffect(() => {
     getLineageDataByFQN(
@@ -235,7 +236,7 @@ const LineageApp = ({ children }) => {
     }
 
     if (node.type === EntityLineageNodeType.LOAD_MORE) {
-      // selectLoadMoreNode(node);
+      selectLoadMoreNode(node);
     } else {
       // setSelectedEdge(undefined);
       setActiveNode(node);
@@ -244,6 +245,60 @@ const LineageApp = ({ children }) => {
       // handleLineageTracing(node);
     }
   };
+
+  const selectLoadMoreNode = (node) => {
+    const { pagination_data, edgeType } = node.data.node;
+    setPaginationData(
+      (prevState) => {
+        const { parentId, index } = pagination_data;
+        const updatedParentData = prevState[parentId] || {
+          upstream: [],
+          downstream: [],
+        };
+        const updatedIndexList =
+          edgeType === EdgeTypeEnum.DOWN_STREAM
+            ? {
+                upstream: updatedParentData.upstream,
+                downstream: [index],
+              }
+            : {
+                upstream: [index],
+                downstream: updatedParentData.downstream,
+              };
+
+        const retnObj = {
+          ...prevState,
+          [parentId]: updatedIndexList,
+        };
+        if (entityLineage) {
+          initLineageChildMaps(entityLineage, childMap, retnObj);
+        }
+
+        return retnObj;
+      }
+    );
+  };
+
+  const initLineageChildMaps = (
+    lineageData,
+    childMapObj,
+    paginationObj
+  ) => {
+    if (lineageData && childMapObj) {
+      const { nodes: newNodes, edges } = getPaginatedChildMap(
+        lineageData,
+        childMapObj,
+        paginationObj,
+        lineageConfig.nodesPerLayer
+      );
+
+      setEntityLineage({
+        ...entityLineage,
+        nodes: newNodes,
+        edges: [...(entityLineage.edges ?? []), ...edges],
+      });
+    }
+  }
 
   const onNodeCollapse = (node, direction) => {
     const { nodeFqn, edges: connectedEdges } = getConnectedNodesEdges(

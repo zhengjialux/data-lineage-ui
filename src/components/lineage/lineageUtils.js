@@ -434,6 +434,7 @@ const flattenObj = (
             fullyQualifiedName: `load_more_${currentId}`,
             id: moreNodeId,
             type: 'load-more',
+            // 提供给获取更多节点的时候用
             pagination_data: {
                 index: endIndex,
                 parentId: currentId,
