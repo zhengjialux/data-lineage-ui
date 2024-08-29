@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { EntityLineageNodeType, Position, DATATYPES_HAVING_SUBFIELDS, NODE_WIDTH, EdgeTypeEnum } from './entity.enum'
 import { Handle, getOutgoers, getIncomers } from '@xyflow/react'
 import { Button, Collapse, Divider, Typography } from 'antd';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { getEntityChildrenAndLabel, getEntityName, encodeLineageHandles, checkUpstreamDownstream } from './lineageUtils'
 import { isEmpty } from 'lodash'
 import LineageNodeLabel from './LineageNodeLabel'
@@ -34,6 +35,7 @@ const CustomNode = (props) => {
     const { id, lineage, fullyQualifiedName } = node;
     const [isTraced, setIsTraced] = useState(false);
     const [filteredColumns, setFilteredColumns] = useState([]);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     const { children, childrenHeading } = getEntityChildrenAndLabel(node);
 
@@ -391,6 +393,18 @@ const CustomNode = (props) => {
             <div className="lineage-node-content">
               <div className="label-container bg-white">
                 <LineageNodeLabel node={node} />
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsExpanded((prevIsExpanded) => !prevIsExpanded);
+                  }}
+                  > 列 
+                  {isExpanded ? (
+                    <UpOutlined style={{ fontSize: '12px' }} />
+                  ) : (
+                    <DownOutlined style={{ fontSize: '12px' }} />
+                  )}
+                  </div>
                 <Typography.Text
                   style={{ fontWeight: 'bold' }}
                   ellipsis={{ tooltip: entityName }}
@@ -399,12 +413,15 @@ const CustomNode = (props) => {
                 </Typography.Text>
               </div>
               <Divider style={{ marginBottom: 0 }} />
-              <div className="lineage-node-content">
+              {/* 字段列表的显示控制 */}
+              {isExpanded && (
+                <div className="lineage-node-content">
                   {/* 字段渲染 */}
                   {filteredColumns.map((column) =>
                     renderColumnsData(column)
                   )}
               </div>
+              )}
           </div>
         </div>
     )
