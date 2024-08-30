@@ -24,17 +24,22 @@ const CustomNode = (props) => {
         selectedNode,
         expandAllColumns,
         tracedColumns,
+        tracedNodes,
         upstreamDownstreamData,
         columnsHavingLineage,
         loadChildNodesHandler,
         onColumnHighlight,
         onNodeCollapse
     } = useLineageProvider()
+    // 节点数据
     const { label, isNewNode, node = {}, isRootNode } = data;
     const isSelected = selectedNode === node;
     const { id, lineage, fullyQualifiedName } = node;
+    // 字段点击后高亮状态
     const [isTraced, setIsTraced] = useState(false);
+    // 字段数据
     const [filteredColumns, setFilteredColumns] = useState([]);
+    // 字段收起展开状态
     const [isExpanded, setIsExpanded] = useState(true);
 
     const { children, childrenHeading } = getEntityChildrenAndLabel(node);
@@ -45,6 +50,9 @@ const CustomNode = (props) => {
         }
     }, [children]);
 
+    useEffect(() => {
+      setIsTraced(tracedNodes.includes(id));
+    }, [tracedNodes, id]);
 
     const { isUpstreamNode, isDownstreamNode } = useMemo(() => {
       return {
@@ -61,10 +69,12 @@ const CustomNode = (props) => {
       return nodes.find((item) => item.id === nodeId);
     }
 
+    // 展开节点
     const onExpand = (direction) => {
       loadChildNodesHandler(node, direction);
     }
     
+    // 收缩节点
     const onCollapse = (direction = EdgeTypeEnum.DOWN_STREAM) => {
       const node = getActiveNode(id);
       if (node) {
@@ -72,6 +82,7 @@ const CustomNode = (props) => {
       }
     }
 
+    // 返回展开收缩句柄，赋值对应事件处理函数
     const getExpandCollapseHandles = () => {
       return (
         <>
@@ -122,6 +133,7 @@ const CustomNode = (props) => {
       };
     }, [id, nodes, edges, hasUpstream, hasDownstream])
 
+    // 节点收缩的句柄
     const getCollapseHandle = (
         direction,
         onClickHandler
@@ -145,6 +157,7 @@ const CustomNode = (props) => {
         );
       }
 
+    // 节点展开的句柄
     const getExpandHandle = (
         direction,
         onClickHandler
@@ -212,6 +225,7 @@ const CustomNode = (props) => {
         )
     }
 
+    // 获取字段的句柄
     const getColumnHandle = (
         nodeType,
         className,
@@ -234,6 +248,7 @@ const CustomNode = (props) => {
         }
       };
 
+      // 字段句柄
       const getHandleByType = (
         position,
         type,
@@ -251,6 +266,7 @@ const CustomNode = (props) => {
         );
       };
 
+      // 字段下关联字段的折叠布局（未验证）
     const renderRecord = (record) => {
         const isColumnTraced = tracedColumns.includes(
             record.fullyQualifiedName ?? ''
@@ -309,6 +325,7 @@ const CustomNode = (props) => {
         if (DATATYPES_HAVING_SUBFIELDS.includes(dataType)) {
           return renderRecord(column);
         } else {
+          // 字段列表走这里
           const isColumnTraced = tracedColumns.includes(fullyQualifiedName ?? '');
           if (!isColumnVisible(column)) {
             return null;
@@ -379,6 +396,7 @@ const CustomNode = (props) => {
           }
     }
 
+    // 当前节点的全称
     const entityName = getEntityName(node)
 
     return (
@@ -386,7 +404,7 @@ const CustomNode = (props) => {
             className={classNames(
                 'lineage-node p-0',
                 isSelected ? 'custom-node-header-active' : 'custom-node-header-normal',
-                { 'custom-node-header-tracing': isTraced }
+                // { 'custom-node-header-tracing': isTraced }
             )}
         >
             {getHandle()}
@@ -394,6 +412,7 @@ const CustomNode = (props) => {
               <div className="label-container bg-white">
                 <LineageNodeLabel node={node} />
                 <div
+                  style={{color: '#999'}}
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsExpanded((prevIsExpanded) => !prevIsExpanded);

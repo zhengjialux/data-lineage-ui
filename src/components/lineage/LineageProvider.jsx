@@ -40,12 +40,13 @@ const LineageApp = ({ children }) => {
   const [activeNode, setActiveNode] = useState();
   const [reactFlowInstance, setReactFlowInstance] = useState();
   const [selectedNode, setSelectedNode] = useState({});
-  const [expandAllColumns, setExpandAllColumns] = useState(true);  // 打开字段
+  const [expandAllColumns, setExpandAllColumns] = useState(true);  // 是否显示字段列表
   const [tracedColumns, setTracedColumns] = useState([]);
   const [tracedNodes, setTracedNodes] = useState([]);
   const [selectedColumn, setSelectedColumn] = useState('');
   const [paginationData, setPaginationData] = useState({});
 
+  // 获取血缘数据
   useEffect(() => {
     getLineageDataByFQN(
       // {
@@ -85,6 +86,7 @@ const LineageApp = ({ children }) => {
     })
   }
 
+  // 插件初始化布局
   useEffect(() => {
     if (reactFlowInstance?.viewportInitialized) {
       repositionLayout(true); // Activate the root node
@@ -121,6 +123,7 @@ const LineageApp = ({ children }) => {
     }
   }
 
+  // 更新血缘数据时，重新渲染
   useEffect(() => {
     redrawLineage(entityLineage)
   }, [entityLineage])
@@ -165,7 +168,7 @@ const LineageApp = ({ children }) => {
     }
   }
 
-  // 当前节点详情
+  // 获取额外节点数据
   const loadChildNodesHandler = async (node, direction) => {
     try {
       const res = await getLineageDataByFQN(
@@ -210,15 +213,12 @@ const LineageApp = ({ children }) => {
     centerNodePosition(node, reactFlowInstance);
   };
 
+  // 初始化插件，并获取对象实例
   const onInitReactFlow = (reactFlowInstance) => {
     setReactFlowInstance(reactFlowInstance);
   };
 
-  const toggleColumnView = () => {
-    const updatedVal = !expandAllColumns;
-    setExpandAllColumns(updatedVal);
-  };
-
+  // 血缘连接线高亮
   const onColumnHighlight = (column = '', targetColumn = '') => {
     setSelectedColumn(column);
     const { columnEdge } = getClassifiedEdge(edges);
@@ -231,14 +231,17 @@ const LineageApp = ({ children }) => {
     setTracedColumns(connectedColumnEdges);
   }
 
+  // 节点点击事件
   const onNodeClick = (node) => {
     if (!node) {
       return;
     }
 
     if (node.type === EntityLineageNodeType.LOAD_MORE) {
+      // 更多节点出发事件
       selectLoadMoreNode(node);
     } else {
+      // 当前节点的操作
       // setSelectedEdge(undefined);
       setActiveNode(node);
       setSelectedNode(node.data.node);
@@ -247,6 +250,7 @@ const LineageApp = ({ children }) => {
     }
   };
 
+  // 获取超出限制的血缘节点
   const selectLoadMoreNode = (node) => {
     const { pagination_data, edgeType } = node.data.node;
     setPaginationData(
@@ -280,6 +284,7 @@ const LineageApp = ({ children }) => {
     );
   };
 
+  // 重新初始化血缘呈现
   const initLineageChildMaps = (
     lineageData,
     childMapObj,
@@ -301,6 +306,7 @@ const LineageApp = ({ children }) => {
     }
   }
 
+  // 节点展开收缩事件
   const onNodeCollapse = (node, direction) => {
     const { nodeFqn, edges: connectedEdges } = getConnectedNodesEdges(
       node,
@@ -309,17 +315,21 @@ const LineageApp = ({ children }) => {
       direction
     );
 
+    // 当前选中的节点
     setActiveNode(node);
 
+    // 更新的节点，排除掉nodeFqn中包含的节点，就是目前收缩节点没有关联的相关节点
     const updatedNodes = (entityLineage.nodes ?? []).filter(
       (item) => !nodeFqn.includes(item.fullyQualifiedName ?? '')
     );
+    // 更新的连接线，排除掉entityLineage.edges中包含connectedEdges中的连线数据，就是目前收缩节点没有关联的相关连线
     const updatedEdges = (entityLineage.edges ?? []).filter((val) => {
       return !connectedEdges.some(
         (connectedEdge) => connectedEdge.data.edge === val
       );
     });
 
+    // 更新血缘数据
     setEntityLineage((pre) => {
       return {
         ...pre,
@@ -342,7 +352,6 @@ const LineageApp = ({ children }) => {
     onEdgesChange,
     onNodesChange,
     loadChildNodesHandler,
-    toggleColumnView,
     onColumnHighlight,
     onNodeCollapse,
     onNodeClick

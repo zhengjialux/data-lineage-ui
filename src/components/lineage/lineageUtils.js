@@ -18,6 +18,7 @@ import CustomNode from './CustomNode'
 import LoadMoreNode from './LoadMoreNode'
 import { getConnectedEdges, getIncomers, getOutgoers } from '@xyflow/react'
 
+// 节点自定义
 export const nodeTypes = {
   output: CustomNode,
   input: CustomNode,
@@ -25,6 +26,7 @@ export const nodeTypes = {
   'load-more': LoadMoreNode,
 };
 
+// 连接线自定义
 export const customEdges = { buttonedge: CustomEdge };
 
 // 加密
@@ -47,6 +49,7 @@ export const getColumnSourceTargetHandles = (obj = {}) => {
   };
 };
 
+// 血缘数据处理
 export const getChildMap = (lineageData, ownerName) => {
     const nodeSet = new Set();
     const parsedNodes = []
@@ -80,6 +83,7 @@ export const getChildMap = (lineageData, ownerName) => {
     }
 }
 
+// 血缘节点数量限制处理
 export const getPaginatedChildMap = (
     lineageData,  // 全量数据（节点，连线）
     childMap,
@@ -212,7 +216,8 @@ export const createEdges = (
                                 type: 'buttonedge',
                                 // type: 'default',
                                 markerEnd: {
-                                    type: MarkerType.ArrowClosed,
+                                    // 箭头控制
+                                    // type: MarkerType.ArrowClosed,
                                 },
                                 data: {
                                     edge,
@@ -768,6 +773,7 @@ export const onLoad = (reactFlowInstance) => {
     reactFlowInstance.zoomTo(ZOOM_VALUE);
 };
 
+// 检查当前id是否有对应上下游元素
 export const checkUpstreamDownstream = (id, data = []) => {
 
     const hasUpstream = data.some((edge) => edge.toEntity.id === id);
@@ -776,26 +782,33 @@ export const checkUpstreamDownstream = (id, data = []) => {
       (edge) => edge.fromEntity.id === id
     );
   
+    // 有返回true，否则false
     return { hasUpstream, hasDownstream };
 };
 
+// 获取当前收缩节点时的其他所有连接线和节点
 export const getConnectedNodesEdges = (
-    selectedNode,
-    nodes,
-    edges,
-    direction
+    selectedNode,  // 当前收缩的节点
+    nodes,  // 全量节点数据
+    edges,  // 全量连接线数据
+    direction  // 方向：上游还是下游
   ) => {
-    const visitedNodes = new Set();
-    const outgoers = [];
-    const connectedEdges = [];
-    const stack = [selectedNode];
-    const currentNodeID = selectedNode.id;
+    const visitedNodes = new Set();  // 递归过的节点
+    const outgoers = [];    // 相关边缘节点
+    const connectedEdges = [];  // 相关边缘连线
+    const stack = [selectedNode];   // 存要循环的节点
+    const currentNodeID = selectedNode.id;  // 当前收缩的节点
   
+    // 递归循环
     while (stack.length > 0) {
+      // 当前循环的元素，并删除
       const currentNode = stack.pop();
+      // 性能优化
       if (currentNode && !visitedNodes.has(currentNode.id)) {
+        // 递归过的存起来，避免重复
         visitedNodes.add(currentNode.id);
   
+        // 获取对应上游、下游数据
         const { outgoers: childNodes, connectedEdges: childEdges } =
           direction === EdgeTypeEnum.DOWN_STREAM
             ? getOutgoersAndConnectedEdges(
@@ -810,31 +823,38 @@ export const getConnectedNodesEdges = (
                 edges,
                 currentNodeID
               );
-  
+              
+        // 每次都将获取到的边缘节点都存到堆栈中，用于递归循环
         stack.push(...childNodes);
+        // 边缘节点全部存起来
         outgoers.push(...childNodes);
+        // 边缘连线全部存起来
         connectedEdges.push(...childEdges);
       }
     }
-  
+    
+    // 提取节点全量完整名称
     const childNodeFqn = outgoers.map(
       (node) => node.data.node.fullyQualifiedName
     );
   
     return {
-      nodes: outgoers,
-      edges: connectedEdges,
-      nodeFqn: childNodeFqn,
+      nodes: outgoers,  // 收缩涉及的额外节点
+      edges: connectedEdges,  // 收缩涉及的额外连接线
+      nodeFqn: childNodeFqn,  //  取出节点全称
     };
 }
 
+// 查询下游连接线和节点
 const getOutgoersAndConnectedEdges = (
     node,
     allNodes,
     allEdges,
     currentNodeID
 ) => {
+    // 获取关联的下游边缘节点
     const outgoers = getOutgoers(node, allNodes, allEdges);
+    // 下游只需获取排除目标连接线的连线数据
     const connectedEdges = checkTarget(
       getConnectedEdges([node], allEdges),
       currentNodeID
@@ -842,14 +862,17 @@ const getOutgoersAndConnectedEdges = (
   
     return { outgoers, connectedEdges };
 };
-  
+
+// 查询上游连接线和节点
 const getIncomersAndConnectedEdges = (
     node,
     allNodes,
     allEdges,
     currentNodeID
 ) => {
+    // 获取关联的上游边缘节点
     const outgoers = getIncomers(node, allNodes, allEdges);
+    // 上游只需获取排除源头连接线的连线数据
     const connectedEdges = checkSource(
       getConnectedEdges([node], allEdges),
       currentNodeID
@@ -858,6 +881,7 @@ const getIncomersAndConnectedEdges = (
     return { outgoers, connectedEdges };
 };
 
+// 排除目标连接线不等于当前id的
 const checkTarget = (edgesObj, id) => {
     const edges = edgesObj.filter((ed) => {
         return ed.target !== id;
@@ -866,6 +890,7 @@ const checkTarget = (edgesObj, id) => {
     return edges;
 };
 
+// 排除源头连接线不等于当前id的
 const checkSource = (edgesObj, id) => {
     const edges = edgesObj.filter((ed) => {
         return ed.source !== id;

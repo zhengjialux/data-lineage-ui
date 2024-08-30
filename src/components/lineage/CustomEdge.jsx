@@ -38,86 +38,88 @@ const CustomEdge = ({
     data,
     selected
 }) => {
-    const {
-        edge,
-        isColumnLineage,
-        sourceHandle,
-        targetHandle,
-        isPipelineRootNode,
-        fromColumns,
-        ...rest
-      } = data;
-    const offset = 4;
+  // 连接线数据 
+  const {
+      edge,
+      isColumnLineage,
+      sourceHandle,
+      targetHandle,
+      isPipelineRootNode,
+      fromColumns,
+      ...rest
+    } = data;
+    
+  const offset = 4;
 
-    const { fromEntity, toEntity, pipeline, pipelineEntityType } = data?.edge ?? {};
+  const { fromEntity, toEntity, pipeline, pipelineEntityType } = data?.edge ?? {};
 
-    const theme = {
-        primaryColor: '#0968da',
-        infoColor: '#2196f3',
-        successColor: '#008376',
-        warningColor: '#ffc34e',
-        errorColor: '#ff4c3b',
+  const theme = {
+      primaryColor: '#0968da',
+      infoColor: '#2196f3',
+      successColor: '#008376',
+      warningColor: '#ffc34e',
+      errorColor: '#ff4c3b',
+  };
+
+  const {
+      tracedNodes,
+      tracedColumns,
+      onColumnHighlight
+  } = useLineageProvider();
+
+  const [edgePath, edgeCenterX, edgeCenterY] = getBezierPath({
+      sourceX,
+      sourceY,
+      sourcePosition,
+      targetX,
+      targetY,
+      targetPosition,
+    });
+    const [invisibleEdgePath] = getBezierPath({
+      sourceX: sourceX + offset,
+      sourceY: sourceY + offset,
+      sourcePosition,
+      targetX: targetX + offset,
+      targetY: targetY + offset,
+      targetPosition,
+    });
+    const [invisibleEdgePath1] = getBezierPath({
+      sourceX: sourceX - offset,
+      sourceY: sourceY - offset,
+      sourcePosition,
+      targetX: targetX - offset,
+      targetY: targetY - offset,
+      targetPosition,
+    });
+
+    const getInvisiblePath = (path) => {
+      return (
+        <path
+          className="react-flow__edge-path"
+          d={path}
+          data-testid="react-flow-edge-path"
+          id={id}
+          markerEnd={markerEnd}
+          style={{ ...style, strokeWidth: '6px', opacity: 0 }}
+        />
+      );
     };
 
-    const {
-        tracedNodes,
-        tracedColumns,
-        onColumnHighlight
-    } = useLineageProvider();
-
-    const [edgePath, edgeCenterX, edgeCenterY] = getBezierPath({
-        sourceX,
-        sourceY,
-        sourcePosition,
-        targetX,
-        targetY,
-        targetPosition,
-      });
-      const [invisibleEdgePath] = getBezierPath({
-        sourceX: sourceX + offset,
-        sourceY: sourceY + offset,
-        sourcePosition,
-        targetX: targetX + offset,
-        targetY: targetY + offset,
-        targetPosition,
-      });
-      const [invisibleEdgePath1] = getBezierPath({
-        sourceX: sourceX - offset,
-        sourceY: sourceY - offset,
-        sourcePosition,
-        targetX: targetX - offset,
-        targetY: targetY - offset,
-        targetPosition,
-      });
-
-      const getInvisiblePath = (path) => {
-        return (
-          <path
-            className="react-flow__edge-path"
-            d={path}
-            data-testid="react-flow-edge-path"
-            id={id}
-            markerEnd={markerEnd}
-            style={{ ...style, strokeWidth: '6px', opacity: 0 }}
-          />
-        );
-      };
-
-      const isColumnHighlighted = () => {
-        if (!isColumnLineage) {
-          return false;
-        }
-    
-        const decodedHandles = getColumnSourceTargetHandles({
-          sourceHandle,
-          targetHandle,
-        });
-    
-        return (
-          tracedColumns.includes(decodedHandles.sourceHandle ?? '') &&
-          tracedColumns.includes(decodedHandles.targetHandle ?? '')
-        );
+    const isColumnHighlighted = () => {
+      if (!isColumnLineage) {
+        return false;
       }
+  
+      const decodedHandles = getColumnSourceTargetHandles({
+        sourceHandle,
+        targetHandle,
+      });
+  
+      return (
+        tracedColumns.includes(decodedHandles.sourceHandle ?? '') &&
+        tracedColumns.includes(decodedHandles.targetHandle ?? '')
+      );
+    }
 
       // 连接线高亮样式
     const updatedStyle = () => {
