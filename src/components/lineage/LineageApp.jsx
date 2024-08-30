@@ -16,7 +16,8 @@ const LineageApp = () => {
         onEdgesChange,
         onNodesChange,
         onNodeClick,
-        onEdgeClick
+        onEdgeClick,
+        onPaneClick
     } = useLineageProvider()
 
     return (
@@ -47,6 +48,7 @@ const LineageApp = () => {
                     onEdgeClick(data);
                     _e.stopPropagation();
                 }}
+                onPaneClick={onPaneClick}
             >
                 <Background gap={12} size={1} />
             </ReactFlow>

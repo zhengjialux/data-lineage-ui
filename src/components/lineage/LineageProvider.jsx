@@ -289,6 +289,15 @@ const LineageApp = ({ children }) => {
     setIsDrawerOpen(true);
   };
 
+  // 点击面板清空所有
+  const onPaneClick = () => {
+    setIsDrawerOpen(false);
+    setTracedNodes([]);
+    setTracedColumns([]);
+    setActiveNode(undefined);
+    setSelectedNode({});
+  };
+
   // 血缘节点追溯连线高亮（备用）
   const handleLineageTracing = (selectedNode) => {
     const { normalEdge } = getClassifiedEdge(edges);
@@ -419,7 +428,8 @@ const LineageApp = ({ children }) => {
     onColumnHighlight,
     onNodeCollapse,
     onNodeClick,
-    onEdgeClick
+    onEdgeClick,
+    onPaneClick
   }
 
   return (
