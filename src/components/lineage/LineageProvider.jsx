@@ -16,6 +16,7 @@ import {
 import { EntityLineageNodeType, EntityLineageDirection, EdgeTypeEnum } from './entity.enum'
 import { useNodesState, useEdgesState } from '@xyflow/react'
 import { getLineageDataByFQN } from '../../serviceApi/getLineageDataApi'
+import { Drawer } from 'antd'
 
 export const LineageContext = createContext({});
 
@@ -45,6 +46,7 @@ const LineageApp = ({ children }) => {
   const [tracedNodes, setTracedNodes] = useState([]);
   const [selectedColumn, setSelectedColumn] = useState('');
   const [paginationData, setPaginationData] = useState({});
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   // 获取血缘数据
   useEffect(() => {
@@ -118,6 +120,8 @@ const LineageApp = ({ children }) => {
 
     // 以源节点为中心居中视图
     centerNodePosition(rootNode, reactFlowInstance);
+
+    // 默认展示根节点详情
     if (activateNode) {
       onNodeClick(rootNode);
     }
@@ -245,7 +249,8 @@ const LineageApp = ({ children }) => {
       // setSelectedEdge(undefined);
       setActiveNode(node);
       setSelectedNode(node.data.node);
-      // setIsDrawerOpen(true);
+      // 打开抽屉
+      setIsDrawerOpen(true);
       // handleLineageTracing(node);
     }
   };
@@ -360,6 +365,16 @@ const LineageApp = ({ children }) => {
   return (
     <LineageContext.Provider value={activityFeedContextValues}>
       {children}
+      
+      <Drawer
+          title="详情"
+          placement='right'
+          onClose={() => setIsDrawerOpen(false)}
+          open={isDrawerOpen}
+          mask={false}
+      >
+          <p>{JSON.stringify(selectedNode)}</p>
+      </Drawer>
     </LineageContext.Provider> 
   )
 }

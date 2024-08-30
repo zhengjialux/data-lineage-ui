@@ -7,15 +7,11 @@ import { MAX_ZOOM_VALUE, MIN_ZOOM_VALUE } from './entity.enum'
 import { nodeTypes, customEdges } from './lineageUtils'
 import { useLineageProvider } from './LineageProvider'
 import '@xyflow/react/dist/style.css';
-import { Drawer } from 'antd'
-import { useState } from 'react';
 
 const LineageApp = () => {
-    const [open, setOpen] = useState(false)
     const {
         edges,
         nodes,
-        selectedNode,
         onInitReactFlow,
         onEdgesChange,
         onNodesChange,
@@ -40,23 +36,18 @@ const LineageApp = () => {
                 onNodesChange={onNodesChange}
                 selectNodesOnDrag={false}    // 所有节点选择是否可拖动
                 onInit={onInitReactFlow}     // viewport初始化事件
+                // 节点点击事件
                 onNodeClick={(_e, node) => {
                     onNodeClick(node);
-                    // 打开抽屉
-                    setOpen(true)
                     _e.stopPropagation();
                 }}
+                // 连接线点击事件
+                // onEdgeClick={(_e, data) => {
+                //     onEdgeClick(data);
+                //     _e.stopPropagation();
+                // }}
             >
                 <Background gap={12} size={1} />
-                <Drawer
-                    title="详情"
-                    placement='right'
-                    closable={false}
-                    onClose={() => setOpen(false)}
-                    open={open}
-                >
-                    <p>{JSON.stringify(selectedNode)}</p>
-                </Drawer>
             </ReactFlow>
         </ReactFlowProvider>
     )
