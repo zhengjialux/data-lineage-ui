@@ -21,32 +21,43 @@ import { Drawer } from 'antd'
 export const LineageContext = createContext({});
 
 const LineageApp = ({ children }) => {
-  const [childMap, setChildMap] = useState({})
+  // 血缘数量配置
   const [lineageConfig, setLineageConfig] = useState({
     upstreamDepth: 3,
     downstreamDepth: 3,
     nodesPerLayer: 50,
   });
-  const [columnsHavingLineage, setColumnsHavingLineage] = useState([]);
-  // 血缘关系对象
+  // 血缘数据详情
+  const [childMap, setChildMap] = useState({})
+  // 血缘数据呈现对象
   const [entityLineage, setEntityLineage] = useState({})
+  // 血缘节点连线布局数据
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  // 上下游归类
   const [upstreamDownstreamData, setUpstreamDownstreamData] = useState({
     downstreamEdges: [],
     upstreamEdges: [],
     downstreamNodes: [],
     upstreamNodes: [],
   });
-  const [activeNode, setActiveNode] = useState();
+  // reactflow 实例对象
   const [reactFlowInstance, setReactFlowInstance] = useState();
+  // 当前选中的节点对象
   const [selectedNode, setSelectedNode] = useState({});
-  const [expandAllColumns, setExpandAllColumns] = useState(true);  // 是否显示字段列表
+  // 当前触发的节点
+  const [activeNode, setActiveNode] = useState();
+  // 追溯有关系的关联字段
   const [tracedColumns, setTracedColumns] = useState([]);
+  // 详情抽屉状态
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  // ----------------- 备用字段 -------------------
+  // 是否显示字段列表
+  const [expandAllColumns, setExpandAllColumns] = useState(true);  
+  const [columnsHavingLineage, setColumnsHavingLineage] = useState([]);
   const [tracedNodes, setTracedNodes] = useState([]);
   const [selectedColumn, setSelectedColumn] = useState('');
   const [paginationData, setPaginationData] = useState({});
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   // 获取血缘数据
   useEffect(() => {
