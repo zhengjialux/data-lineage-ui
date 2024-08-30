@@ -21,12 +21,6 @@ import { Drawer } from 'antd'
 export const LineageContext = createContext({});
 
 const LineageApp = ({ children }) => {
-  // 血缘数量配置
-  const [lineageConfig, setLineageConfig] = useState({
-    upstreamDepth: 3,
-    downstreamDepth: 3,
-    nodesPerLayer: 50,
-  });
   // 血缘数据详情
   const [childMap, setChildMap] = useState({})
   // 血缘数据呈现对象
@@ -54,10 +48,20 @@ const LineageApp = ({ children }) => {
   // ----------------- 备用字段 -------------------
   // 是否显示字段列表
   const [expandAllColumns, setExpandAllColumns] = useState(true);  
+  // 连接线关联的所有血缘字段
   const [columnsHavingLineage, setColumnsHavingLineage] = useState([]);
+  // 追溯有关系的关联节点
   const [tracedNodes, setTracedNodes] = useState([]);
+  // 选中的字段
   const [selectedColumn, setSelectedColumn] = useState('');
+  // 血缘节点数量控制
   const [paginationData, setPaginationData] = useState({});
+  // 血缘数量配置
+  const [lineageConfig, setLineageConfig] = useState({
+    upstreamDepth: 3,
+    downstreamDepth: 3,
+    nodesPerLayer: 50,
+  });
 
   // 获取血缘数据
   useEffect(() => {
@@ -293,6 +297,7 @@ const LineageApp = ({ children }) => {
           [parentId]: updatedIndexList,
         };
         if (entityLineage) {
+          // 使用新的位置获取额外血缘数据
           initLineageChildMaps(entityLineage, childMap, retnObj);
         }
 
