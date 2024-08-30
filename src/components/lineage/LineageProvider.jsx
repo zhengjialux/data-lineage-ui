@@ -56,6 +56,8 @@ const LineageApp = ({ children }) => {
   const [selectedColumn, setSelectedColumn] = useState('');
   // 血缘节点数量控制
   const [paginationData, setPaginationData] = useState({});
+  // 选中的连接线
+  const [selectedEdge, setSelectedEdge] = useState();
   // 血缘数量配置
   const [lineageConfig, setLineageConfig] = useState({
     upstreamDepth: 3,
@@ -260,15 +262,30 @@ const LineageApp = ({ children }) => {
       // 更多节点出发事件
       selectLoadMoreNode(node);
     } else {
-      // 当前节点的操作
-      // setSelectedEdge(undefined);
+      // 当前节点的点击操作
+      // 清空选中的连接线
+      setSelectedEdge(undefined);
+      // 保存触发的节点
       setActiveNode(node);
+      // 保存选中的节点
       setSelectedNode(node.data.node);
-      // 打开抽屉
+      // 打开详情抽屉
       setIsDrawerOpen(true);
-      // 血缘追溯连线高亮
+      // 血缘节点追溯连线高亮
       // handleLineageTracing(node);
     }
+  };
+
+  // 连接线点击事件
+  const onEdgeClick = (edge) => {
+    // 保存选中的连接线
+    setSelectedEdge(edge);
+    // 清空触发节点
+    setActiveNode(undefined);
+    // 清空选中的节点
+    setSelectedNode({});
+    // 打开详情抽屉
+    setIsDrawerOpen(true);
   };
 
   // 获取超出限制的血缘节点
@@ -376,7 +393,8 @@ const LineageApp = ({ children }) => {
     loadChildNodesHandler,
     onColumnHighlight,
     onNodeCollapse,
-    onNodeClick
+    onNodeClick,
+    onEdgeClick
   }
 
   return (
@@ -391,6 +409,7 @@ const LineageApp = ({ children }) => {
           mask={false}
       >
           <p>{JSON.stringify(selectedNode)}</p>
+          <p>{JSON.stringify(selectedEdge)}</p>
       </Drawer>
     </LineageContext.Provider> 
   )

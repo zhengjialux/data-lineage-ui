@@ -15,7 +15,8 @@ const LineageApp = () => {
         onInitReactFlow,
         onEdgesChange,
         onNodesChange,
-        onNodeClick
+        onNodeClick,
+        onEdgeClick
     } = useLineageProvider()
 
     return (
@@ -42,10 +43,10 @@ const LineageApp = () => {
                     _e.stopPropagation();
                 }}
                 // 连接线点击事件
-                // onEdgeClick={(_e, data) => {
-                //     onEdgeClick(data);
-                //     _e.stopPropagation();
-                // }}
+                onEdgeClick={(_e, data) => {
+                    onEdgeClick(data);
+                    _e.stopPropagation();
+                }}
             >
                 <Background gap={12} size={1} />
             </ReactFlow>
