@@ -251,6 +251,7 @@ const LineageApp = ({ children }) => {
       setSelectedNode(node.data.node);
       // 打开抽屉
       setIsDrawerOpen(true);
+      // 血缘追溯连线高亮
       // handleLineageTracing(node);
     }
   };
