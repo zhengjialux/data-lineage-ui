@@ -11,7 +11,8 @@ import {
   getAllTracedColumnEdge,
   getLayoutedElements,
   onLoad,
-  getConnectedNodesEdges
+  getConnectedNodesEdges,
+  getAllTracedNodes
 } from './lineageUtils'
 import { EntityLineageNodeType, EntityLineageDirection, EdgeTypeEnum } from './entity.enum'
 import { useNodesState, useEdgesState } from '@xyflow/react'
@@ -287,6 +288,30 @@ const LineageApp = ({ children }) => {
     // 打开详情抽屉
     setIsDrawerOpen(true);
   };
+
+  // 血缘节点追溯连线高亮（备用）
+  const handleLineageTracing = (selectedNode) => {
+    const { normalEdge } = getClassifiedEdge(edges);
+    const incomingNode = getAllTracedNodes(
+      selectedNode,
+      nodes,
+      normalEdge,
+      [],
+      true
+    );
+    const outgoingNode = getAllTracedNodes(
+      selectedNode,
+      nodes,
+      normalEdge,
+      [],
+      false
+    );
+    const incomerIds = incomingNode.map((incomer) => incomer.id);
+    const outgoerIds = outgoingNode.map((outGoer) => outGoer.id);
+    const connectedNodeIds = [...outgoerIds, ...incomerIds, selectedNode.id];
+    setTracedNodes(connectedNodeIds);
+    setTracedColumns([]);
+  }
 
   // 获取超出限制的血缘节点
   const selectLoadMoreNode = (node) => {

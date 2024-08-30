@@ -16,7 +16,7 @@ import { t } from 'i18next';
 import CustomEdge from './CustomEdge'
 import CustomNode from './CustomNode'
 import LoadMoreNode from './LoadMoreNode'
-import { getConnectedEdges, getIncomers, getOutgoers } from '@xyflow/react'
+import { getConnectedEdges, getIncomers, getOutgoers, isNode } from '@xyflow/react'
 
 // 节点自定义
 export const nodeTypes = {
@@ -897,4 +897,72 @@ const checkSource = (edgesObj, id) => {
     });
 
     return edges;
+};
+
+// 递归追溯有关系的所有节点血缘（备用）
+export const getAllTracedNodes = (
+    node,
+    nodes,
+    edges,
+    prevTraced = [],
+    isIncomer
+  ) => {
+    const tracedNodes = getTracedNode(node, nodes, edges, isIncomer);
+  
+    return tracedNodes.reduce((memo, tracedNode) => {
+      memo.push(tracedNode);
+  
+      if (prevTraced.findIndex((n) => n.id === tracedNode.id) === -1) {
+        prevTraced.push(tracedNode);
+  
+        getAllTracedNodes(
+          tracedNode,
+          nodes,
+          edges,
+          prevTraced,
+          isIncomer
+        ).forEach((foundNode) => {
+          memo.push(foundNode);
+  
+          if (prevTraced.findIndex((n) => n.id === foundNode.id) === -1) {
+            prevTraced.push(foundNode);
+          }
+        });
+      }
+  
+      return memo;
+    }, []);
+};
+
+// 获取当前的节点的所有关联血缘数据（备用）
+const getTracedNode = (
+    node,
+    nodes,
+    edges,
+    isIncomer
+  ) => {
+    if (!isNode(node)) {
+      return [];
+    }
+  
+    const tracedEdgeIds = edges
+      .filter((e) => {
+        const id = isIncomer ? e.target : e.source;
+  
+        return id === node.id;
+      })
+      .map((e) => (isIncomer ? e.source : e.target));
+  
+    return nodes.filter((n) =>
+      tracedEdgeIds
+        .map((id) => {
+          const matches = /([\w-^]+)__([\w-]+)/.exec(id);
+          if (matches === null) {
+            return id;
+          }
+  
+          return matches[1];
+        })
+        .includes(n.id)
+    );
 };
