@@ -18,4 +18,4 @@ Currently, two official plugins are available:
 
 [OpenMetaData](https://docs.open-metadata.org/latest/quick-start/sandbox) 解析的血缘呈现效果，结合了 [flink-sql-lineage](https://github.com/HamaWhiteGG/flink-sql-lineage) 血缘加工字段显示效果。
 
-![血缘](./lineage.png)
+![血缘](./lineage-new.png)
