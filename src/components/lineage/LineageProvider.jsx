@@ -159,10 +159,7 @@ const LineageApp = ({ children }) => {
   // 血缘呈现渲染
   const redrawLineage = (lineageData) => {
     // 全量节点去重
-    const allNode = uniqWith([
-      ...(lineageData.nodes ?? []),
-      ...(lineageData.entity ? [lineageData.entity] : [])
-    ], isEqual)
+    const allNode = uniqWith([...(lineageData.nodes ?? [])], isEqual)
 
     // 生成组件需要的节点数据格式
     const updatedNodes = createNodes(

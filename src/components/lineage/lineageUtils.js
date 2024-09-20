@@ -138,7 +138,9 @@ export const createNodes = (
     })
     // 对节点进行连线
     edgesData.forEach(edge => {
+      if(edge.fromEntity?.id){
         graph.setEdge(edge.fromEntity?.id, edge.toEntity?.id)
+      }
     })
 
     // 渲染
@@ -146,6 +148,8 @@ export const createNodes = (
     
     // 获取布局中的节点
     const layoutPositions = graph.nodes().map((nodeId) => graph.node(nodeId))
+    //! 位置出的问题
+
     // 返回处理好的血缘数据集
     return uniqueNodesData.map((node, index) => {
         const position = layoutPositions[index]
@@ -162,8 +166,8 @@ export const createNodes = (
                 isRootNode: node.isRootNode,
             },
             position: {
-                x: position.x - NODE_WIDTH / 2,
-                y: position.y - position.height / 2
+                x: position?.x - NODE_WIDTH / 2,
+                y: position?.y - position?.height / 2
             }
         }
     })
