@@ -1,0 +1,137 @@
+[
+    {
+        "fromEntity": {
+            "fqn": "dwd_hudi_users",
+            "id": "7",
+            "type": "table"
+        },
+        "toEntity": {
+            "fqn": "dws_users_cnt",
+            "id": "31",
+            "type": "table"
+        },
+        "pipeline": null,
+        "sqlQuery": null,
+        "columns": [
+            {
+                "fromColumns": [
+                    "company_name"
+                ],
+                "toColumn": "company_name_cnt"
+            },
+            {
+                "fromColumns": [
+                    "id"
+                ],
+                "toColumn": "id"
+            },
+            {
+                "fromColumns": [
+                    "name"
+                ],
+                "toColumn": "name_cnt"
+            }
+        ],
+        "description": null,
+        "source": "",
+        "doc_id": ""
+    },
+    {
+        "fromEntity": {
+            "fqn": "ods_mysql_users",
+            "id": "1",
+            "type": "table"
+        },
+        "toEntity": {
+            "fqn": "dwd_hudi_users",
+            "id": "7",
+            "type": "table"
+        },
+        "pipeline": null,
+        "sqlQuery": null,
+        "columns": [
+            {
+                "fromColumns": [
+                    "id"
+                ],
+                "toColumn": "id"
+            },
+            {
+                "fromColumns": [
+                    "ts"
+                ],
+                "toColumn": "ts"
+            },
+            {
+                "fromColumns": [
+                    "birthday"
+                ],
+                "toColumn": "birthday"
+            },
+            {
+                "fromColumns": [
+                    "name"
+                ],
+                "toColumn": "name"
+            },
+            {
+                "fromColumns": [
+                    "birthday"
+                ],
+                "toColumn": "partition"
+            }
+        ],
+        "description": null,
+        "source": "",
+        "doc_id": ""
+    },
+    {
+        "fromEntity": {
+            "fqn": "dim_mysql_company",
+            "id": "18",
+            "type": "table"
+        },
+        "toEntity": {
+            "fqn": "dwd_hudi_users",
+            "id": "7",
+            "type": "table"
+        },
+        "pipeline": null,
+        "sqlQuery": null,
+        "columns": [
+            {
+                "fromColumns": [
+                    "company_name"
+                ],
+                "toColumn": "name"
+            },
+            {
+                "fromColumns": [
+                    "company_name"
+                ],
+                "toColumn": "company_name"
+            }
+        ],
+        "description": null,
+        "source": "",
+        "doc_id": ""
+    },
+    {
+        "fromEntity": {
+            "fqn": "",
+            "id": "",
+            "type": ""
+        },
+        "toEntity": {
+            "fqn": "",
+            "id": "",
+            "type": ""
+        },
+        "pipeline": null,
+        "sqlQuery": null,
+        "columns": [],
+        "description": null,
+        "source": "",
+        "doc_id": ""
+    }
+]

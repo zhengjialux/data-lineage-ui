@@ -124,8 +124,8 @@ const CustomEdge = ({
       // 连接线高亮样式
     const updatedStyle = () => {
         const isNodeTraced =
-          tracedNodes.includes(edge.fromEntity.id) &&
-          tracedNodes.includes(edge.toEntity.id);
+          tracedNodes.includes(edge.fromEntity?.id) &&
+          tracedNodes.includes(edge.toEntity?.id);
     
         let isStrokeNeeded = isNodeTraced;
     
@@ -165,9 +165,9 @@ const CustomEdge = ({
                                     borderRadius: '10px'
                                 }}
                                 onMouseEnter={() => {
-                                    const fullyQualifiedName = decodeLineageHandles(sourceHandle)
-                                    const targetHandleFullyQualifiedName = decodeLineageHandles(targetHandle)
-                                    onColumnHighlight(fullyQualifiedName ?? '', targetHandleFullyQualifiedName ?? '')
+                                    const sourceHandleId = decodeLineageHandles(sourceHandle)
+                                    const targetHandleId = decodeLineageHandles(targetHandle)
+                                    onColumnHighlight(sourceHandleId ?? '', targetHandleId ?? '')
                                 }}
                                 onMouseLeave={() => {
                                     onColumnHighlight()
