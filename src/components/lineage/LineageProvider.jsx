@@ -205,7 +205,22 @@ const LineageApp = ({ children }) => {
       //   //   查询已删除的 includeDeleted: false
       //   // }
       // )
-      const res = await getLineageDataByFlink()
+      // 根据 direction 判断 upstreamDepth、downstreamDepth 传递来决定查询上游还是下游血缘，例：
+      // {
+      //   upstreamDepth: direction === EdgeTypeEnum.UP_STREAM ? 1 : 0,
+      //   downstreamDepth: direction === EdgeTypeEnum.DOWN_STREAM ? 1 : 0,
+      //   nodesPerLayer: lineageConfig.nodesPerLayer,
+      // }
+      const res = await getLineageDataByFlink({
+        // {
+        //   查询主表名 fqn: node.fullyQualifiedName
+        //   血缘类型 type: node.entityType
+        //   向上查询血缘层级 upstreamDepth: 1
+        //   向下查询血缘层级 downstreamDepth: 1
+        //   筛选域查询 query_filter: {"query":{"bool":{"must":[{"bool":{"should":[{"term":{"domain.displayName.keyword":"供应链-电饭煲产线"}}]}}]}}}
+        //   查询已删除的 includeDeleted: false
+        // }
+      })
       const lineageData = classifyNodeAndEdge(res)
 
       const activeNode = nodes.find((n) => n.id === node.id);
