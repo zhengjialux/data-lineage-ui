@@ -104,7 +104,8 @@
         "source": "",
         "doc_id": "",
         "id": "7",
-        "name": "dwd_hudi_users"
+        "name": "dwd_hudi_users",
+        "displayName": "dwd_hudi_users"
     },
     {
         "isRootNode": false,
@@ -198,7 +199,8 @@
         "source": "",
         "doc_id": "",
         "id": "1",
-        "name": "ods_mysql_users"
+        "name": "ods_mysql_users",
+        "displayName": "ods_mysql_users"
     },
     {
         "isRootNode": false,
@@ -253,7 +255,8 @@
         "source": "",
         "doc_id": "",
         "id": "18",
-        "name": "dim_mysql_company"
+        "name": "dim_mysql_company",
+        "displayName": "dim_mysql_company"
     },
     {
         "isRootNode": false,
@@ -296,6 +299,7 @@
         "source": "",
         "doc_id": "",
         "id": "31",
-        "name": "dws_users_cnt"
+        "name": "dws_users_cnt",
+        "displayName": "dws_users_cnt"
     }
 ]

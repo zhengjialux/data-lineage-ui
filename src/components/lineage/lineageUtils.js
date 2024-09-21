@@ -145,14 +145,11 @@ export const createNodes = (
 
     // 渲染
     layout(graph)
-    
-    // 获取布局中的节点
-    const layoutPositions = graph.nodes().map((nodeId) => graph.node(nodeId))
-    //! 位置出的问题
 
     // 返回处理好的血缘数据集
     return uniqueNodesData.map((node, index) => {
-        const position = layoutPositions[index]
+      // 获取布局中的节点信息
+        const position = graph.node(node.id)
         // 节点类型
         const type = node.type === EntityLineageNodeType.LOAD_MORE ? node.type : getNodeType(edgesData, node.id)
         return {
@@ -201,12 +198,7 @@ export const createEdges = (
                 // 加密生成唯一ID
                 const encodedFromColumn = encodeLineageHandles(fromColumn);
                 const encodedToColumn = encodeLineageHandles(toColumn);
-                let edgeId = '';
-                if (edge.fromEntity?.id) {
-                  edgeId = `column-${encodedFromColumn}-${encodedToColumn}-edge-${edge.fromEntity?.id}-${edge.toEntity?.id}`
-                } else {
-                  edgeId = `column-${encodedFromColumn}-${encodedToColumn}-edge-${edge.fromEntity}-${edge.toEntity}`
-                }
+                const edgeId = `column-${encodedFromColumn}-${encodedToColumn}-edge-${edge.fromEntity}-${edge.toEntity}`;
                 // 性能优化
                 if (!edgeIds.has(edgeId)) {
                     edgeIds.add(edgeId);
@@ -215,8 +207,8 @@ export const createEdges = (
                     // targetHandle、sourceHandle 具体连接的字段
                     lineageEdgesV1.push({
                         id: edgeId,
-                        source: edge.fromEntity?.id || edge.fromEntity,
-                        target: edge.toEntity?.id || edge.toEntity,
+                        source: edge.fromEntity,
+                        target: edge.toEntity,
                         targetHandle: encodedToColumn,
                         sourceHandle: encodedFromColumn,
                         style: { strokeWidth: '2px' },
