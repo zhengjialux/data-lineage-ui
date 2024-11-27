@@ -71,7 +71,7 @@ const LineageApp = ({ children }) => {
   useEffect(() => {
     // getLineageDataByFQN(
     //   // {
-    //   //   查询主表名 fqn: TEXT-MySQL.data_test.cascade_connection_test.cdc_table
+    //   //   查询主表名 fqn: TEST-MySQL.data_test.cascade_connection_test.cdc_table
     //   //   血缘类型 type: table
     //   //   向上查询血缘层级 upstreamDepth: 3
     //   //   向下查询血缘层级 downstreamDepth: 3
