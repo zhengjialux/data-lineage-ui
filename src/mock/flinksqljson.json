@@ -1,0 +1,245 @@
+{
+    "code": 200,
+    "message": "detail success",
+    "data": {
+        "createTime": 1674565178000,
+        "modifyTime": 1721114214751,
+        "createUserId": 1,
+        "modifyUserId": 2,
+        "taskId": 1,
+        "catalogId": 1,
+        "taskName": "first-demo",
+        "descr": "Demo",
+        "database": "default",
+        "taskSource": "SU5TRVJUIElOVE8KICAgIGR3ZF9odWRpX3VzZXJzClNFTEVDVAogICAgYS5pZCBhcyBpZDEsCiAgICBDT05DQVQoYS5uYW1lLGIuY29tcGFueV9uYW1lKSwKICAgIGIuY29tcGFueV9uYW1lLCAKICAgIGEuYmlydGhkYXksCiAgICBhLnRzLAogICAgREFURV9GT1JNQVQoYS5iaXJ0aGRheSwgJ3l5eXlNTWRkJykgYXMgcApGUk9NCiAgICBvZHNfbXlzcWxfdXNlcnMgQVMgYQpKT0lOCiAgICBkaW1fbXlzcWxfY29tcGFueSBGT1IgU1lTVEVNX1RJTUUgQVMgT0YgYS5wcm9jX3RpbWUgQVMgYiAKT04gYS5pZCA9IGIudXNlcl9pZDsKCklOU0VSVCBJTlRPIAogICAgZHdzX3VzZXJzX2NudCAKU0VMRUNUICAgICAgICAKICAgIGlkLCAgICAgICAKICAgIENPVU5UKERJU1RJTkNUIG5hbWUpLCAgICAgICAgCiAgICBDT1VOVChESVNUSU5DVCBjb21wYW55X25hbWUpIApGUk9NICAgICAgIAogICAgZHdkX2h1ZGlfdXNlcnMgCkdST1VQIEJZICAgICAgICAKICAgIGlk",
+        "taskStatus": "SUCCESS",
+        "taskLog": "",
+        "lineageTime": 1721114294546,
+        "taskSqlList": [],
+        "taskFunctionList": [],
+        "lineageGraph": {
+            "nodes": [
+                {
+                    "id": "7",
+                    "name": "dwd_hudi_users",
+                    "columns": [
+                        {
+                            "id": "8",
+                            "name": "id",
+                            "childrenCnt": 1
+                        },
+                        {
+                            "id": "9",
+                            "name": "name",
+                            "childrenCnt": 1
+                        },
+                        {
+                            "id": "10",
+                            "name": "company_name",
+                            "childrenCnt": 1
+                        },
+                        {
+                            "id": "11",
+                            "name": "birthday",
+                            "childrenCnt": 0
+                        },
+                        {
+                            "id": "12",
+                            "name": "ts",
+                            "childrenCnt": 0
+                        },
+                        {
+                            "id": "13",
+                            "name": "partition",
+                            "childrenCnt": 0
+                        }
+                    ],
+                    "hasUpstream": true,
+                    "hasDownstream": true,
+                    "tableIcon": null,
+                    "childrenCnt": 1
+                },
+                {
+                    "id": "1",
+                    "name": "ods_mysql_users",
+                    "columns": [
+                        {
+                            "id": "2",
+                            "name": "id",
+                            "childrenCnt": 2
+                        },
+                        {
+                            "id": "3",
+                            "name": "name",
+                            "childrenCnt": 2
+                        },
+                        {
+                            "id": "4",
+                            "name": "birthday",
+                            "childrenCnt": 2
+                        },
+                        {
+                            "id": "5",
+                            "name": "ts",
+                            "childrenCnt": 1
+                        },
+                        {
+                            "id": "6",
+                            "name": "proc_time",
+                            "childrenCnt": 0
+                        }
+                    ],
+                    "hasUpstream": false,
+                    "hasDownstream": true,
+                    "tableIcon": null,
+                    "childrenCnt": 2
+                },
+                {
+                    "id": "18",
+                    "name": "dim_mysql_company",
+                    "columns": [
+                        {
+                            "id": "19",
+                            "name": "user_id",
+                            "childrenCnt": 0
+                        },
+                        {
+                            "id": "20",
+                            "name": "company_name",
+                            "childrenCnt": 4
+                        }
+                    ],
+                    "hasUpstream": false,
+                    "hasDownstream": true,
+                    "tableIcon": null,
+                    "childrenCnt": 2
+                },
+                {
+                    "id": "31",
+                    "name": "dws_users_cnt",
+                    "columns": [
+                        {
+                            "id": "32",
+                            "name": "id",
+                            "childrenCnt": 0
+                        },
+                        {
+                            "id": "33",
+                            "name": "name_cnt",
+                            "childrenCnt": 0
+                        },
+                        {
+                            "id": "34",
+                            "name": "company_name_cnt",
+                            "childrenCnt": 0
+                        }
+                    ],
+                    "hasUpstream": true,
+                    "hasDownstream": false,
+                    "tableIcon": null,
+                    "childrenCnt": 0
+                }
+            ],
+            "links": [
+                {
+                    "id": "35",
+                    "relU": "7",
+                    "relV": "31",
+                    "sqlSource": "SU5TRVJUIElOVE8gCiAgICBkd3NfdXNlcnNfY250IApTRUxFQ1QgICAgICAgIAogICAgaWQsICAgICAgIAogICAgQ09VTlQoRElTVElOQ1QgbmFtZSksICAgICAgICAKICAgIENPVU5UKERJU1RJTkNUIGNvbXBhbnlfbmFtZSkgCkZST00gICAgICAgCiAgICBkd2RfaHVkaV91c2VycyAKR1JPVVAgQlkgICAgICAgIAogICAgaWQ="
+                },
+                {
+                    "id": "21",
+                    "relU": "18",
+                    "relV": "7",
+                    "sqlSource": "SU5TRVJUIElOVE8KICAgIGR3ZF9odWRpX3VzZXJzClNFTEVDVAogICAgYS5pZCBhcyBpZDEsCiAgICBDT05DQVQoYS5uYW1lLGIuY29tcGFueV9uYW1lKSwKICAgIGIuY29tcGFueV9uYW1lLCAKICAgIGEuYmlydGhkYXksCiAgICBhLnRzLAogICAgREFURV9GT1JNQVQoYS5iaXJ0aGRheSwgJ3l5eXlNTWRkJykgYXMgcApGUk9NCiAgICBvZHNfbXlzcWxfdXNlcnMgQVMgYQpKT0lOCiAgICBkaW1fbXlzcWxfY29tcGFueSBGT1IgU1lTVEVNX1RJTUUgQVMgT0YgYS5wcm9jX3RpbWUgQVMgYiAKT04gYS5pZCA9IGIudXNlcl9pZA=="
+                },
+                {
+                    "id": "14",
+                    "relU": "1",
+                    "relV": "7",
+                    "sqlSource": "SU5TRVJUIElOVE8KICAgIGR3ZF9odWRpX3VzZXJzClNFTEVDVAogICAgYS5pZCBhcyBpZDEsCiAgICBDT05DQVQoYS5uYW1lLGIuY29tcGFueV9uYW1lKSwKICAgIGIuY29tcGFueV9uYW1lLCAKICAgIGEuYmlydGhkYXksCiAgICBhLnRzLAogICAgREFURV9GT1JNQVQoYS5iaXJ0aGRheSwgJ3l5eXlNTWRkJykgYXMgcApGUk9NCiAgICBvZHNfbXlzcWxfdXNlcnMgQVMgYQpKT0lOCiAgICBkaW1fbXlzcWxfY29tcGFueSBGT1IgU1lTVEVNX1RJTUUgQVMgT0YgYS5wcm9jX3RpbWUgQVMgYiAKT04gYS5pZCA9IGIudXNlcl9pZA=="
+                },
+                {
+                    "id": "15",
+                    "relU": "1",
+                    "relV": "7",
+                    "u": "2",
+                    "v": "8",
+                    "transform": ""
+                },
+                {
+                    "id": "40",
+                    "relU": "7",
+                    "relV": "31",
+                    "u": "10",
+                    "v": "34",
+                    "transform": "COUNT(DISTINCT company_name)"
+                },
+                {
+                    "id": "22",
+                    "relU": "18",
+                    "relV": "7",
+                    "u": "20",
+                    "v": "9",
+                    "transform": "CONCAT(ods_mysql_users.name, dim_mysql_company.company_name)"
+                },
+                {
+                    "id": "28",
+                    "relU": "1",
+                    "relV": "7",
+                    "u": "5",
+                    "v": "12",
+                    "transform": ""
+                },
+                {
+                    "id": "36",
+                    "relU": "7",
+                    "relV": "31",
+                    "u": "8",
+                    "v": "32",
+                    "transform": ""
+                },
+                {
+                    "id": "24",
+                    "relU": "18",
+                    "relV": "7",
+                    "u": "20",
+                    "v": "10",
+                    "transform": ""
+                },
+                {
+                    "id": "26",
+                    "relU": "1",
+                    "relV": "7",
+                    "u": "4",
+                    "v": "11",
+                    "transform": ""
+                },
+                {
+                    "id": "17",
+                    "relU": "1",
+                    "relV": "7",
+                    "u": "3",
+                    "v": "9",
+                    "transform": "CONCAT(ods_mysql_users.name, dim_mysql_company.company_name)"
+                },
+                {
+                    "id": "30",
+                    "relU": "1",
+                    "relV": "7",
+                    "u": "4",
+                    "v": "13",
+                    "transform": "DATE_FORMAT(birthday, 'yyyyMMdd')"
+                },
+                {
+                    "id": "38",
+                    "relU": "7",
+                    "relV": "31",
+                    "u": "9",
+                    "v": "33",
+                    "transform": "COUNT(DISTINCT name)"
+                }
+            ]
+        }
+    }
+}
