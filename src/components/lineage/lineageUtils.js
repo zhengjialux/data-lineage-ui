@@ -50,7 +50,7 @@ export const getColumnSourceTargetHandles = (obj = {}) => {
 };
 
 // 血缘数据处理
-export const getChildMap = (lineageData, ownerName) => {
+export const getChildMap = (lineageData, ownerId) => {
     const nodeSet = new Set();
     const parsedNodes = []
 
@@ -60,7 +60,7 @@ export const getChildMap = (lineageData, ownerName) => {
     const data = getUpstreamDownstreamNodesEdges(
         lineageData.edges ?? [],
         lineageData.nodes ?? [],
-        ownerName
+        ownerId
     )
 
     // 创建一个新的血缘数据对象备用
@@ -115,7 +115,6 @@ export const getPaginatedChildMap = (
 export const createNodes = (
     nodesData,
     edgesData,
-    entityFqn,
     isExpanded
 ) => {
     // 容错 + 排序
@@ -139,17 +138,18 @@ export const createNodes = (
     })
     // 对节点进行连线
     edgesData.forEach(edge => {
-        graph.setEdge(edge.fromEntity.id, edge.toEntity.id)
+      if(edge.fromEntity?.id){
+        graph.setEdge(edge.fromEntity?.id, edge.toEntity?.id)
+      }
     })
 
     // 渲染
     layout(graph)
-    
-    // 获取布局中的节点
-    const layoutPositions = graph.nodes().map((nodeId) => graph.node(nodeId))
+
     // 返回处理好的血缘数据集
     return uniqueNodesData.map((node, index) => {
-        const position = layoutPositions[index]
+      // 获取布局中的节点信息
+        const position = graph.node(node.id)
         // 节点类型
         const type = node.type === EntityLineageNodeType.LOAD_MORE ? node.type : getNodeType(edgesData, node.id)
         return {
@@ -160,11 +160,11 @@ export const createNodes = (
             className: '',
             data: {
                 node,
-                isRootNode: entityFqn === node.fullyQualifiedName,
+                isRootNode: node.isRootNode,
             },
             position: {
-                x: position.x - NODE_WIDTH / 2,
-                y: position.y - position.height / 2
+                x: position?.x - NODE_WIDTH / 2,
+                y: position?.y - position?.height / 2
             }
         }
     })
@@ -174,73 +174,71 @@ export const createNodes = (
 export const createEdges = (
     nodesData,
     edgesData,
-    entityFqn,
+    entityId,
 ) => {
     const lineageEdgesV1 = []
     const edgeIds = new Set()
     const columnsHavingLineage = new Set()
     edgesData.forEach(edge => {
         // 找到连接线的源头节点
-        const sourceType = nodesData.find((n) => edge.fromEntity.id === n.id);
+        const sourceType = nodesData.find((n) => edge.fromEntity?.id === n.id || edge.fromEntity === n.id);
         // 找到连接线的目标节点
-        const targetType = nodesData.find((n) => edge.toEntity.id === n.id);
+        const targetType = nodesData.find((n) => edge.toEntity?.id === n.id || edge.toEntity === n.id);
         // 容错处理
         if (isUndefined(sourceType) || isUndefined(targetType)) { return }
         // 字段的连线生成
-        if (!isUndefined(edge.columns)) {
-            edge.columns?.forEach((e) => {
-                const toColumn = e.toColumn ?? '';
-                // 有目标字段，并且目标字段可能由多个源头字段加工出来的，所以是个数组
-                if (toColumn && e.fromColumns && e.fromColumns.length > 0) {
-                    e.fromColumns.forEach((fromColumn) => {
-                        // 血缘中字段有关联的都存起来，因为是个 Set 实例对象，会内部去重
-                        columnsHavingLineage.add(fromColumn);
-                        columnsHavingLineage.add(toColumn);
-                        // 加密生成唯一ID
-                        const encodedFromColumn = encodeLineageHandles(fromColumn);
-                        const encodedToColumn = encodeLineageHandles(toColumn);
-                        const edgeId = `column-${encodedFromColumn}-${encodedToColumn}-edge-${edge.fromEntity.id}-${edge.toEntity.id}`;
-                        // 性能优化
-                        if (!edgeIds.has(edgeId)) {
-                            edgeIds.add(edgeId);
-                            // 生成节点下具体字段连接线呈现对象
-                            // source、target 关联的节点
-                            // targetHandle、sourceHandle 具体连接的字段
-                            lineageEdgesV1.push({
-                                id: edgeId,
-                                source: edge.fromEntity.id,
-                                target: edge.toEntity.id,
-                                targetHandle: encodedToColumn,
-                                sourceHandle: encodedFromColumn,
-                                style: { strokeWidth: '2px' },
-                                type: 'buttonedge',
-                                // type: 'default',
-                                markerEnd: {
-                                    // 箭头控制
-                                    // type: MarkerType.ArrowClosed,
-                                },
-                                data: {
-                                    edge,
-                                    isColumnLineage: true,
-                                    targetHandle: encodedToColumn,
-                                    sourceHandle: encodedFromColumn,
-                                    fromColumns: e.fromColumns
-                                },
-                            });
-                        }
-                    })
+        if (!isUndefined(edge.fromColumns)) {
+          const toColumn = edge.toColumn ?? '';
+          // 有目标字段，并且目标字段可能由多个源头字段加工出来的，所以是个数组
+          if (toColumn && edge.fromColumns && edge.fromColumns.length > 0) {
+            edge.fromColumns.forEach((fromColumn) => {
+                // 血缘中字段有关联的都存起来，因为是个 Set 实例对象，会内部去重
+                columnsHavingLineage.add(fromColumn);
+                columnsHavingLineage.add(toColumn);
+                // 加密生成唯一ID
+                const encodedFromColumn = encodeLineageHandles(fromColumn);
+                const encodedToColumn = encodeLineageHandles(toColumn);
+                const edgeId = `column-${encodedFromColumn}-${encodedToColumn}-edge-${edge.fromEntity}-${edge.toEntity}`;
+                // 性能优化
+                if (!edgeIds.has(edgeId)) {
+                    edgeIds.add(edgeId);
+                    // 生成节点下具体字段连接线呈现对象
+                    // source、target 关联的节点
+                    // targetHandle、sourceHandle 具体连接的字段
+                    lineageEdgesV1.push({
+                        id: edgeId,
+                        source: edge.fromEntity,
+                        target: edge.toEntity,
+                        targetHandle: encodedToColumn,
+                        sourceHandle: encodedFromColumn,
+                        style: { strokeWidth: '2px' },
+                        type: 'buttonedge',
+                        // type: 'default',
+                        markerEnd: {
+                            // 箭头控制
+                            // type: MarkerType.ArrowClosed,
+                        },
+                        data: {
+                            edge,
+                            isColumnLineage: true,
+                            targetHandle: encodedToColumn,
+                            sourceHandle: encodedFromColumn,
+                            fromColumns: edge.fromColumns
+                        },
+                    });
                 }
             })
-        }
+          }
+      } else {
         // 节点的连线生成（与字段连线一样）
-        const edgeId = `edge-${edge.fromEntity.id}-${edge.toEntity.id}`;
+        const edgeId = `edge-${edge.fromEntity?.id}-${edge.toEntity?.id}`;
         if (!edgeIds.has(edgeId)) {
             edgeIds.add(edgeId);
             // 生成节点连接线呈现对
             lineageEdgesV1.push({
                 id: edgeId,
-                source: edge.fromEntity.id,
-                target: edge.toEntity.id,
+                source: edge.fromEntity?.id,
+                target: edge.toEntity?.id,
                 type: 'buttonedge',
                 // type: 'default',
                 animated: !isNil(edge.pipeline),
@@ -251,10 +249,11 @@ export const createEdges = (
                 data: {
                     edge,
                     isColumnLineage: false,
-                    isPipelineRootNode: !isNil(edge.pipeline) ? entityFqn === edge.pipeline?.fullyQualifiedName : false,
+                    isPipelineRootNode: !isNil(edge.pipeline) ? entityId === edge.pipeline?.id : false,
                 },
             });
         }
+      }
     })
     // 返回结果 
     return {  
@@ -354,7 +353,7 @@ const calculateHeightAndFlattenNode = (
         // 节点有字段就累加高度
         if (
             expandAllColumns ||
-            columnsHavingLineage.includes(item.fullyQualifiedName || '') !== -1
+            columnsHavingLineage.includes(item.id || '') !== -1
         ) {
             totalHeight += 27
         }
@@ -375,8 +374,8 @@ const calculateHeightAndFlattenNode = (
 const removeDuplicateNodes = (nodesData) => {
     const uniqueNodesMap = new Map()
     nodesData.forEach((node) => {
-      if (node?.fullyQualifiedName) {
-        uniqueNodesMap.set(node.fullyQualifiedName, node);
+      if (node?.id) {
+        uniqueNodesMap.set(node.id, node);
       }
     });
   
@@ -436,7 +435,6 @@ const flattenObj = (
             descrition: '加载更多',
             displayName: 'Load More',
             name: `load_more_${currentId}`,
-            fullyQualifiedName: `load_more_${currentId}`,
             id: moreNodeId,
             type: 'load-more',
             // 提供给获取更多节点的时候用
@@ -480,11 +478,11 @@ const getLineageChildParents = (
     // 根据isParent 区分处理的是上游还是下游，获取相应方向的连线数组
     const edges = isParent ? lineageData?.upstreamEdges || [] : lineageData?.downstreamEdges || []
     // 过滤出对应的上下游连线对象
-    const filtered = edges.filter(edge => isParent ? edge.toEntity.id === currentId : edge.fromEntity.id === currentId)
+    const filtered = edges.filter(edge => isParent ? edge.toEntity?.id === currentId : edge.fromEntity?.id === currentId)
 
     return filtered.reduce((childMap, edge, i) => {
         // 根据连线匹配出对应的节点
-        const node = lineageData.nodes?.find(node => isParent ? node.id === edge.fromEntity.id : node.id === edge.toEntity.id)
+        const node = lineageData.nodes?.find(node => isParent ? node.id === edge.fromEntity?.id : node.id === edge.toEntity?.id)
         // 性能优化：有节点 + nodeSet没有记录
         if (node && !nodeSet.has(node.id)) {
             nodeSet.add(node.id)
@@ -522,7 +520,7 @@ const getLineageChildParents = (
 }
 
 // 血缘上下游分类
-export const getUpstreamDownstreamNodesEdges = (edges, nodes, currentName) => {
+export const getUpstreamDownstreamNodesEdges = (edges, nodes, nodeId) => {
     // 上游连线对象
     const upstreamEdges = []
     // 下游连线对象
@@ -533,7 +531,7 @@ export const getUpstreamDownstreamNodesEdges = (edges, nodes, currentName) => {
     const downstreamNodes = []
 
     // 当前选中的节点（默认源节点）
-    const activeNode = nodes.find(node => node.fullyQualifiedName === currentName)
+    const activeNode = nodes.find(node => node.id === nodeId)
 
     // 如果取消选中就直接返回
     if (!activeNode) {
@@ -544,12 +542,12 @@ export const getUpstreamDownstreamNodesEdges = (edges, nodes, currentName) => {
     function findUpstream(node) {
         // 直接关系的上游
         const directDownstream = edges.filter(edge => {
-            return edge.toEntity.id === node.id
+            return edge.toEntity?.id === node.id
         })
         upstreamEdges.push(...directDownstream)
         // 筛选出对应的节点
         directDownstream.forEach(edge => {
-            const toNode = nodes.find(item => item.id === edge.fromEntity.id)
+            const toNode = nodes.find(item => item.id === edge.fromEntity?.id)
             // 过滤假值
             if(!isUndefined(toNode)) {
                 // 防止节点重复
@@ -565,11 +563,11 @@ export const getUpstreamDownstreamNodesEdges = (edges, nodes, currentName) => {
     // 整理出下游数据
     function findDownstream(node) {
         // 直接关系的下游
-        const directDownstream = edges.filter(edge => edge.fromEntity.id === node.id)
+        const directDownstream = edges.filter(edge => edge.fromEntity?.id === node.id)
         downstreamEdges.push(...directDownstream)
         // 筛选出对应的节点
         directDownstream.forEach(edge => {
-            const toNode = nodes.find(item => item.id === edge.toEntity.id)
+            const toNode = nodes.find(item => item.id === edge.toEntity?.id)
             // 过滤假值
             if(!isUndefined(toNode)) {
                 // 防止节点重复
@@ -776,10 +774,10 @@ export const onLoad = (reactFlowInstance) => {
 // 检查当前id是否有对应上下游元素
 export const checkUpstreamDownstream = (id, data = []) => {
 
-    const hasUpstream = data.some((edge) => edge.toEntity.id === id);
+    const hasUpstream = data.some((edge) => edge.toEntity?.id === id);
   
     const hasDownstream = data.some(
-      (edge) => edge.fromEntity.id === id
+      (edge) => edge.fromEntity?.id === id
     );
   
     // 有返回true，否则false
@@ -834,14 +832,14 @@ export const getConnectedNodesEdges = (
     }
     
     // 提取节点全量完整名称
-    const childNodeFqn = outgoers.map(
-      (node) => node.data.node.fullyQualifiedName
+    const childNodeId = outgoers.map(
+      (node) => node.data.node.id
     );
   
     return {
       nodes: outgoers,  // 收缩涉及的额外节点
       edges: connectedEdges,  // 收缩涉及的额外连接线
-      nodeFqn: childNodeFqn,  //  取出节点全称
+      nodeCollapseIds: childNodeId,  //  取出节点全称
     };
 }
 
@@ -966,3 +964,17 @@ const getTracedNode = (
         .includes(n.id)
     );
 };
+
+// 处理接口数据
+export const classifyNodeAndEdge = (lineageData) => {
+  let entity = lineageData.filter(item => item.isRootNode)[0]
+  const edges = []
+
+  lineageData.map(item => {
+    const _edges = [...item.nodesLineage, ...item.columnsLineage]
+    edges.push(..._edges)
+    item.lineage = _edges
+  })
+
+  return { nodes: [...lineageData], edges, entity } 
+}

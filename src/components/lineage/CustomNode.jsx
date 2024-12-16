@@ -34,7 +34,7 @@ const CustomNode = (props) => {
     // 节点数据
     const { label, isNewNode, node = {}, isRootNode } = data;
     const isSelected = selectedNode === node;
-    const { id, lineage, fullyQualifiedName } = node;
+    const { id, lineage } = node;
     // 字段点击后高亮状态
     const [isTraced, setIsTraced] = useState(false);
     // 字段数据
@@ -57,13 +57,13 @@ const CustomNode = (props) => {
     const { isUpstreamNode, isDownstreamNode } = useMemo(() => {
       return {
         isUpstreamNode: upstreamDownstreamData.upstreamNodes.some(
-          (item) => item.fullyQualifiedName === fullyQualifiedName
+          (item) => item.id === id
         ),
         isDownstreamNode: upstreamDownstreamData.downstreamNodes.some(
-          (item) => item.fullyQualifiedName === fullyQualifiedName
+          (item) => item.id === id
         ),
       }
-    }, [fullyQualifiedName, upstreamDownstreamData])
+    }, [id, upstreamDownstreamData])
 
     const getActiveNode = (nodeId) => {
       return nodes.find((item) => item.id === nodeId);
@@ -183,7 +183,7 @@ const CustomNode = (props) => {
 
     const isColumnVisible = (record) => {
         if(expandAllColumns) { return true }
-        return columnsHavingLineage.includes(record.fullyQualifiedName ?? '');
+        return columnsHavingLineage.includes(record.id ?? '');
     }
 
     // 获取字段值内容
@@ -192,17 +192,17 @@ const CustomNode = (props) => {
         isColumnTraced,
         onColumnHighlight = () => {}
     ) => {
-        const { fullyQualifiedName } = column;
+        const { id } = column;
 
         return (
           <div
             className={classNames(
               'custom-node-column-container custom-node-column-lineage-normal bg-white'
             )}
-            key={fullyQualifiedName}
+            key={id}
             onMouseEnter={(e) => {
               e.stopPropagation();
-              onColumnHighlight(fullyQualifiedName ?? '');
+              onColumnHighlight(id ?? '');
             }}
             onMouseLeave={(e) => {
               e.stopPropagation();
@@ -212,7 +212,7 @@ const CustomNode = (props) => {
             {getColumnHandle(
               EntityLineageNodeType.DEFAULT,
               'lineage-column-node-handle',
-              encodeLineageHandles(fullyQualifiedName ?? '')
+              encodeLineageHandles(id ?? '')
             )}
     
             <Typography.Text
@@ -269,7 +269,7 @@ const CustomNode = (props) => {
       // 字段下关联字段的折叠布局（未验证）
     const renderRecord = (record) => {
         const isColumnTraced = tracedColumns.includes(
-            record.fullyQualifiedName ?? ''
+            record.id ?? ''
           );
           const headerContent = getColumnContent(
             record,
@@ -289,17 +289,17 @@ const CustomNode = (props) => {
             <Collapse
               destroyInactivePanel
               className="lineage-collapse-column"
-              defaultActiveKey={record.fullyQualifiedName}
+              defaultActiveKey={record.id}
               expandIcon={() => null}
-              key={record.fullyQualifiedName}>
-              <Panel header={headerContent} key={record.fullyQualifiedName ?? ''}>
+              key={record.id}>
+              <Panel header={headerContent} key={record.id ?? ''}>
                 {record?.children?.map((child) => {
-                  const { fullyQualifiedName, dataType } = child;
+                  const { id, dataType } = child;
                   if (DATATYPES_HAVING_SUBFIELDS.includes(dataType)) {
                     return renderRecord(child);
                   } else {
                     const isColumnTraced = tracedColumns.includes(
-                      fullyQualifiedName ?? ''
+                      id ?? ''
                     );
     
                     if (!isColumnVisible(child)) {
@@ -320,13 +320,13 @@ const CustomNode = (props) => {
 
     // 字段渲染
     const renderColumnsData = (column) => {
-        const { fullyQualifiedName, dataType } = column;
+        const { id, dataType } = column;
         
         if (DATATYPES_HAVING_SUBFIELDS.includes(dataType)) {
           return renderRecord(column);
         } else {
           // 字段列表走这里
-          const isColumnTraced = tracedColumns.includes(fullyQualifiedName ?? '');
+          const isColumnTraced = tracedColumns.includes(id ?? '');
           if (!isColumnVisible(column)) {
             return null;
           }
@@ -410,7 +410,7 @@ const CustomNode = (props) => {
             {getHandle()}
             <div className="lineage-node-content">
               <div className="label-container bg-white">
-                <LineageNodeLabel node={node} />
+                {/* <LineageNodeLabel node={node} /> */}
                 <div
                   style={{color: '#999'}}
                   onClick={(e) => {

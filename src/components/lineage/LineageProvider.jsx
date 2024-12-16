@@ -12,11 +12,12 @@ import {
   getLayoutedElements,
   onLoad,
   getConnectedNodesEdges,
-  getAllTracedNodes
+  getAllTracedNodes,
+  classifyNodeAndEdge
 } from './lineageUtils'
 import { EntityLineageNodeType, EntityLineageDirection, EdgeTypeEnum } from './entity.enum'
 import { useNodesState, useEdgesState } from '@xyflow/react'
-import { getLineageDataByFQN } from '../../serviceApi/getLineageDataApi'
+import { getLineageDataByFQN, getLineageDataByFlink } from '../../serviceApi/getLineageDataApi'
 import { Drawer } from 'antd'
 
 export const LineageContext = createContext({});
@@ -68,27 +69,32 @@ const LineageApp = ({ children }) => {
 
   // 获取血缘数据
   useEffect(() => {
-    getLineageDataByFQN(
-      // {
-      //   查询主表名 fqn: TEST-MySQL.data_test.cascade_connection_test.cdc_table
-      //   血缘类型 type: table
-      //   向上查询血缘层级 upstreamDepth: 3
-      //   向下查询血缘层级 downstreamDepth: 3
-      //   筛选域查询 query_filter: {"query":{"bool":{"must":[{"bool":{"should":[{"term":{"domain.displayName.keyword":"供应链-电饭煲产线"}}]}}]}}}
-      //   查询已删除的 includeDeleted: false
-      // }
-    ).then(res => {
-      handleLineageData(res)
+    // getLineageDataByFQN(
+    //   // {
+    //   //   查询主表名 fqn: TEST-MySQL.data_test.cascade_connection_test.cdc_table
+    //   //   血缘类型 type: table
+    //   //   向上查询血缘层级 upstreamDepth: 3
+    //   //   向下查询血缘层级 downstreamDepth: 3
+    //   //   筛选域查询 query_filter: {"query":{"bool":{"must":[{"bool":{"should":[{"term":{"domain.displayName.keyword":"供应链-电饭煲产线"}}]}}]}}}
+    //   //   查询已删除的 includeDeleted: false
+    //   // }
+    // ).then(res => {
+    //   handleLineageData(res)
+    // })
+
+    getLineageDataByFlink().then(res => {
+      const lineageData = classifyNodeAndEdge(res)
+      handleLineageData(lineageData)
     })
+
   }, [lineageConfig])
 
   const handleLineageData = (lineageData) => {
     const { entity, nodes, edges } = lineageData
-    const fullyQualifiedName = entity.fullyQualifiedName
-    // 整合全量节点
-    const nodeAll = uniqWith([entity, ...nodes].filter(Boolean), isEqual)
+    // 去重节点
+    const nodeAll = uniqWith(nodes.filter(Boolean), isEqual)
     // 对节点进行处理
-    const { map } = getChildMap({...lineageData, nodes: nodeAll}, fullyQualifiedName)
+    const { map } = getChildMap({...lineageData, nodes: nodeAll}, entity.id)
     setChildMap(map)
 
     const { nodes: newNodes, edges: newEdges } = getPaginatedChildMap(
@@ -153,23 +159,19 @@ const LineageApp = ({ children }) => {
   // 血缘呈现渲染
   const redrawLineage = (lineageData) => {
     // 全量节点去重
-    const allNode = uniqWith([
-      ...(lineageData.nodes ?? []),
-      ...(lineageData.entity ? [lineageData.entity] : [])
-    ], isEqual)
+    const allNode = uniqWith([...(lineageData.nodes ?? [])], isEqual)
 
     // 生成组件需要的节点数据格式
     const updatedNodes = createNodes(
       allNode,
       lineageData?.edges ?? [],
-      lineageData?.entity?.fullyQualifiedName,
       'COLUMN'
     )
     // 生成组件需要的连线数据格式
     const { edges: updatedEdges, columnsHavingLineage } = createEdges(
       allNode,
       lineageData?.edges ?? [],
-      lineageData?.entity?.fullyQualifiedName,
+      lineageData?.entity?.id,
     )
     // 更新画布上的血缘呈现
     setNodes(updatedNodes);
@@ -180,7 +182,7 @@ const LineageApp = ({ children }) => {
     const data = getUpstreamDownstreamNodesEdges(
       lineageData.edges ?? [],
       lineageData.nodes ?? [],
-      lineageData?.entity?.fullyQualifiedName,
+      lineageData?.entity?.id,
     )
     setUpstreamDownstreamData(data)
 
@@ -193,7 +195,23 @@ const LineageApp = ({ children }) => {
   // 获取额外节点数据
   const loadChildNodesHandler = async (node, direction) => {
     try {
-      const res = await getLineageDataByFQN(
+      // const res = await getLineageDataByFQN(
+      //   // {
+      //   //   查询主表名 fqn: node.fullyQualifiedName
+      //   //   血缘类型 type: node.entityType
+      //   //   向上查询血缘层级 upstreamDepth: 1
+      //   //   向下查询血缘层级 downstreamDepth: 1
+      //   //   筛选域查询 query_filter: {"query":{"bool":{"must":[{"bool":{"should":[{"term":{"domain.displayName.keyword":"供应链-电饭煲产线"}}]}}]}}}
+      //   //   查询已删除的 includeDeleted: false
+      //   // }
+      // )
+      // 根据 direction 判断 upstreamDepth、downstreamDepth 传递来决定查询上游还是下游血缘，例：
+      // {
+      //   upstreamDepth: direction === EdgeTypeEnum.UP_STREAM ? 1 : 0,
+      //   downstreamDepth: direction === EdgeTypeEnum.DOWN_STREAM ? 1 : 0,
+      //   nodesPerLayer: lineageConfig.nodesPerLayer,
+      // }
+      const res = await getLineageDataByFlink({
         // {
         //   查询主表名 fqn: node.fullyQualifiedName
         //   血缘类型 type: node.entityType
@@ -202,7 +220,8 @@ const LineageApp = ({ children }) => {
         //   筛选域查询 query_filter: {"query":{"bool":{"must":[{"bool":{"should":[{"term":{"domain.displayName.keyword":"供应链-电饭煲产线"}}]}}]}}}
         //   查询已删除的 includeDeleted: false
         // }
-      )
+      })
+      const lineageData = classifyNodeAndEdge(res)
 
       const activeNode = nodes.find((n) => n.id === node.id);
       if (activeNode) {
@@ -210,11 +229,11 @@ const LineageApp = ({ children }) => {
       }
 
       const allNodes = uniqWith(
-        [...(entityLineage?.nodes ?? []), ...(res.nodes ?? []), res.entity],
+        [...(entityLineage?.nodes ?? []), ...(lineageData.nodes ?? [])],
         isEqual
       );
       const allEdges = uniqWith(
-        [...(entityLineage?.edges ?? []), ...(res.edges ?? [])],
+        [...(entityLineage?.edges ?? []), ...(lineageData.edges ?? [])],
         isEqual
       );
 
@@ -381,7 +400,7 @@ const LineageApp = ({ children }) => {
 
   // 节点展开收缩事件
   const onNodeCollapse = (node, direction) => {
-    const { nodeFqn, edges: connectedEdges } = getConnectedNodesEdges(
+    const { nodeCollapseIds, edges: connectedEdges } = getConnectedNodesEdges(
       node,
       nodes,
       edges,
@@ -391,9 +410,9 @@ const LineageApp = ({ children }) => {
     // 当前选中的节点
     setActiveNode(node);
 
-    // 更新的节点，排除掉nodeFqn中包含的节点，就是目前收缩节点没有关联的相关节点
+    // 更新的节点，排除掉nodeCollapseIds中包含的节点，就是目前收缩节点没有关联的相关节点
     const updatedNodes = (entityLineage.nodes ?? []).filter(
-      (item) => !nodeFqn.includes(item.fullyQualifiedName ?? '')
+      (item) => !nodeCollapseIds.includes(item.id ?? '')
     );
     // 更新的连接线，排除掉entityLineage.edges中包含connectedEdges中的连线数据，就是目前收缩节点没有关联的相关连线
     const updatedEdges = (entityLineage.edges ?? []).filter((val) => {

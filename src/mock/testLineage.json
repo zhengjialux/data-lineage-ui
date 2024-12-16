@@ -1,0 +1,305 @@
+[
+    {
+        "isRootNode": true,
+        "entityType": "table",
+        "pipeline": null,
+        "sqlQuery": null,
+        "nodesLineage": [
+            {
+                "fromEntity": {
+                    "fqn": "dwd_hudi_users",
+                    "id": "7",
+                    "type": "table"
+                },
+                "toEntity": {
+                    "fqn": "dws_users_cnt",
+                    "id": "31",
+                    "type": "table"
+                }
+            },
+            {
+                "fromEntity": {
+                    "fqn": "dim_mysql_company",
+                    "id": "18",
+                    "type": "table"
+                },
+                "toEntity": {
+                    "fqn": "dwd_hudi_users",
+                    "id": "7",
+                    "type": "table"
+                }
+            },
+            {
+                "fromEntity": {
+                    "fqn": "ods_mysql_users",
+                    "id": "1",
+                    "type": "table"
+                },
+                "toEntity": {
+                    "fqn": "dwd_hudi_users",
+                    "id": "7",
+                    "type": "table"
+                }
+            }
+        ],
+        "columnsLineage": [
+            {
+                "fromEntity": "7",
+                "toEntity": "31",
+                "fromColumns": [
+                    "10"
+                ],
+                "toColumn": "34"
+            },
+            {
+                "fromEntity": "7",
+                "toEntity": "31",
+                "fromColumns": [
+                    "8"
+                ],
+                "toColumn": "32"
+            },
+            {
+                "fromEntity": "7",
+                "toEntity": "31",
+                "fromColumns": [
+                    "9"
+                ],
+                "toColumn": "33"
+            }
+        ],
+        "columns": [
+            {
+                "id": "8",
+                "name": "id",
+                "childrenCnt": 1
+            },
+            {
+                "id": "9",
+                "name": "name",
+                "childrenCnt": 1
+            },
+            {
+                "id": "10",
+                "name": "company_name",
+                "childrenCnt": 1
+            },
+            {
+                "id": "11",
+                "name": "birthday",
+                "childrenCnt": 0
+            },
+            {
+                "id": "12",
+                "name": "ts",
+                "childrenCnt": 0
+            },
+            {
+                "id": "13",
+                "name": "partition",
+                "childrenCnt": 0
+            }
+        ],
+        "description": null,
+        "source": "",
+        "doc_id": "",
+        "id": "7",
+        "name": "dwd_hudi_users",
+        "displayName": "dwd_hudi_users"
+    },
+    {
+        "isRootNode": false,
+        "entityType": "table",
+        "pipeline": null,
+        "sqlQuery": null,
+        "nodesLineage": [
+            {
+                "fromEntity": {
+                    "fqn": "ods_mysql_users",
+                    "id": "1",
+                    "type": "table"
+                },
+                "toEntity": {
+                    "fqn": "dwd_hudi_users",
+                    "id": "7",
+                    "type": "table"
+                }
+            }
+        ],
+        "columnsLineage": [
+            {
+                "fromEntity": "1",
+                "toEntity": "7",
+                "fromColumns": [
+                    "2"
+                ],
+                "toColumn": "8"
+            },
+            {
+                "fromEntity": "1",
+                "toEntity": "7",
+                "fromColumns": [
+                    "5"
+                ],
+                "toColumn": "12"
+            },
+            {
+                "fromEntity": "1",
+                "toEntity": "7",
+                "fromColumns": [
+                    "4"
+                ],
+                "toColumn": "11"
+            },
+            {
+                "fromEntity": "1",
+                "toEntity": "7",
+                "fromColumns": [
+                    "3"
+                ],
+                "toColumn": "9"
+            },
+            {
+                "fromEntity": "1",
+                "toEntity": "7",
+                "fromColumns": [
+                    "4"
+                ],
+                "toColumn": "13"
+            }
+        ],
+        "columns": [
+            {
+                "id": "2",
+                "name": "id",
+                "childrenCnt": 2
+            },
+            {
+                "id": "3",
+                "name": "name",
+                "childrenCnt": 2
+            },
+            {
+                "id": "4",
+                "name": "birthday",
+                "childrenCnt": 2
+            },
+            {
+                "id": "5",
+                "name": "ts",
+                "childrenCnt": 1
+            },
+            {
+                "id": "6",
+                "name": "proc_time",
+                "childrenCnt": 0
+            }
+        ],
+        "description": null,
+        "source": "",
+        "doc_id": "",
+        "id": "1",
+        "name": "ods_mysql_users",
+        "displayName": "ods_mysql_users"
+    },
+    {
+        "isRootNode": false,
+        "entityType": "table",
+        "pipeline": null,
+        "sqlQuery": null,
+        "nodesLineage": [
+            {
+                "fromEntity": {
+                    "fqn": "dim_mysql_company",
+                    "id": "18",
+                    "type": "table"
+                },
+                "toEntity": {
+                    "fqn": "dwd_hudi_users",
+                    "id": "7",
+                    "type": "table"
+                }
+            }
+        ],
+        "columnsLineage": [
+            {
+                "fromEntity": "18",
+                "toEntity": "7",
+                "fromColumns": [
+                    "20"
+                ],
+                "toColumn": "9"
+            },
+            {
+                "fromEntity": "18",
+                "toEntity": "7",
+                "fromColumns": [
+                    "20"
+                ],
+                "toColumn": "10"
+            }
+        ],
+        "columns": [
+            {
+                "id": "19",
+                "name": "user_id",
+                "childrenCnt": 0
+            },
+            {
+                "id": "20",
+                "name": "company_name",
+                "childrenCnt": 4
+            }
+        ],
+        "description": null,
+        "source": "",
+        "doc_id": "",
+        "id": "18",
+        "name": "dim_mysql_company",
+        "displayName": "dim_mysql_company"
+    },
+    {
+        "isRootNode": false,
+        "entityType": "table",
+        "pipeline": null,
+        "sqlQuery": null,
+        "nodesLineage": [
+            {
+                "fromEntity": {
+                    "fqn": "dwd_hudi_users",
+                    "id": "7",
+                    "type": "table"
+                },
+                "toEntity": {
+                    "fqn": "dws_users_cnt",
+                    "id": "31",
+                    "type": "table"
+                }
+            }
+        ],
+        "columnsLineage": [],
+        "columns": [
+            {
+                "id": "32",
+                "name": "id",
+                "childrenCnt": 0
+            },
+            {
+                "id": "33",
+                "name": "name_cnt",
+                "childrenCnt": 0
+            },
+            {
+                "id": "34",
+                "name": "company_name_cnt",
+                "childrenCnt": 0
+            }
+        ],
+        "description": null,
+        "source": "",
+        "doc_id": "",
+        "id": "31",
+        "name": "dws_users_cnt",
+        "displayName": "dws_users_cnt"
+    }
+]
