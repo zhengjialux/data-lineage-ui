@@ -1,0 +1,2767 @@
+{
+    "nodes": [
+        {
+            "databaseSchema": {
+                "deleted": false,
+                "displayName": "lbacsys",
+                "name": "lbacsys",
+                "id": "b354a6b7-59e6-4367-9997-e02eaaac8aec",
+                "type": "databaseSchema",
+                "fullyQualifiedName": "TEST-Oracle.default.lbacsys"
+            },
+            "serviceType": "Oracle",
+            "lineage": [
+                {
+                    "toEntity": {
+                        "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                        "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.lbacsys.cdb_lbac_policies",
+                        "id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.lbacsys.cdb_lbac_policies.package"
+                            ],
+                            "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                        }
+                    ],
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+                }
+            ],
+            "columns": [
+                {
+                    "dataLength": 30,
+                    "dataType": "VARCHAR",
+                    "name": "policy_name",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies.policy_name",
+                    "dataTypeDisplay": "varchar2(30)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 128,
+                    "dataType": "VARCHAR",
+                    "name": "column_name",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies.column_name",
+                    "dataTypeDisplay": "varchar2(128)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 30,
+                    "dataType": "VARCHAR",
+                    "name": "package",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies.package",
+                    "dataTypeDisplay": "varchar2(30)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 8,
+                    "dataType": "VARCHAR",
+                    "name": "status",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies.status",
+                    "dataTypeDisplay": "varchar2(8)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "policy_options",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies.policy_options",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 5,
+                    "dataType": "VARCHAR",
+                    "name": "policy_subscribed",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies.policy_subscribed",
+                    "dataTypeDisplay": "varchar2(5)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "con_id",
+                    "description": "container id",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies.con_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                }
+            ],
+            "schemaDefinition": "CREATE OR REPLACE FORCE NONEDITIONABLE VIEW \"LBACSYS\".\"CDB_LBAC_POLICIES\"  CONTAINER_DATA \n (\"POLICY_NAME\", \"COLUMN_NAME\", \"PACKAGE\", \"STATUS\", \"POLICY_OPTIONS\", \"POLICY_SUBSCRIBED\", \"CON_ID\") AS \n  SELECT \"POLICY_NAME\",\"COLUMN_NAME\",\"PACKAGE\",\"STATUS\",\"POLICY_OPTIONS\",\"POLICY_SUBSCRIBED\",\"CON_ID\" FROM CONTAINERS(\"LBACSYS\".\"DBA_LBAC_POLICIES\")",
+            "displayName": "cdb_lbac_policies",
+            "description": " in all containers",
+            "customMetrics": [],
+            "tableType": "View",
+            "database": {
+                "deleted": false,
+                "displayName": "default",
+                "name": "default",
+                "id": "38800062-37ba-48cf-9daf-b69e5922fd5d",
+                "type": "database",
+                "fullyQualifiedName": "TEST-Oracle.default"
+            },
+            "descriptionStatus": "INCOMPLETE",
+            "columnNames": [
+                "policy_name",
+                "column_name",
+                "package",
+                "status",
+                "policy_options",
+                "policy_subscribed",
+                "con_id"
+            ],
+            "tier": null,
+            "totalVotes": 0,
+            "usageSummary": {
+                "date": "2024-08-16",
+                "weeklyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "monthlyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "dailyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                }
+            },
+            "id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b",
+            "updatedAt": 1721184376877,
+            "owner": null,
+            "updatedBy": "ingestion-bot",
+            "entityType": "table",
+            "dataProducts": [],
+            "fullyQualifiedName": "TEST-Oracle.default.lbacsys.cdb_lbac_policies",
+            "version": 0.1,
+            "tableConstraints": [],
+            "tags": [],
+            "sourceHash": "56e693d9e7086384638da57c8ee1d8d0",
+            "followers": [],
+            "deleted": false,
+            "service": {
+                "deleted": false,
+                "displayName": "TEST-Oracle",
+                "name": "TEST-Oracle",
+                "description": "",
+                "id": "0d77f6cc-5d9f-472b-99f0-65283f789bc1",
+                "type": "databaseService",
+                "fullyQualifiedName": "TEST-Oracle"
+            },
+            "domain": null,
+            "name": "cdb_lbac_policies",
+            "votes": {
+                "upVoters": [],
+                "downVoters": [],
+                "upVotes": 0,
+                "downVotes": 0
+            }
+        },
+        {
+            "databaseSchema": {
+                "deleted": false,
+                "displayName": "apex_040200",
+                "name": "apex_040200",
+                "id": "6c09e136-5e70-4e2a-8a5f-091588ce31c5",
+                "type": "databaseSchema",
+                "fullyQualifiedName": "TEST-Oracle.default.apex_040200"
+            },
+            "serviceType": "Oracle",
+            "lineage": [
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_temp_list",
+                        "id": "05ae123a-1579-465c-8d9e-94f6b75141c7",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict",
+                        "id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6-05ae123a-1579-465c-8d9e-94f6b75141c7"
+                },
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict",
+                        "id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                        "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "053ee2b2-ca66-45d3-82b0-80b18de24532-06b288a2-ad37-4a39-bd1d-dd32b881a7e6"
+                }
+            ],
+            "columns": [
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "workspace",
+                    "description": "A work area mapped to one or more database schemas",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.workspace",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "workspace_display_name",
+                    "description": "Display name for the workspace",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.workspace_display_name",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 30,
+                    "dataType": "VARCHAR",
+                    "name": "column_name",
+                    "description": "Name of column or synonym.  Used to match against columns when UI Defaults are used by create wizards.",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.column_name",
+                    "dataTypeDisplay": "varchar2(30)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 30,
+                    "dataType": "VARCHAR",
+                    "name": "synonym_of",
+                    "description": "If a synonym, the name of the base column that it is a synonym of.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.synonym_of",
+                    "dataTypeDisplay": "varchar2(30)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "label",
+                    "description": "Used for item label and report column heading.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.label",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "help_text",
+                    "description": "Used for help text for items and interactive report columns.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.help_text",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "format_mask",
+                    "description": "Used as the format mask for items and report columns.  Can be overwritten by report for form specific format masks.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.format_mask",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "default_value",
+                    "description": "Used as the default value for items.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.default_value",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "form_format_mask",
+                    "description": "If provided, used as the format mask for items, overriding any value for the general format mask.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.form_format_mask",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "form_display_width",
+                    "description": "Used as the width of any items using this Attribute Definition.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.form_display_width",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "form_display_height",
+                    "description": "Used as the height of any items using this Attribute Definition (only used by item types such as textares and shuttles).",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.form_display_height",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 30,
+                    "dataType": "VARCHAR",
+                    "name": "form_data_type",
+                    "description": "Used as the data type for items (specifies whether this item contains VARCHAR or NUMBER data which results in an automatic validation).",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.form_data_type",
+                    "dataTypeDisplay": "varchar2(30)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "report_format_mask",
+                    "description": "If provided, used as the format mask for report columns, overriding any value for the general format mask.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.report_format_mask",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 10,
+                    "dataType": "VARCHAR",
+                    "name": "report_col_alignment",
+                    "description": "Used as the alignment for report column data (e.g. number are usually right justified).",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.report_col_alignment",
+                    "dataTypeDisplay": "varchar2(10)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "created_by",
+                    "description": "User that created this column.",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.created_by",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "DATE",
+                    "name": "created_on",
+                    "description": "Date this column was created.",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.created_on",
+                    "dataTypeDisplay": "date",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "last_updated_by",
+                    "description": "APEX developer who made last update",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.last_updated_by",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "DATE",
+                    "name": "last_updated_on",
+                    "description": "Date of last update",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict.last_updated_on",
+                    "dataTypeDisplay": "date",
+                    "tags": [],
+                    "customMetrics": []
+                }
+            ],
+            "schemaDefinition": "CREATE OR REPLACE FORCE NONEDITIONABLE VIEW \"APEX_040200\".\"APEX_UI_DEFAULTS_ATTR_DICT\" (\"WORKSPACE\", \"WORKSPACE_DISPLAY_NAME\", \"COLUMN_NAME\", \"SYNONYM_OF\", \"LABEL\", \"HELP_TEXT\", \"FORMAT_MASK\", \"DEFAULT_VALUE\", \"FORM_FORMAT_MASK\", \"FORM_DISPLAY_WIDTH\", \"FORM_DISPLAY_HEIGHT\", \"FORM_DATA_TYPE\", \"REPORT_FORMAT_MASK\", \"REPORT_COL_ALIGNMENT\", \"CREATED_BY\", \"CREATED_ON\", \"LAST_UPDATED_BY\", \"LAST_UPDATED_ON\") AS \n  select\n    w.short_name   workspace,\n    w.display_name workspace_display_name,\n    --\n    syn.syn_name column_name,\n    case when c.column_name != syn.syn_name\n         then c.column_name\n         end synonym_of,\n    c.label,\n    c.help_text,\n    c.format_mask,\n    c.default_value,\n    c.form_format_mask,\n    c.form_display_width,\n    c.form_display_height,\n    c.form_data_type,\n    c.report_format_mask,\n    c.report_col_alignment,\n    c.created_by,\n    c.created_on,\n    c.last_updated_by,\n    c.last_updated_on\nfrom wwv_flow_hnt_column_dict c,\n     wwv_flow_hnt_col_dict_syn syn,\n     wwv_flow_company_schemas s,\n     wwv_flow_companies w,\n     (select nvl(v('FLOW_SECURITY_GROUP_ID'),0) sgid,\n            (select sys_context('USERENV','CURRENT_USER') from sys.dual) cu\n        from sys.dual) d\nwhere (s.schema  = cu  or\n      (select wwv_flow_security.has_apex_administrator_role_yn(cu) from sys.dual)='Y' or\n      d.sgid              = w.PROVISIONING_COMPANY_ID) and\n      c.security_group_id = w.PROVISIONING_COMPANY_ID and\n      c.column_id = syn.column_id and\n      syn.security_group_id = w.PROVISIONING_COMPANY_ID and\n      s.security_group_id = w.PROVISIONING_COMPANY_ID and\n      d.sgid != 0 and\n      w.PROVISIONING_COMPANY_ID != 0",
+            "displayName": "apex_ui_defaults_attr_dict",
+            "description": "The Attribute Dictionary is specific to a workspace.  It is part of User Interface Defaults and can be used in report and form creation.",
+            "customMetrics": [],
+            "tableType": "View",
+            "database": {
+                "deleted": false,
+                "displayName": "default",
+                "name": "default",
+                "id": "38800062-37ba-48cf-9daf-b69e5922fd5d",
+                "type": "database",
+                "fullyQualifiedName": "TEST-Oracle.default"
+            },
+            "descriptionStatus": "COMPLETE",
+            "columnNames": [
+                "workspace",
+                "workspace_display_name",
+                "column_name",
+                "synonym_of",
+                "label",
+                "help_text",
+                "format_mask",
+                "default_value",
+                "form_format_mask",
+                "form_display_width",
+                "form_display_height",
+                "form_data_type",
+                "report_format_mask",
+                "report_col_alignment",
+                "created_by",
+                "created_on",
+                "last_updated_by",
+                "last_updated_on"
+            ],
+            "tier": null,
+            "totalVotes": 0,
+            "usageSummary": {
+                "date": "2024-08-16",
+                "weeklyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "monthlyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "dailyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                }
+            },
+            "id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6",
+            "updatedAt": 1721184195061,
+            "owner": null,
+            "updatedBy": "ingestion-bot",
+            "entityType": "table",
+            "dataProducts": [],
+            "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict",
+            "version": 0.1,
+            "tableConstraints": [],
+            "tags": [],
+            "sourceHash": "56f89bb3282a5c631f3dae81e55500d4",
+            "followers": [],
+            "deleted": false,
+            "service": {
+                "deleted": false,
+                "displayName": "TEST-Oracle",
+                "name": "TEST-Oracle",
+                "description": "",
+                "id": "0d77f6cc-5d9f-472b-99f0-65283f789bc1",
+                "type": "databaseService",
+                "fullyQualifiedName": "TEST-Oracle"
+            },
+            "domain": null,
+            "name": "apex_ui_defaults_attr_dict",
+            "votes": {
+                "upVoters": [],
+                "downVoters": [],
+                "upVotes": 0,
+                "downVotes": 0
+            }
+        },
+        {
+            "databaseSchema": {
+                "deleted": false,
+                "displayName": "cascade_connection_test",
+                "name": "cascade_connection_test",
+                "id": "1cea2bf9-17fa-431a-8a3a-26a79c7e4d77",
+                "type": "databaseSchema",
+                "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test"
+            },
+            "serviceType": "Mysql",
+            "lineage": [
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                        "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                        "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_aggregations"
+                        },
+                        {
+                            "fromColumns": [
+                                "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_computations"
+                        }
+                    ],
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7-053ee2b2-ca66-45d3-82b0-80b18de24532"
+                },
+                {
+                    "toEntity": {
+                        "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                        "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.wmsys.cdb_removed_workspaces",
+                        "id": "077b72a4-d41d-40b5-b551-36e8af014086",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.wmsys.cdb_removed_workspaces.owner",
+                                "TEST-Oracle.default.wmsys.cdb_removed_workspaces.workspace_name"
+                            ],
+                            "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                        }
+                    ],
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "077b72a4-d41d-40b5-b551-36e8af014086-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+                },
+                {
+                    "toEntity": {
+                        "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                        "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.lbacsys.cdb_lbac_policies",
+                        "id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.lbacsys.cdb_lbac_policies.package"
+                            ],
+                            "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                        }
+                    ],
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+                }
+            ],
+            "columns": [
+                {
+                    "dataLength": 1,
+                    "dataType": "INT",
+                    "name": "id",
+                    "constraint": "PRIMARY_KEY",
+                    "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id",
+                    "dataTypeDisplay": "int",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "name",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name",
+                    "dataTypeDisplay": "varchar(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "INT",
+                    "name": "age",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.age",
+                    "dataTypeDisplay": "int",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "adress",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.adress",
+                    "dataTypeDisplay": "varchar(255)",
+                    "tags": [],
+                    "customMetrics": []
+                }
+            ],
+            "schemaDefinition": "CREATE TABLE cascade_connection_test.cdc_table (\n\tid INTEGER NOT NULL, \n\tname VARCHAR(255), \n\tage INTEGER, \n\tadress VARCHAR(255), \n\tPRIMARY KEY (id)\n)",
+            "testSuite": {
+                "deleted": false,
+                "displayName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.testSuite",
+                "name": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.testSuite",
+                "id": "2a00ff57-ae79-454e-8905-91d84b287193",
+                "type": "testSuite",
+                "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.testSuite"
+            },
+            "displayName": "cdc_table",
+            "description": "学生基本信息",
+            "customMetrics": [],
+            "tableType": "Regular",
+            "database": {
+                "deleted": false,
+                "displayName": "data_test",
+                "name": "data_test",
+                "id": "c44ab471-d353-4440-9463-504632a60148",
+                "type": "database",
+                "fullyQualifiedName": "TEST-MySQL.data_test"
+            },
+            "descriptionStatus": "INCOMPLETE",
+            "tableProfilerConfig": {
+                "sampleDataCount": 50,
+                "profileSampleType": "PERCENTAGE",
+                "includeColumns": [
+                    {
+                        "columnName": "id"
+                    },
+                    {
+                        "columnName": "name"
+                    },
+                    {
+                        "columnName": "age"
+                    },
+                    {
+                        "columnName": "adress"
+                    }
+                ],
+                "profileSample": 100.0
+            },
+            "columnNames": [
+                "id",
+                "name",
+                "age",
+                "adress"
+            ],
+            "tier": {
+                "tagFQN": "Tier.Tier3",
+                "displayName": "三级",
+                "name": "Tier3",
+                "labelType": "Manual",
+                "description": "**通常是非业务和一般内部系统的部门/组级数据集**\n* 用于产品指标和仪表盘，以推动产品决策\n* 用于跟踪内部系统的运行指标\n* 用于推导其他关键三级数据集的数据源",
+                "style": {},
+                "source": "Classification",
+                "state": "Confirmed"
+            },
+            "totalVotes": 0,
+            "usageSummary": {
+                "date": "2024-08-16",
+                "weeklyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "monthlyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "dailyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                }
+            },
+            "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+            "updatedAt": 1721717361218,
+            "retentionPeriod": "30",
+            "owner": {
+                "deleted": false,
+                "displayName": "模块1产品组",
+                "name": "模块1产品组",
+                "description": "",
+                "id": "5b9afe21-2141-4178-9282-05ba8c6902a0",
+                "type": "team",
+                "fullyQualifiedName": "模块1产品组"
+            },
+            "updatedBy": "zhangyibei",
+            "entityType": "table",
+            "dataProducts": [],
+            "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+            "version": 0.4,
+            "tableConstraints": [],
+            "tags": [
+                {
+                    "tagFQN": "PII.NonSensitive",
+                    "displayName": "标签4",
+                    "name": "NonSensitive",
+                    "labelType": "Manual",
+                    "description": "PII which is easily accessible from public sources and can include zip code, race, gender, and date of birth.",
+                    "style": {},
+                    "source": "Classification",
+                    "state": "Confirmed"
+                },
+                {
+                    "tagFQN": "非敏感数据.非敏感的个人数据",
+                    "displayName": "非敏感的个人数据",
+                    "name": "非敏感的个人数据",
+                    "labelType": "Manual",
+                    "description": "非敏感的个人数据",
+                    "style": {},
+                    "source": "Glossary",
+                    "state": "Confirmed"
+                }
+            ],
+            "sourceHash": "b44dd6ebd6026281a27c5c53ccf30f34",
+            "followers": [],
+            "deleted": false,
+            "service": {
+                "deleted": false,
+                "displayName": "TEST-MySQL",
+                "name": "TEST-MySQL",
+                "description": "",
+                "id": "09714f58-4278-4f0e-9cf0-875da26c1774",
+                "type": "databaseService",
+                "fullyQualifiedName": "TEST-MySQL"
+            },
+            "domain": {
+                "displayName": "产品测试域",
+                "name": "产品测试域",
+                "description": "这是一个产品测试域",
+                "id": "3d8d8b45-c1c1-45c5-8dc1-dee693514b5a",
+                "type": "domain",
+                "fullyQualifiedName": "产品测试域"
+            },
+            "name": "cdc_table",
+            "votes": {
+                "upVoters": [],
+                "downVoters": [],
+                "upVotes": 0,
+                "downVotes": 0
+            }
+        },
+        {
+            "databaseSchema": {
+                "deleted": false,
+                "displayName": "apex_040200",
+                "name": "apex_040200",
+                "id": "6c09e136-5e70-4e2a-8a5f-091588ce31c5",
+                "type": "databaseSchema",
+                "fullyQualifiedName": "TEST-Oracle.default.apex_040200"
+            },
+            "serviceType": "Oracle",
+            "lineage": [
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_component_signatures",
+                        "id": "5fa80c12-5268-4148-a742-64968ae8472b",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_temp_list",
+                        "id": "05ae123a-1579-465c-8d9e-94f6b75141c7",
+                        "type": "table"
+                    },
+                    "sqlQuery": "CREATE OR REPLACE FORCE NONEDITIONABLE VIEW \"APEX_040200\".\"APEX_COMPONENT_SIGNATURES\" (\"PAGE_ID\", \"PAGE_NAME\", \"COMPONENT\", \"COMPONENT_NAME\", \"COMPONENT_SIGNATURE\", \"APPLICATION_1\", \"APPLICATION_2\") AS \n  select page_id,\n       page_name,\n       component,\n       component_name,\n       component_signature,\n       sum(decode(application_id,x.a1,1,0)) as application_1,\n       sum(decode(application_id,x.a2,1,0)) as application_2\n  from\n       (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x,\n       (\n        select 'PAGE' component,\n               page_id,\n               page_name,\n               lpad(page_id,5,'00000')||'. '||page_title component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_PAGES,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE')\n         union all\n        select 'PAGE.VALIDATION' component,\n               page_id,\n               page_name,\n               VALIDATION_NAME component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_PAGE_VAL,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.VALIDATION')\n         union all\n        select 'PAGE.BRANCH' component,\n               page_id,\n               page_name,\n               nvl(branch_name, substr(BRANCH_ACTION,1,40)||length(branch_action)) component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_PAGE_BRANCHES,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.BRANCH')\n         union all\n        select 'PAGE.COMPUTATION' component,\n               page_id,\n               page_name,\n               ITEM_NAME component_name,\n               component_signature,\n               application_id\n          from apex_application_page_comp,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.COMPUTATION')\n         union all\n        select 'PAGE.PROCESS' component,\n               page_id,\n               page_name,\n               PROCESS_NAME component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_PAGE_PROC,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.PROCESS')\n         union all\n        select 'PAGE.REGION' component,\n               page_id,\n               page_name,\n               region_name component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_PAGE_REGIONS,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.REGION')\n         union all\n        select 'PAGE.ITEM' component,\n               page_id,\n               page_name,\n               item_name component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_PAGE_ITEMS,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.ITEM')\n         union all\n        select 'PAGE.BUTTON' component,\n               page_id,\n               page_name,\n               button_name component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_PAGE_BUTTONS,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.BUTTON')\n         union all\n        select 'AUTHENTICATION' component,\n               0 page_id,\n               null page_name,\n               authentication_scheme_name as component_name,\n               component_signature,\n               application_id\n          from apex_application_auth,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='AUTHENTICATION')\n         union all\n        select 'LOV.ENTRY' component,\n               0 page_id,\n               null page_name,\n               LIST_OF_VALUES_NAME||'.'||substr(display_value,1,50) component_name,\n               component_signature,\n               application_id\n          from apex_application_lov_entries,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='LOV.ENTRY')\n         union all\n        select 'LOV' component,\n               0 page_id,\n               null page_name,\n               LIST_OF_VALUES_NAME component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_LOVS,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='LOV')\n         union all\n        select 'APPLICATION.PROCESS' component,\n               0 page_id,\n               null page_name,\n               process_name component_name,\n               component_signature,\n               application_id\n          from apex_application_processes,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='APPLICATION.PROCESS')\n         union all\n        select 'APPLICATION.COMPUTATION' component,\n               0 page_id,\n               null page_name,\n               computation_item component_name,\n               component_signature,\n               application_id\n          from apex_application_computations,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='APPLICATION.COMPUTATION')\n         union all\n        select 'NAVBAR' component,\n               0 page_id,\n               null page_name,\n               ICON_SUBTEXT component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_NAV_BAR,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='NAVBAR')\n         union all\n        select 'TAB' component,\n               t.tab_page page_id,\n               (select name from wwv_flow_steps where flow_id=t.application_id and id=t.tab_page) page_name,\n               tab_name component_name,\n               component_signature,\n               application_id\n          from apex_application_tabs t,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TAB')\n         union all\n        select 'PARENT.TAB' component,\n               0 page_id,\n               null page_name,\n               tab_name component_name,\n               component_signature,\n               application_id\n          from apex_application_parent_tabs t,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PARENT.TAB')\n         union all\n        select 'BREADCRUMB' component,\n               0 page_id,\n               null page_name,\n               BREADCRUMB_NAME component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_BREADCRUMBS,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='BREADCRUMB')\n         union all\n        select 'LIST' component,\n               0 page_id,\n               null page_name,\n               LIST_NAME component_name,\n               component_signature,\n               application_id\n          from apex_application_lists,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='LIST')\n         union all\n        select 'LIST.ENTRY' component,\n               0 page_id,\n               null page_name,\n               list_name||'.'||entry_text component_name,\n               component_signature,\n               application_id\n          from apex_application_list_entries,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='LIST.ENTRY')\n         union all\n        select 'TREE' component,\n               0 page_id,\n               null page_name,\n               tree_name component_name,\n               component_signature,\n               application_id\n          from apex_application_trees,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TREE')\n         union all\n        select 'SHORTCUT' component,\n               0 page_id,\n               null page_name,\n               shortcut_name component_name,\n               component_signature,\n               application_id\n          from apex_application_shortcuts,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='SHORTCUT')\n         union all\n        select 'APPLICATION.ITEM' component,\n               0 page_id,\n               null page_name,\n               ITEM_NAME component_name,\n               component_signature,\n               application_id\n          from apex_application_items,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='APPLICATION.ITEM')\n         union all\n        select 'BUILD.OPTION' component,\n               0 page_id,\n               null page_name,\n               build_option_name component_name,\n               component_signature,\n               application_id\n          from apex_application_build_options,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='BUILD.OPTION')\n         union all\n        select 'BREADCRUMB.ENTRY' component,\n               DEFINED_FOR_PAGE page_id,\n               (select name from wwv_flow_steps where id = DEFINED_FOR_PAGE and flow_id = application_id) page_name,\n               ENTRY_LABEL component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_BC_ENTRIES,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='BREADCRUMB.ENTRY')\n         union all\n        select 'APPLICATION.ATTRIBUTES' component,\n               0 page_id,\n               null page_name,\n               application_name component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATIONS,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='APPLICATION.ATTRIBUTES')\n         union all\n        select 'PAGE.REGION' component,\n               page_id,\n               (select name from wwv_flow_steps where id = v.page_id and flow_id = v.application_id) page_name,\n               (select plug_name from wwv_flow_page_plugs where flow_id = v.application_id and id = v.region_id)||' - IR'\n                   as component_name,\n               component_signature,\n               application_id\n          from apex_application_page_ir v,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where v.application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PAGE.REGION')\n         union all\n        select 'REPORT.COLUMN' component,\n               page_id,\n               (select name from wwv_flow_steps where id = v.page_id and flow_id = v.application_id) page_name,\n               v.report_label component_name,\n               component_signature,\n               application_id\n          from apex_application_page_ir_col v,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where v.application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='REPORT.COLUMN')\n         union all\n        select 'REPORT.COLUMN' component,\n               page_id,\n               page_name,\n               REGION_NAME||'.'||substr(column_alias,1,255) component_name,\n               component_signature,\n               application_id\n          from apex_application_page_rpt_cols,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='REPORT.COLUMN')\n         union all\n        select 'AUTHORIZATION' component,\n               0 page_id,\n               null page_name,\n               AUTHORIZATION_SCHEME_NAME component_name,\n               component_signature,\n               application_id\n          from apex_application_authorization,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='AUTHORIZATION')\n         union all\n        select 'THEME' component,\n               0 page_id,\n               null page_name,\n               theme_name component_name,\n               component_signature,\n               application_id\n          from apex_application_themes,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='THEME')\n         union all\n        select 'TEMPLATE.CALENDAR' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_calendar,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.CALENDAR')\n         union all\n        select 'TEMPLATE.BUTTON' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_button,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.BUTTON')\n         union all\n        select 'TEMPLATE.POPUP' component,\n               0 page_id,\n               null page_name,\n               'POPUP' component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_popuplov,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.POPUP')\n         union all\n        select 'TEMPLATE.REPORT' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_report,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.REPORT')\n         union all\n        select 'TEMPLATE.BREADCRUMB' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_bc,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.BREADCRUMB')\n         union all\n        select 'TEMPLATE.LIST' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_list,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.LIST')\n         union all\n        select 'TEMPLATE.LABEL' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_label,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.LABEL')\n         union all\n        select 'TEMPLATE.REGION' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from APEX_APPLICATION_TEMP_REGION,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.REGION')\n         union all\n        select 'TEMPLATE.PAGE' component,\n               0 page_id,\n               null page_name,\n               template_name component_name,\n               component_signature,\n               application_id\n          from apex_application_temp_page,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEMPLATE.PAGE')\n         union all\n        select 'FLASH_CHART' component,\n               page_id,\n               page_name,\n               region_name||'.'||chart_type component_name,\n               component_signature,\n               application_id\n          from apex_application_page_flash_ch,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='FLASH_CHART')\n         union all\n        select 'FLASH_CHART.SERIES' component,\n               page_id,\n               page_name,\n               region_name||'.'||series_name component_name,\n               component_signature,\n               application_id\n          from apex_application_page_flash_s,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1,x.a2)\n           and (nvl(x.c,'0')='0' or x.c='FLASH_CHART.SERIES')\n         union all\n        select 'WEB.SERVICE' component,\n               0 as page_id,\n               null as page_name,\n               web_service_name as component_name,\n               component_signature,\n               application_id\n          from apex_application_web_services,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1, x.a2)\n           and (nvl(x.c,'0')='0' or x.c='WEB.SERVICE')\n         union all\n        select 'DATA.LOADING' component,\n               0 as page_id,\n               null as page_name,\n               name as component_name,\n               component_signature,\n               application_id\n          from apex_appl_load_tables,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1, x.a2)\n           and (nvl(x.c,'0')='0' or x.c='DATA.LOADING')\n         union all\n        select 'PLUGIN' component,\n               0 as page_id,\n               null as page_name,\n               display_name as component_name,\n               component_signature,\n               application_id\n          from apex_appl_plugins,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1, x.a2)\n           and (nvl(x.c,'0')='0' or x.c='PLUGIN')\n         union all\n        select 'TEXT.MESSAGE' component,\n               0 as page_id,\n               null as page_name,\n               translatable_message as component_name,\n               component_signature,\n               application_id\n          from apex_application_translations,\n               (select nv('APEX_APPLICATION_1') a1, nv('APEX_APPLICATION_2') a2, v('APEX_COMPONENT') c from sys.dual) x\n         where application_id in (x.a1, x.a2)\n           and (nvl(x.c,'0')='0' or x.c='TEXT.MESSAGE')\n       ) d\n group by page_id, page_name, component, component_signature, component_name",
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.apex_040200.apex_application_temp_list.application_id"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_component_signatures.application_2"
+                        },
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.apex_040200.apex_application_temp_list.template_name"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_component_signatures.component_name"
+                        },
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.apex_040200.apex_application_temp_list.application_id"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_component_signatures.application_1"
+                        },
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.apex_040200.apex_application_temp_list.component_signature"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_component_signatures.component_signature"
+                        }
+                    ],
+                    "description": null,
+                    "source": "ViewLineage",
+                    "doc_id": "05ae123a-1579-465c-8d9e-94f6b75141c7-5fa80c12-5268-4148-a742-64968ae8472b"
+                },
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_temp_list",
+                        "id": "05ae123a-1579-465c-8d9e-94f6b75141c7",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict",
+                        "id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6-05ae123a-1579-465c-8d9e-94f6b75141c7"
+                }
+            ],
+            "columns": [
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "workspace",
+                    "description": "A work area mapped to one or more database schemas",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.workspace",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "workspace_display_name",
+                    "description": "Display name for the workspace",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.workspace_display_name",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "application_id",
+                    "description": "Application Primary Key, Unique over all workspaces",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.application_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "application_name",
+                    "description": "Identifies the application",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.application_name",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "template_name",
+                    "description": "Identifies the List template name",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.template_name",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "list_template_current",
+                    "description": "HTML or text to be substituted for the selected (or current) list entry",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.list_template_current",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "list_template_noncurrent",
+                    "description": "HTML or text to be substituted for the non selected (or non-current) list entry",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.list_template_noncurrent",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "list_template_before_rows",
+                    "description": "HTML that displays before any list elements. You can use this attribute to open an HTML table or HTML table row",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.list_template_before_rows",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "list_template_after_rows",
+                    "description": "HTML that displays after list elements. You can use this attribute to close an HTML table or HTML table row",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.list_template_after_rows",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "between_items",
+                    "description": "HTML that displays between list elements",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.between_items",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "before_sub_list",
+                    "description": "HTML that displays before any sub list elements. ",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.before_sub_list",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "after_sub_list",
+                    "description": "HTML that displays after any sub list elements.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.after_sub_list",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "between_sub_list_items",
+                    "description": "HTML that displays between sub list elements",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.between_sub_list_items",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "sub_list_item_current",
+                    "description": "HTML or text to be substituted for the selected (or current) sub list entry",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.sub_list_item_current",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "sub_list_item_noncurrent",
+                    "description": "HTML or text to be substituted for the unselected (or noncurrent) sub list entry",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.sub_list_item_noncurrent",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "item_template_curr_w_child",
+                    "description": "HTML or text to be substituted for the selected (or current) sub list template used when an item has sub list entries",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.item_template_curr_w_child",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "item_template_noncurr_w_child",
+                    "description": "HTML or text to be substituted for the unselected (or noncurrent) list template used when item has sub list items",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.item_template_noncurr_w_child",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "sub_template_curr_w_child",
+                    "description": "HTML or text to be substituted for the selected (or current) sub list template used when an item has sub list entries",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.sub_template_curr_w_child",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "CLOB",
+                    "name": "sub_template_noncurr_w_child",
+                    "description": "HTML or text to be substituted for the unselected (or noncurrent) list template used when item has sub list items",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.sub_template_noncurr_w_child",
+                    "dataTypeDisplay": "clob",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "first_list_template_noncurrent",
+                    "description": "First list template for non current entry template.  Defaults to list template non current.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.first_list_template_noncurrent",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "first_list_template_current",
+                    "description": "First list template for current entry template.  Defaults to list template current.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.first_list_template_current",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "f_item_template_curr_w_child",
+                    "description": "First item template for current entry with child",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.f_item_template_curr_w_child",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "fitem_template_noncurr_w_child",
+                    "description": "First item template for non current entry with child",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.fitem_template_noncurr_w_child",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "is_subscribed",
+                    "description": "Identifies if this List Template is subscribed from another List Template",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.is_subscribed",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 297,
+                    "dataType": "VARCHAR",
+                    "name": "subscribed_from",
+                    "description": "Identifies the master component from which this component is subscribed",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.subscribed_from",
+                    "dataTypeDisplay": "varchar2(297)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "last_updated_by",
+                    "description": "APEX developer who made last update",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.last_updated_by",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "DATE",
+                    "name": "last_updated_on",
+                    "description": "Date of last update",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.last_updated_on",
+                    "dataTypeDisplay": "date",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "theme_number",
+                    "description": "Identifies the numeric identifier of this theme to which this template is associated",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.theme_number",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 40,
+                    "dataType": "VARCHAR",
+                    "name": "theme_class",
+                    "description": "Identifies a specific usage for this template",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.theme_class",
+                    "dataTypeDisplay": "varchar2(40)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "VARCHAR",
+                    "name": "translate_this_template",
+                    "description": "Identifies if this template should be translated",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.translate_this_template",
+                    "dataTypeDisplay": "varchar2(1)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "component_comment",
+                    "description": "Developer comment",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.component_comment",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "list_template_id",
+                    "description": "Primary Key of this template",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.list_template_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "component_signature",
+                    "description": "Identifies attributes defined at a given component level to facilitate application comparisons",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list.component_signature",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                }
+            ],
+            "schemaDefinition": "CREATE OR REPLACE FORCE NONEDITIONABLE VIEW \"APEX_040200\".\"APEX_APPLICATION_TEMP_LIST\" (\"WORKSPACE\", \"WORKSPACE_DISPLAY_NAME\", \"APPLICATION_ID\", \"APPLICATION_NAME\", \"TEMPLATE_NAME\", \"LIST_TEMPLATE_CURRENT\", \"LIST_TEMPLATE_NONCURRENT\", \"LIST_TEMPLATE_BEFORE_ROWS\", \"LIST_TEMPLATE_AFTER_ROWS\", \"BETWEEN_ITEMS\", \"BEFORE_SUB_LIST\", \"AFTER_SUB_LIST\", \"BETWEEN_SUB_LIST_ITEMS\", \"SUB_LIST_ITEM_CURRENT\", \"SUB_LIST_ITEM_NONCURRENT\", \"ITEM_TEMPLATE_CURR_W_CHILD\", \"ITEM_TEMPLATE_NONCURR_W_CHILD\", \"SUB_TEMPLATE_CURR_W_CHILD\", \"SUB_TEMPLATE_NONCURR_W_CHILD\", \"FIRST_LIST_TEMPLATE_NONCURRENT\", \"FIRST_LIST_TEMPLATE_CURRENT\", \"F_ITEM_TEMPLATE_CURR_W_CHILD\", \"FITEM_TEMPLATE_NONCURR_W_CHILD\", \"IS_SUBSCRIBED\", \"SUBSCRIBED_FROM\", \"LAST_UPDATED_BY\", \"LAST_UPDATED_ON\", \"THEME_NUMBER\", \"THEME_CLASS\", \"TRANSLATE_THIS_TEMPLATE\", \"COMPONENT_COMMENT\", \"LIST_TEMPLATE_ID\", \"COMPONENT_SIGNATURE\") AS \n  select\n    w.short_name                     workspace,\n    w.display_name                   workspace_display_name,\n    f.ID                             application_id,\n    f.NAME                           application_name,\n    --\n    t.LIST_TEMPLATE_NAME             template_name,\n    t.LIST_TEMPLATE_CURRENT,\n    t.LIST_TEMPLATE_NONCURRENT,\n    t.LIST_TEMPLATE_BEFORE_ROWS,\n    t.LIST_TEMPLATE_AFTER_ROWS,\n    t.BETWEEN_ITEMS,\n    t.BEFORE_SUB_LIST,\n    t.AFTER_SUB_LIST,\n    t.BETWEEN_SUB_LIST_ITEMS,\n    t.SUB_LIST_ITEM_CURRENT,\n    t.SUB_LIST_ITEM_NONCURRENT,\n    t.ITEM_TEMPLATE_CURR_W_CHILD,\n    t.ITEM_TEMPLATE_NONCURR_W_CHILD,\n    t.SUB_TEMPLATE_CURR_W_CHILD,\n    t.SUB_TEMPLATE_NONCURR_W_CHILD,\n    --\n    t.FIRST_LIST_TEMPLATE_NONCURRENT,\n    t.FIRST_LIST_TEMPLATE_CURRENT,\n    t.F_ITEM_TEMPLATE_CURR_W_CHILD,\n    t.FITEM_TEMPLATE_NONCURR_W_CHILD,\n    --\n    decode(t.REFERENCE_ID,\n    null,'No','Yes')                 is_subscribed,\n    (select flow_id||'. '||name\n     from WWV_FLOW_LIST_TEMPLATES\n     where id = t.REFERENCE_ID)      subscribed_from,\n    --\n    t.LAST_UPDATED_BY                ,\n    t.LAST_UPDATED_ON                ,\n    t.THEME_ID                       theme_number,\n    decode(t.THEME_CLASS_ID,\n       '1','Vertical Unordered List with Bullets',\n       '2','Vertical Ordered List',\n       '3','Horizontal Links List',\n       '4','Horizontal Images with Label List',\n       '5','Vertical Images List',\n       '6','Button List',\n       '7','Tabbed Navigation List',\n       '9','Custom 1',\n       '10','Custom 2',\n       '11','Custom 3',\n       '12','Custom 4',\n       '13','Custom 5',\n       '14','Custom 6',\n       '15','Custom 7',\n       '16','Custom 8',\n       '17','Wizard Progress List',\n       '18','Vertical Unordered List without Bullets',\n       '19','Vertical Sidebar List',\n       '20','Pull Down Menu',\n       '21','Pull Down Menu with Image',\n       '22','Hierarchical Expanding',\n       '23','Hierarchical Expanded',\n       t.THEME_CLASS_ID)             theme_class,\n    t.TRANSLATE_THIS_TEMPLATE,\n    t.LIST_TEMPLATE_COMMENT          component_comment,\n    t.id                             list_template_id,\n    --\n    t.LIST_TEMPLATE_NAME\n    ||' t='||t.THEME_ID\n    ||' c='||t.THEME_CLASS_ID\n    ||' 1='||sys.dbms_lob.substr(t.LIST_TEMPLATE_CURRENT,40,1)||'.'||sys.dbms_lob.getlength(t.LIST_TEMPLATE_CURRENT)\n    ||' 2='||sys.dbms_lob.substr(t.LIST_TEMPLATE_NONCURRENT,40,1)||'.'||sys.dbms_lob.getlength(t.LIST_TEMPLATE_NONCURRENT)\n    ||' 3='||sys.dbms_lob.substr(t.SUB_LIST_ITEM_CURRENT,40,1)||'.'||sys.dbms_lob.getlength(t.SUB_LIST_ITEM_CURRENT)\n    ||' 4='||sys.dbms_lob.substr(t.SUB_LIST_ITEM_NONCURRENT,40,1)||'.'||sys.dbms_lob.getlength(t.SUB_LIST_ITEM_NONCURRENT)\n    ||' 5='||sys.dbms_lob.substr(t.ITEM_TEMPLATE_CURR_W_CHILD,40,1)||'.'||sys.dbms_lob.getlength(t.ITEM_TEMPLATE_CURR_W_CHILD)\n    ||' 6='||sys.dbms_lob.substr(t.ITEM_TEMPLATE_NONCURR_W_CHILD,40,1)||'.'||sys.dbms_lob.getlength(t.ITEM_TEMPLATE_NONCURR_W_CHILD)\n    ||' 7='||sys.dbms_lob.substr(t.SUB_TEMPLATE_CURR_W_CHILD,40,1)||'.'||sys.dbms_lob.getlength(t.SUB_TEMPLATE_CURR_W_CHILD)\n    ||' 8='||sys.dbms_lob.substr(t.SUB_TEMPLATE_NONCURR_W_CHILD,40,1)||'.'||sys.dbms_lob.getlength(t.SUB_TEMPLATE_NONCURR_W_CHILD)\n    ||' t='||t.TRANSLATE_THIS_TEMPLATE\n    ||' r='||decode(t.REFERENCE_ID,null,'N','Y')\n    ||' b='||substr(t.LIST_TEMPLATE_BEFORE_ROWS,1,20)||length(t.LIST_TEMPLATE_BEFORE_ROWS)\n    ||' a='||substr(t.LIST_TEMPLATE_AFTER_ROWS,1,20)||length(t.LIST_TEMPLATE_AFTER_ROWS)\n    ||' b='||substr(t.BETWEEN_ITEMS,1,20)||length(t.BETWEEN_ITEMS)\n    ||' b='||substr(t.BEFORE_SUB_LIST,1,20)||length(t.BEFORE_SUB_LIST)\n    ||' a='||substr(t.AFTER_SUB_LIST,1,20)||length(t.AFTER_SUB_LIST)\n    ||' b='||substr(t.BETWEEN_SUB_LIST_ITEMS,1,20)||length(t.BETWEEN_SUB_LIST_ITEMS)\n    component_signature\nfrom WWV_FLOW_LIST_TEMPLATES t,\n     wwv_flows f,\n     wwv_flow_companies w,\n     wwv_flow_company_schemas s,\n     (select nvl(v('FLOW_SECURITY_GROUP_ID'),0) sgid,\n            (select sys_context('USERENV','CURRENT_USER') from sys.dual) cu\n        from sys.dual) d\nwhere (s.schema  = cu  or\n      (select wwv_flow_security.has_apex_administrator_role_yn(cu) from sys.dual)='Y' or\n      d.sgid              = w.PROVISIONING_COMPANY_ID) and\n      f.security_group_id = w.PROVISIONING_COMPANY_ID and\n      s.security_group_id = w.PROVISIONING_COMPANY_ID and\n      s.schema = f.owner and\n      f.id = t.flow_id and\n      (d.sgid != 0 or nvl(f.BUILD_STATUS,'x') not in ('RUN_ONLY','RUN_AND_HIDDEN')) and\n      w.PROVISIONING_COMPANY_ID != 0",
+            "displayName": "apex_application_temp_list",
+            "description": "Identifies HTML template markup used to render a List with List Elements",
+            "customMetrics": [],
+            "tableType": "View",
+            "database": {
+                "deleted": false,
+                "displayName": "default",
+                "name": "default",
+                "id": "38800062-37ba-48cf-9daf-b69e5922fd5d",
+                "type": "database",
+                "fullyQualifiedName": "TEST-Oracle.default"
+            },
+            "descriptionStatus": "COMPLETE",
+            "columnNames": [
+                "workspace",
+                "workspace_display_name",
+                "application_id",
+                "application_name",
+                "template_name",
+                "list_template_current",
+                "list_template_noncurrent",
+                "list_template_before_rows",
+                "list_template_after_rows",
+                "between_items",
+                "before_sub_list",
+                "after_sub_list",
+                "between_sub_list_items",
+                "sub_list_item_current",
+                "sub_list_item_noncurrent",
+                "item_template_curr_w_child",
+                "item_template_noncurr_w_child",
+                "sub_template_curr_w_child",
+                "sub_template_noncurr_w_child",
+                "first_list_template_noncurrent",
+                "first_list_template_current",
+                "f_item_template_curr_w_child",
+                "fitem_template_noncurr_w_child",
+                "is_subscribed",
+                "subscribed_from",
+                "last_updated_by",
+                "last_updated_on",
+                "theme_number",
+                "theme_class",
+                "translate_this_template",
+                "component_comment",
+                "list_template_id",
+                "component_signature"
+            ],
+            "tier": null,
+            "totalVotes": 0,
+            "usageSummary": {
+                "date": "2024-08-16",
+                "weeklyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "monthlyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "dailyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                }
+            },
+            "id": "05ae123a-1579-465c-8d9e-94f6b75141c7",
+            "updatedAt": 1721184169287,
+            "owner": null,
+            "updatedBy": "ingestion-bot",
+            "entityType": "table",
+            "dataProducts": [],
+            "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_temp_list",
+            "version": 0.1,
+            "tableConstraints": [],
+            "tags": [],
+            "sourceHash": "c184931a63cb2c646f087fc357ea6d51",
+            "followers": [],
+            "deleted": false,
+            "service": {
+                "deleted": false,
+                "displayName": "TEST-Oracle",
+                "name": "TEST-Oracle",
+                "description": "",
+                "id": "0d77f6cc-5d9f-472b-99f0-65283f789bc1",
+                "type": "databaseService",
+                "fullyQualifiedName": "TEST-Oracle"
+            },
+            "domain": null,
+            "name": "apex_application_temp_list",
+            "votes": {
+                "upVoters": [],
+                "downVoters": [],
+                "upVotes": 0,
+                "downVotes": 0
+            }
+        },
+        {
+            "databaseSchema": {
+                "deleted": false,
+                "displayName": "apex_040200",
+                "name": "apex_040200",
+                "id": "6c09e136-5e70-4e2a-8a5f-091588ce31c5",
+                "type": "databaseSchema",
+                "fullyQualifiedName": "TEST-Oracle.default.apex_040200"
+            },
+            "serviceType": "Oracle",
+            "lineage": [
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict",
+                        "id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                        "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "053ee2b2-ca66-45d3-82b0-80b18de24532-06b288a2-ad37-4a39-bd1d-dd32b881a7e6"
+                },
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                        "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                        "type": "table"
+                    },
+                    "pipeline": {
+                        "databaseSchema": {
+                            "deleted": false,
+                            "displayName": "sys",
+                            "name": "sys",
+                            "id": "0da99c7e-a712-4869-8ae7-b67f5a5aab87",
+                            "type": "databaseSchema",
+                            "fullyQualifiedName": "TEST-Oracle.default.sys"
+                        },
+                        "serviceType": "Oracle",
+                        "updatedBy": "ingestion-bot",
+                        "storedProcedureCode": {
+                            "code": "PROCEDURE scheduler$_job_event_handler wrapped\na000000\n1\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\nabcd\n7\n232b b98\n+aFAmIhCfH5egtrdBrd2FZZGdVIwgw2jEiAFV9OdnXM+U+kf8bvDap8sxB94+xH0YT1j6ZxR\n8atXZ1q2YwhMJx9Kx5XhOqV4Ghb0I7QtkKAWX3VuxiBATma3iBfRCGbcUHM9ecBzuJzYD8a1\nkxDwt7Vs2S7PEr40QGyYAsjZ4TW858M6xggCHZhuX3Nw2+WY7nqKj3JkC7RKQ7wUgVp9wEZh\n9+V5qhsEnNuCerB0Erqg/EyjMbJRKcil3+ZX07aahEjbrb2idgJG7yTDBCKAFGZ/E71PRGv0\nr/3cagSqucNa4H+mvD69hHobCF8DiO4VSTjwZNwJyZCP3YzboNu5EBH9ji5KvVW9btNs5DJZ\n/2M+JVjxxgstj0jXWITUFq/7e63p71mEZqH6Qmi1wZhIneZ7jKhatpFZUxrheaZVJCgTceVp\nQIZTqC//f79Jdf7Nv1VI6liE6LSwf1PkbqUwFebMqIqdtWmwE3/RJ1MaiHP+KqPTU1xD7fks\neaF5RFbKK/BqQ9sF1GtNAGUV85RnLDBGsfASBa55CoogY+/BZhzMehnNTveuRA4K0yuuG6s/\nZuJnrtpBxzlB23augT7ltF9GrhB/u1CmrqFfrcbHoRA3PmzhhZWRxLTdAcxpXg+EJnrvlZxN\nn6gEZSCHC7TXUQCf42/NvMVy0W/ccaqL2fXVf3kXiJfFtOH/CWY19UNEZq5dy+SP+YjBw9/O\nVwFZKYtryuvLSbTWX8RcBntCngpOpYARfZlNG59hioVwIgIoFBsUhScdTR96Zh02SR1Z8rKl\n/EyhMcU9fA84iudKTNMK0i1iwmgUHpWb/aw8qcP2Z0Uq9dghi54xgZuDN+z7AQSpTQbRndS8\neBHKRhu2YF5Xkyk9rGugehZ2cWI8n8Uuf09B3ovg1949BdwNthZhJQm26oQsptSSJ7YgPCWe\nQGCylwFAUKAgoNB7vK4KZElkVtLOtMWvu0shbLTpZ86GjIHlTpcjz9h+8sb67dJujbmeRJGn\nm1MsUam9EZSJb1Of74TTq0WqzkU05EFuylC86VMrQQIx68D0dCXC26DHGDpfw4RvfvH0TYB2\nBfHW4b3/YsZlgFsK8D/aedKQ3uLccLIYCyRGWuERjkv6FX7+RSAS3CZa6u5GRpfmu/OcQtvi\nar/Yrn4EB+HHNXrZKWMIt9Fg4gzjSZz4PjHn5KidvAydy634tzanToCSPQHriImqbIvWPoBL\nMVnivD3g3W51kl4P3VYHY96nTjVt0uQvKI3LFgBAdH0sP8o4CQ29cyJjF8KUrgicBIvc2UKa\n1hU8ee99qFa7nAmF4wM+m2ZZA0autR7fkW9czR5/oH/nZ6pdmFQB4lUvlz68i8rHqyix+sxj\nNOkHx5s8QwSk+n+68F5IZsZjuzAN9zduo0FJLQI8+j0GxuEG5BxV2DxF0ZpoTD9eOE9rSE1y\npsqUn4MuukRJZgavDuanYQN3yZT3wXVgok/DMkXrTXcmJpNBJVEFlQuXQHXUVOe5KO81IYGV\nNtOyQwpFwIQzqyU7NLl3SfKTwMLA1sPiNb0YAFa4euH4NDfMf4UfnE0Y0Q05AUUGyqNCOdkY\nDsLDSVKD8TLTnSmdHvmZwH2Mw6o5AlFGtPey6jpMJuDKkAc5WhBmk3x+xG1SoqF8b7aYYOs8\nF/4Vqb2y+/csRqyxMns89D0iHis0XCyPQ4WvBtL/cITfIZnZmYvRebV9lPW6TAjJnEafPNon\nh6cqkf1Tcc3RsyAjsvoNvzzdc0OcbPCO/8HFaMRd0DQAjSWwYbpojMv6ZmwIU1Cc8qrZiW81\nyRlpXVpUPjppZGtTJ2aXJYMgwft56KCLFUGwvnEE6369tDUpsGsMn2MXbuI09vlFho0lr6Ys\nXh4BrgFtjYlMZ8XVujIK0Q+NqvRjCUsNqinicRmowzMolfPDoyx01cQe/4XBaUl7kJdlleWa\nzNTJYgsbyMVegJSCrM3Eba+Tt5Q97Vzifik/JsKw6+YxZcdQQLo1UhJQ4JddY6xVNmHmIlBG\ni9h5XakI4TbTwvvnR3eY/Gows1etzUMzH4TTUOrXhVCc48WPbVOJNTVx46tdrrDbTlIcXHyI\nVUm/+j05TDscp/34u3n1A4cQgLEonL99wXnC3HcwwwleU2mVYTrKtgI/fP85amh4Q6kh5tWc\nibVwnh3QgTnpmgpyN64PWPK/6R6Ly9GLCD0nQu20VisMkRmb8vwNcq+4HpRFvnFobLF9weDH\nbfGBq8mApVrOWJf4YAIA0yFvudiGwHsJIXzcWQUCssmJw9ZqRZN6+7uTj6troaiLQOSHuoVn\nq2siEc16t5BOOlpY9J6CZEi3CrUbsaQKRrHmgyzAoiQCAO9lQf9FZhAUEN9T0IhG9qbo3QLy\nU7c1WEk7LpJVfJCfwm2hbDiB//o+SQubATmcNIhEmXntuVSd2Q+e2D/Rt4G7p+swLiU50m7i\nC2LCsaxH6yqvMdTM8SipVixv/MDXsQ6Gpixmv9C/t5cToTP1m4n0tbkWfJL7RKVUK3/RnLIF\n2aDWXc2/ppZAeSDeuAKogOZom9GlrEso62mXi3NfvkWYNJ1kQLAjSjcmbM83hZY+TXoWK9J2\nQcIpZKR4qnN8s/2WD4DvJFS4Y5/8c7CplrxJ/hPZuyT88s/O0aX1YQVGO+z86HaMJ3JeU7oQ\nbR+xQHCXXW1zCBmauo+8OGbB4XXV4gywJkHDQ3WlX3ytw6U1qe7buZadPekdqcHmIlrSQQ6x\nKNlU11BAwxxELSN7ehylN+DZcE+XhK0AIti37OE6dBxSwigzEMClWir4eyIx2LXl+OPnIqph\nTigfTFn08K49m4NNtcVr9YQmJFg9D56kEIgywAf9sX4EzE7E9Ul44ptgXhKUUux3t93XdDrO\nLQSccv+jKSx4GnI2wgWX2hAzPIbCKXcHDOYMGSj5M6rs8dcL\n",
+                            "language": "SQL"
+                        },
+                        "fullyQualifiedName": "TEST-Oracle.default.sys.SCHEDULER$_JOB_EVENT_HANDLER",
+                        "version": 0.1,
+                        "tags": [],
+                        "database": {
+                            "deleted": false,
+                            "displayName": "default",
+                            "name": "default",
+                            "id": "38800062-37ba-48cf-9daf-b69e5922fd5d",
+                            "type": "database",
+                            "fullyQualifiedName": "TEST-Oracle.default"
+                        },
+                        "sourceHash": "32b1505435fd71cd1b5e2b6b97068641",
+                        "deleted": false,
+                        "service": {
+                            "deleted": false,
+                            "displayName": "TEST-Oracle",
+                            "name": "TEST-Oracle",
+                            "description": "",
+                            "id": "0d77f6cc-5d9f-472b-99f0-65283f789bc1",
+                            "type": "databaseService",
+                            "fullyQualifiedName": "TEST-Oracle"
+                        },
+                        "name": "SCHEDULER$_JOB_EVENT_HANDLER",
+                        "id": "026fc553-59b6-4757-a621-8591e933e6ea",
+                        "updatedAt": 1721187745080
+                    },
+                    "pipelineEntityType": "storedProcedure",
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_temp_button",
+                        "id": "05187861-bb04-4c54-8492-e67c9ec1df93",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.apex_040200.apex_application_temp_button.application_name"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.format_mask"
+                        },
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.apex_040200.apex_application_temp_button.template_name"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.tz_dependent"
+                        }
+                    ],
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "05187861-bb04-4c54-8492-e67c9ec1df93-053ee2b2-ca66-45d3-82b0-80b18de24532"
+                },
+                {
+                    "toEntity": {
+                        "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                        "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                        "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_aggregations"
+                        },
+                        {
+                            "fromColumns": [
+                                "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                            ],
+                            "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_computations"
+                        }
+                    ],
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7-053ee2b2-ca66-45d3-82b0-80b18de24532"
+                }
+            ],
+            "columns": [
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "workspace",
+                    "description": "A work area mapped to one or more database schemas",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.workspace",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "workspace_display_name",
+                    "description": "Display name for the workspace",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.workspace_display_name",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "application_id",
+                    "description": "Application Primary Key, Unique over all workspaces",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.application_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "application_name",
+                    "description": "Identifies the application",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.application_name",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "page_id",
+                    "description": "Identifies the page",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.page_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "interactive_report_id",
+                    "description": "ID of the interactive report",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.interactive_report_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "region_id",
+                    "description": "ID of the interactive report region",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.region_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "column_id",
+                    "description": "ID of this column",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 30,
+                    "dataType": "VARCHAR",
+                    "name": "column_alias",
+                    "description": "Database column name or expression to use in SQL query when displaying this worksheet column",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_alias",
+                    "dataTypeDisplay": "varchar2(30)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "display_order",
+                    "description": "Default display order of this column",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.display_order",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "column_group",
+                    "description": "Name of the column group for this column",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_group",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "column_group_id",
+                    "description": "ID of the column group for this column",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_group_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "report_label",
+                    "description": "Report heading label to use for this column",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.report_label",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "form_label",
+                    "description": "Single row view label to use for this column",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.form_label",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "html_expression",
+                    "description": "HTML column template used to display this column",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.html_expression",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "column_link",
+                    "description": "Optional link target for this column",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_link",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "column_linktext",
+                    "description": "Text do display if a link is defined",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_linktext",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "column_link_attr",
+                    "description": "Link attributes for the column link.  Displayed within the HTML \"A\" tag",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_link_attr",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "column_link_checksum_type",
+                    "description": "An appropriate checksum when linking to protected pages",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_link_checksum_type",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_sorting",
+                    "description": "Determines whether to allow sorting for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_sorting",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_filtering",
+                    "description": "Determines whether to allow filtering for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_filtering",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_highlighting",
+                    "description": "Determines whether to allow highlighting for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_highlighting",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_ctrl_breaks",
+                    "description": "Determines whether to allow control breaks for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_ctrl_breaks",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_aggregations",
+                    "description": "Determines whether to allow aggregations for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_aggregations",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_computations",
+                    "description": "Determines whether to allow computations for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_computations",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_charting",
+                    "description": "Determines whether to allow charting for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_charting",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_group_by",
+                    "description": "Determines whether to allow group by for this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_group_by",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "allow_hide",
+                    "description": "Determines whether to allow hiding this column.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_hide",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "column_type",
+                    "description": "Type of data in this column",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_type",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "display_text_as",
+                    "description": "Format to display this column",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.display_text_as",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "heading_alignment",
+                    "description": "Horizontal alignment of this column's report heading",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.heading_alignment",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "column_alignment",
+                    "description": "Horizontal alignment of this column's report data",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_alignment",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "format_mask",
+                    "description": "Format mask for this column",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.format_mask",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "VARCHAR",
+                    "name": "tz_dependent",
+                    "description": "Column is time zone dependent",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.tz_dependent",
+                    "dataTypeDisplay": "varchar2(1)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 50,
+                    "dataType": "VARCHAR",
+                    "name": "filter_lov_source",
+                    "description": "Query used to retrieve a list of values for the interactive report.  Displayed in the column header dropdowns, and during filter and highlight creation.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.filter_lov_source",
+                    "dataTypeDisplay": "varchar2(50)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "named_lov",
+                    "description": "Identifies the Shared List of Values to be used to display and filter this report column",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.named_lov",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "rpt_lov",
+                    "description": "LOV query to display in filter dropdown",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.rpt_lov",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "filter_date_ranges",
+                    "description": "Determines the range of dates to display for filters on this column",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.filter_date_ranges",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "display_condition_type",
+                    "description": "For conditionally displayed this column; identifies the condition type to evaluate",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.display_condition_type",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "display_condition_type_code",
+                    "description": "Internal code of DISPLAY_CONDITION_TYPE",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.display_condition_type_code",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "display_condition",
+                    "description": "Specifies an expression based on the specific condition type selected.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.display_condition",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "display_condition2",
+                    "description": "Specifies an expression based on the specific condition type selected.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.display_condition2",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "help_text",
+                    "description": "Descriptive help text for this column, displayed when a user clicks on the column information icon",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.help_text",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 259,
+                    "dataType": "VARCHAR",
+                    "name": "authorization_scheme",
+                    "description": "Optional authorization scheme determining whether this column and data is available to a user",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.authorization_scheme",
+                    "dataTypeDisplay": "varchar2(259)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "authorization_scheme_id",
+                    "description": "ID of the authorization scheme",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.authorization_scheme_id",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "column_expr",
+                    "description": "Attribute for internal use only",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.column_expr",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "component_comment",
+                    "description": "Developer Comment",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.component_comment",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "DATE",
+                    "name": "created_on",
+                    "description": "Auditing; date the record was created.",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.created_on",
+                    "dataTypeDisplay": "date",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "created_by",
+                    "description": "Auditing; user that created the record.",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.created_by",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "DATE",
+                    "name": "updated_on",
+                    "description": "Auditing; date the record was last modified.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.updated_on",
+                    "dataTypeDisplay": "date",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 255,
+                    "dataType": "VARCHAR",
+                    "name": "updated_by",
+                    "description": "Auditing; user that last modified the record.",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.updated_by",
+                    "dataTypeDisplay": "varchar2(255)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 4000,
+                    "dataType": "VARCHAR",
+                    "name": "component_signature",
+                    "description": "Identifies attributes defined at a given component level to facilitate application comparisons",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.component_signature",
+                    "dataTypeDisplay": "varchar2(4000)",
+                    "tags": [],
+                    "customMetrics": []
+                }
+            ],
+            "schemaDefinition": "CREATE OR REPLACE FORCE NONEDITIONABLE VIEW \"APEX_040200\".\"APEX_APPLICATION_PAGE_IR_COL\" (\"WORKSPACE\", \"WORKSPACE_DISPLAY_NAME\", \"APPLICATION_ID\", \"APPLICATION_NAME\", \"PAGE_ID\", \"INTERACTIVE_REPORT_ID\", \"REGION_ID\", \"COLUMN_ID\", \"COLUMN_ALIAS\", \"DISPLAY_ORDER\", \"COLUMN_GROUP\", \"COLUMN_GROUP_ID\", \"REPORT_LABEL\", \"FORM_LABEL\", \"HTML_EXPRESSION\", \"COLUMN_LINK\", \"COLUMN_LINKTEXT\", \"COLUMN_LINK_ATTR\", \"COLUMN_LINK_CHECKSUM_TYPE\", \"ALLOW_SORTING\", \"ALLOW_FILTERING\", \"ALLOW_HIGHLIGHTING\", \"ALLOW_CTRL_BREAKS\", \"ALLOW_AGGREGATIONS\", \"ALLOW_COMPUTATIONS\", \"ALLOW_CHARTING\", \"ALLOW_GROUP_BY\", \"ALLOW_HIDE\", \"COLUMN_TYPE\", \"DISPLAY_TEXT_AS\", \"HEADING_ALIGNMENT\", \"COLUMN_ALIGNMENT\", \"FORMAT_MASK\", \"TZ_DEPENDENT\", \"FILTER_LOV_SOURCE\", \"NAMED_LOV\", \"RPT_LOV\", \"FILTER_DATE_RANGES\", \"DISPLAY_CONDITION_TYPE\", \"DISPLAY_CONDITION_TYPE_CODE\", \"DISPLAY_CONDITION\", \"DISPLAY_CONDITION2\", \"HELP_TEXT\", \"AUTHORIZATION_SCHEME\", \"AUTHORIZATION_SCHEME_ID\", \"COLUMN_EXPR\", \"COMPONENT_COMMENT\", \"CREATED_ON\", \"CREATED_BY\", \"UPDATED_ON\", \"UPDATED_BY\", \"COMPONENT_SIGNATURE\") AS \n  select\nw.short_name                workspace,\nw.display_name              workspace_display_name,\nf.id                        application_id,\nf.name                      application_name,\nir.page_id                   page_id,\nir.id                       interactive_report_id,\nir.region_id                region_id,\nc.id                        column_id,\nc.db_column_name            column_alias,\nc.display_order             display_order,\n(select name from wwv_flow_worksheet_col_groups where id = c.group_id) column_group,\nc.group_id                  column_group_id,\nc.report_label              report_label,\nc.column_label              form_label,\nc.column_html_expression    html_expression,\nc.column_link               ,\nc.column_linktext           ,\nc.column_link_attr          ,\nc.column_link_checksum_type ,\n--\ndecode(c.allow_sorting     ,'Y','Yes','N','No',c.allow_sorting     ) allow_sorting     ,\ndecode(c.allow_filtering   ,'Y','Yes','N','No',c.allow_filtering   ) allow_filtering   ,\ndecode(c.allow_highlighting   ,'Y','Yes','N','No',c.allow_highlighting) allow_highlighting,\ndecode(c.allow_ctrl_breaks ,'Y','Yes','N','No',c.allow_ctrl_breaks ) allow_ctrl_breaks ,\ndecode(c.allow_aggregations,'Y','Yes','N','No',c.allow_aggregations) allow_aggregations,\ndecode(c.allow_computations,'Y','Yes','N','No',c.allow_computations) allow_computations,\ndecode(c.allow_charting    ,'Y','Yes','N','No',c.allow_charting    ) allow_charting    ,\ndecode(c.allow_group_by    ,'Y','Yes','N','No',c.allow_group_by    ) allow_group_by    ,\ndecode(c.allow_hide        ,'Y','Yes','N','No',c.allow_hide        ) allow_hide        ,\n--\nc.column_type               ,\nc.display_text_as           ,\nc.heading_alignment         ,\nc.column_alignment          ,\nc.format_mask               ,\ntz_dependent                ,\n--\ndecode(c.rpt_show_filter_lov,\n       'D','Default Based on Column Type',\n       'S','Use Defined List of Values to Filter Exact Match',\n       'C','Use Defined List of Values to Filter Word Contains',\n       '1','Use Named List of Values to Filter Exact Match',\n       '2','Use Named List of Values to Filter Word Contains',\n       'N','None',\n       c.rpt_show_filter_lov)\n                            filter_lov_source,\n(select lov_name\n   from wwv_flow_lists_of_values$\n  where id = c.rpt_named_lov\n)                           named_lov,\nc.rpt_lov                   ,\nc.rpt_filter_date_ranges    filter_date_ranges,\n--\nnvl((select r from apex_standard_conditions where d = c.display_condition_type), c.display_condition_type)\n                            display_condition_type,\nc.display_condition_type    display_condition_type_code,\nc.display_condition         ,\nc.display_condition2        ,\n--\nc.help_text                 ,\n--\ndecode(substr(c.SECURITY_SCHEME,1,1),'!','Not ')||\nnvl((select name\n from   wwv_flow_security_schemes\n where  to_char(id) = ltrim(c.SECURITY_SCHEME,'!')\n and    flow_id = f.id),\n c.SECURITY_SCHEME)             authorization_scheme,\nc.security_scheme               authorization_scheme_id,\nc.column_expr,\nc.column_comment                component_comment,\n--\nc.created_on,\nc.created_by,\nc.updated_on,\nc.updated_by,\n--\n'Interactive Report Column-'||\nc.db_column_name||\n' s='||c.display_order||\n' g='||(select name from wwv_flow_worksheet_col_groups where id = c.group_id)||\n' l='||c.report_label||\nsubstr(c.column_label,1,30)||\nsubstr(c.column_link,1,30)||\nsubstr(c.column_linktext,1,30)||\nsubstr(c.column_link_attr,1,30)||\nc.column_link_checksum_type||\nc.allow_sorting||\nc.allow_filtering||\nc.allow_highlighting||\nc.allow_ctrl_breaks||\nc.allow_aggregations||\nc.allow_computations||\nc.allow_charting||\nc.allow_group_by||\nc.allow_hide||\nc.column_type||\nc.display_text_as||\n' ha='||c.heading_alignment||\n' ca='||c.column_alignment||\n' f='||c.format_mask||\nc.rpt_show_filter_lov||\n' lov='||length(c.rpt_lov)||\n' d='||c.rpt_filter_date_ranges||\n' cond='||c.display_condition_type||\nlength(c.display_condition)||\nlength(c.display_condition2)||\n' h='||length(c.help_text)||\n' as='||decode(substr(c.SECURITY_SCHEME,1,1),'!','Not ')||\nnvl((select name\n from   wwv_flow_security_schemes\n where  to_char(id) = ltrim(c.SECURITY_SCHEME,'!')\n and    flow_id = f.id),\n c.SECURITY_SCHEME)\ncomponent_signature\nfrom wwv_flow_worksheet_columns c,\n     wwv_flow_worksheets ir,\n     wwv_flows f,\n     wwv_flow_companies w,\n     wwv_flow_company_schemas s,\n     (select nvl(v('FLOW_SECURITY_GROUP_ID'),0) sgid,\n            (select sys_context('USERENV','CURRENT_USER') from sys.dual) cu\n        from sys.dual) d\nwhere (s.schema  = cu  or\n      (select wwv_flow_security.has_apex_administrator_role_yn(cu) from sys.dual)='Y' or\n      d.sgid              = w.PROVISIONING_COMPANY_ID) and\n      f.security_group_id = w.PROVISIONING_COMPANY_ID and\n      s.security_group_id = w.PROVISIONING_COMPANY_ID and\n      s.schema = f.owner and\n      f.security_group_id = c.security_group_id and\n      f.id = ir.flow_id and ir.id = c.worksheet_id and\n      (d.sgid != 0 or nvl(f.BUILD_STATUS,'x') not in ('RUN_ONLY','RUN_AND_HIDDEN')) and\n      w.PROVISIONING_COMPANY_ID != 0",
+            "displayName": "apex_application_page_ir_col",
+            "description": "Report column definitions for interactive report columns",
+            "customMetrics": [],
+            "tableType": "View",
+            "database": {
+                "deleted": false,
+                "displayName": "default",
+                "name": "default",
+                "id": "38800062-37ba-48cf-9daf-b69e5922fd5d",
+                "type": "database",
+                "fullyQualifiedName": "TEST-Oracle.default"
+            },
+            "descriptionStatus": "COMPLETE",
+            "columnNames": [
+                "workspace",
+                "workspace_display_name",
+                "application_id",
+                "application_name",
+                "page_id",
+                "interactive_report_id",
+                "region_id",
+                "column_id",
+                "column_alias",
+                "display_order",
+                "column_group",
+                "column_group_id",
+                "report_label",
+                "form_label",
+                "html_expression",
+                "column_link",
+                "column_linktext",
+                "column_link_attr",
+                "column_link_checksum_type",
+                "allow_sorting",
+                "allow_filtering",
+                "allow_highlighting",
+                "allow_ctrl_breaks",
+                "allow_aggregations",
+                "allow_computations",
+                "allow_charting",
+                "allow_group_by",
+                "allow_hide",
+                "column_type",
+                "display_text_as",
+                "heading_alignment",
+                "column_alignment",
+                "format_mask",
+                "tz_dependent",
+                "filter_lov_source",
+                "named_lov",
+                "rpt_lov",
+                "filter_date_ranges",
+                "display_condition_type",
+                "display_condition_type_code",
+                "display_condition",
+                "display_condition2",
+                "help_text",
+                "authorization_scheme",
+                "authorization_scheme_id",
+                "column_expr",
+                "component_comment",
+                "created_on",
+                "created_by",
+                "updated_on",
+                "updated_by",
+                "component_signature"
+            ],
+            "tier": null,
+            "totalVotes": 0,
+            "usageSummary": {
+                "date": "2024-08-16",
+                "weeklyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "monthlyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "dailyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                }
+            },
+            "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+            "updatedAt": 1721184185079,
+            "owner": null,
+            "updatedBy": "ingestion-bot",
+            "entityType": "table",
+            "dataProducts": [],
+            "fullyQualifiedName": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+            "version": 0.1,
+            "tableConstraints": [],
+            "tags": [],
+            "sourceHash": "1daea7a9e4a768509c503bbf7de9b7af",
+            "followers": [],
+            "deleted": false,
+            "service": {
+                "deleted": false,
+                "displayName": "TEST-Oracle",
+                "name": "TEST-Oracle",
+                "description": "",
+                "id": "0d77f6cc-5d9f-472b-99f0-65283f789bc1",
+                "type": "databaseService",
+                "fullyQualifiedName": "TEST-Oracle"
+            },
+            "domain": null,
+            "name": "apex_application_page_ir_col",
+            "votes": {
+                "upVoters": [],
+                "downVoters": [],
+                "upVotes": 0,
+                "downVotes": 0
+            }
+        },
+        {
+            "databaseSchema": {
+                "deleted": false,
+                "displayName": "wmsys",
+                "name": "wmsys",
+                "id": "39d285c0-cd18-412a-a3d2-709720dd39a9",
+                "type": "databaseSchema",
+                "fullyQualifiedName": "TEST-Oracle.default.wmsys"
+            },
+            "serviceType": "Oracle",
+            "lineage": [
+                {
+                    "toEntity": {
+                        "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                        "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                        "type": "table"
+                    },
+                    "pipeline": null,
+                    "fromEntity": {
+                        "fqn": "TEST-Oracle.default.wmsys.cdb_removed_workspaces",
+                        "id": "077b72a4-d41d-40b5-b551-36e8af014086",
+                        "type": "table"
+                    },
+                    "sqlQuery": null,
+                    "columns": [
+                        {
+                            "fromColumns": [
+                                "TEST-Oracle.default.wmsys.cdb_removed_workspaces.owner",
+                                "TEST-Oracle.default.wmsys.cdb_removed_workspaces.workspace_name"
+                            ],
+                            "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                        }
+                    ],
+                    "description": null,
+                    "source": "Manual",
+                    "doc_id": "077b72a4-d41d-40b5-b551-36e8af014086-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+                }
+            ],
+            "columns": [
+                {
+                    "dataLength": 128,
+                    "dataType": "VARCHAR",
+                    "name": "owner",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.owner",
+                    "dataTypeDisplay": "varchar2(128)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 128,
+                    "dataType": "VARCHAR",
+                    "name": "workspace_name",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.workspace_name",
+                    "dataTypeDisplay": "varchar2(128)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "INT",
+                    "name": "workspace_id",
+                    "constraint": "NOT_NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.workspace_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 128,
+                    "dataType": "VARCHAR",
+                    "name": "parent_workspace_name",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.parent_workspace_name",
+                    "dataTypeDisplay": "varchar2(128)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "INT",
+                    "name": "parent_workspace_id",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.parent_workspace_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "TIMESTAMP",
+                    "name": "createtime",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.createtime",
+                    "dataTypeDisplay": "timestamp(6) with time zone",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "TIMESTAMP",
+                    "name": "retiretime",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.retiretime",
+                    "dataTypeDisplay": "timestamp(6) with time zone",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1000,
+                    "dataType": "VARCHAR",
+                    "name": "description",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.description",
+                    "dataTypeDisplay": "varchar2(1000)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "INT",
+                    "name": "mp_root_workspace_id",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.mp_root_workspace_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 3,
+                    "dataType": "VARCHAR",
+                    "name": "continually_refreshed",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.continually_refreshed",
+                    "dataTypeDisplay": "varchar2(3)",
+                    "tags": [],
+                    "customMetrics": []
+                },
+                {
+                    "dataLength": 1,
+                    "dataType": "NUMBER",
+                    "name": "con_id",
+                    "description": "container id",
+                    "constraint": "NULL",
+                    "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces.con_id",
+                    "dataTypeDisplay": "number",
+                    "tags": [],
+                    "customMetrics": []
+                }
+            ],
+            "schemaDefinition": "CREATE OR REPLACE FORCE NONEDITIONABLE VIEW \"WMSYS\".\"CDB_REMOVED_WORKSPACES\"  CONTAINER_DATA \n (\"OWNER\", \"WORKSPACE_NAME\", \"WORKSPACE_ID\", \"PARENT_WORKSPACE_NAME\", \"PARENT_WORKSPACE_ID\", \"CREATETIME\", \"RETIRETIME\", \"DESCRIPTION\", \"MP_ROOT_WORKSPACE_ID\", \"CONTINUALLY_REFRESHED\", \"CON_ID\") AS \n  SELECT \"OWNER\",\"WORKSPACE_NAME\",\"WORKSPACE_ID\",\"PARENT_WORKSPACE_NAME\",\"PARENT_WORKSPACE_ID\",\"CREATETIME\",\"RETIRETIME\",\"DESCRIPTION\",\"MP_ROOT_WORKSPACE_ID\",\"CONTINUALLY_REFRESHED\",\"CON_ID\" FROM CONTAINERS(\"WMSYS\".\"DBA_REMOVED_WORKSPACES\")",
+            "displayName": "cdb_removed_workspaces",
+            "description": " in all containers",
+            "customMetrics": [],
+            "tableType": "View",
+            "database": {
+                "deleted": false,
+                "displayName": "default",
+                "name": "default",
+                "id": "38800062-37ba-48cf-9daf-b69e5922fd5d",
+                "type": "database",
+                "fullyQualifiedName": "TEST-Oracle.default"
+            },
+            "descriptionStatus": "INCOMPLETE",
+            "columnNames": [
+                "owner",
+                "workspace_name",
+                "workspace_id",
+                "parent_workspace_name",
+                "parent_workspace_id",
+                "createtime",
+                "retiretime",
+                "description",
+                "mp_root_workspace_id",
+                "continually_refreshed",
+                "con_id"
+            ],
+            "tier": null,
+            "totalVotes": 0,
+            "usageSummary": {
+                "date": "2024-08-16",
+                "weeklyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "monthlyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                },
+                "dailyStats": {
+                    "percentileRank": 0.0,
+                    "count": 0
+                }
+            },
+            "id": "077b72a4-d41d-40b5-b551-36e8af014086",
+            "updatedAt": 1721187848807,
+            "owner": null,
+            "updatedBy": "ingestion-bot",
+            "entityType": "table",
+            "dataProducts": [],
+            "fullyQualifiedName": "TEST-Oracle.default.wmsys.cdb_removed_workspaces",
+            "version": 0.1,
+            "tableConstraints": [],
+            "tags": [],
+            "sourceHash": "74cc3a6928ff0b0250ff8aa2deec99e1",
+            "followers": [],
+            "deleted": false,
+            "service": {
+                "deleted": false,
+                "displayName": "TEST-Oracle",
+                "name": "TEST-Oracle",
+                "description": "",
+                "id": "0d77f6cc-5d9f-472b-99f0-65283f789bc1",
+                "type": "databaseService",
+                "fullyQualifiedName": "TEST-Oracle"
+            },
+            "domain": null,
+            "name": "cdb_removed_workspaces",
+            "votes": {
+                "upVoters": [],
+                "downVoters": [],
+                "upVotes": 0,
+                "downVotes": 0
+            }
+        }
+    ],
+    "edges": [
+        {
+            "toEntity": {
+                "fqn": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict",
+                "id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6",
+                "type": "table"
+            },
+            "pipeline": null,
+            "fromEntity": {
+                "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                "type": "table"
+            },
+            "sqlQuery": null,
+            "description": null,
+            "source": "Manual",
+            "doc_id": "053ee2b2-ca66-45d3-82b0-80b18de24532-06b288a2-ad37-4a39-bd1d-dd32b881a7e6"
+        },
+        {
+            "toEntity": {
+                "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                "type": "table"
+            },
+            "pipeline": null,
+            "fromEntity": {
+                "fqn": "TEST-Oracle.default.wmsys.cdb_removed_workspaces",
+                "id": "077b72a4-d41d-40b5-b551-36e8af014086",
+                "type": "table"
+            },
+            "sqlQuery": null,
+            "columns": [
+                {
+                    "fromColumns": [
+                        "TEST-Oracle.default.wmsys.cdb_removed_workspaces.owner",
+                        "TEST-Oracle.default.wmsys.cdb_removed_workspaces.workspace_name"
+                    ],
+                    "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                }
+            ],
+            "description": null,
+            "source": "Manual",
+            "doc_id": "077b72a4-d41d-40b5-b551-36e8af014086-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+        },
+        {
+            "toEntity": {
+                "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                "type": "table"
+            },
+            "pipeline": null,
+            "fromEntity": {
+                "fqn": "TEST-Oracle.default.lbacsys.cdb_lbac_policies",
+                "id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b",
+                "type": "table"
+            },
+            "sqlQuery": null,
+            "columns": [
+                {
+                    "fromColumns": [
+                        "TEST-Oracle.default.lbacsys.cdb_lbac_policies.package"
+                    ],
+                    "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                }
+            ],
+            "description": null,
+            "source": "Manual",
+            "doc_id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+        },
+        {
+            "toEntity": {
+                "fqn": "TEST-Oracle.default.apex_040200.apex_application_temp_list",
+                "id": "05ae123a-1579-465c-8d9e-94f6b75141c7",
+                "type": "table"
+            },
+            "pipeline": null,
+            "fromEntity": {
+                "fqn": "TEST-Oracle.default.apex_040200.apex_ui_defaults_attr_dict",
+                "id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6",
+                "type": "table"
+            },
+            "sqlQuery": null,
+            "description": null,
+            "source": "Manual",
+            "doc_id": "06b288a2-ad37-4a39-bd1d-dd32b881a7e6-05ae123a-1579-465c-8d9e-94f6b75141c7"
+        },
+        {
+            "toEntity": {
+                "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                "type": "table"
+            },
+            "pipeline": null,
+            "fromEntity": {
+                "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                "type": "table"
+            },
+            "sqlQuery": null,
+            "columns": [
+                {
+                    "fromColumns": [
+                        "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                    ],
+                    "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_aggregations"
+                },
+                {
+                    "fromColumns": [
+                        "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                    ],
+                    "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_computations"
+                }
+            ],
+            "description": null,
+            "source": "Manual",
+            "doc_id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7-053ee2b2-ca66-45d3-82b0-80b18de24532"
+        }
+    ],
+    "entity": {
+        "databaseSchema": {
+            "deleted": false,
+            "displayName": "cascade_connection_test",
+            "name": "cascade_connection_test",
+            "id": "1cea2bf9-17fa-431a-8a3a-26a79c7e4d77",
+            "type": "databaseSchema",
+            "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test"
+        },
+        "serviceType": "Mysql",
+        "lineage": [
+            {
+                "toEntity": {
+                    "fqn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col",
+                    "id": "053ee2b2-ca66-45d3-82b0-80b18de24532",
+                    "type": "table"
+                },
+                "pipeline": null,
+                "fromEntity": {
+                    "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                    "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                    "type": "table"
+                },
+                "sqlQuery": null,
+                "columns": [
+                    {
+                        "fromColumns": [
+                            "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                        ],
+                        "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_aggregations"
+                    },
+                    {
+                        "fromColumns": [
+                            "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id"
+                        ],
+                        "toColumn": "TEST-Oracle.default.apex_040200.apex_application_page_ir_col.allow_computations"
+                    }
+                ],
+                "description": null,
+                "source": "Manual",
+                "doc_id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7-053ee2b2-ca66-45d3-82b0-80b18de24532"
+            },
+            {
+                "toEntity": {
+                    "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                    "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                    "type": "table"
+                },
+                "pipeline": null,
+                "fromEntity": {
+                    "fqn": "TEST-Oracle.default.wmsys.cdb_removed_workspaces",
+                    "id": "077b72a4-d41d-40b5-b551-36e8af014086",
+                    "type": "table"
+                },
+                "sqlQuery": null,
+                "columns": [
+                    {
+                        "fromColumns": [
+                            "TEST-Oracle.default.wmsys.cdb_removed_workspaces.owner",
+                            "TEST-Oracle.default.wmsys.cdb_removed_workspaces.workspace_name"
+                        ],
+                        "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                    }
+                ],
+                "description": null,
+                "source": "Manual",
+                "doc_id": "077b72a4-d41d-40b5-b551-36e8af014086-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+            },
+            {
+                "toEntity": {
+                    "fqn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+                    "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+                    "type": "table"
+                },
+                "pipeline": null,
+                "fromEntity": {
+                    "fqn": "TEST-Oracle.default.lbacsys.cdb_lbac_policies",
+                    "id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b",
+                    "type": "table"
+                },
+                "sqlQuery": null,
+                "columns": [
+                    {
+                        "fromColumns": [
+                            "TEST-Oracle.default.lbacsys.cdb_lbac_policies.package"
+                        ],
+                        "toColumn": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name"
+                    }
+                ],
+                "description": null,
+                "source": "Manual",
+                "doc_id": "12243fde-dbe0-40a7-a62b-0b9684ddf75b-1eb463ac-9318-42ca-adf8-e3f5a77c45b7"
+            }
+        ],
+        "columns": [
+            {
+                "dataLength": 1,
+                "dataType": "INT",
+                "name": "id",
+                "constraint": "PRIMARY_KEY",
+                "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.id",
+                "dataTypeDisplay": "int",
+                "tags": [],
+                "customMetrics": []
+            },
+            {
+                "dataLength": 255,
+                "dataType": "VARCHAR",
+                "name": "name",
+                "constraint": "NULL",
+                "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.name",
+                "dataTypeDisplay": "varchar(255)",
+                "tags": [],
+                "customMetrics": []
+            },
+            {
+                "dataLength": 1,
+                "dataType": "INT",
+                "name": "age",
+                "constraint": "NULL",
+                "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.age",
+                "dataTypeDisplay": "int",
+                "tags": [],
+                "customMetrics": []
+            },
+            {
+                "dataLength": 255,
+                "dataType": "VARCHAR",
+                "name": "adress",
+                "constraint": "NULL",
+                "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.adress",
+                "dataTypeDisplay": "varchar(255)",
+                "tags": [],
+                "customMetrics": []
+            }
+        ],
+        "schemaDefinition": "CREATE TABLE cascade_connection_test.cdc_table (\n\tid INTEGER NOT NULL, \n\tname VARCHAR(255), \n\tage INTEGER, \n\tadress VARCHAR(255), \n\tPRIMARY KEY (id)\n)",
+        "testSuite": {
+            "deleted": false,
+            "displayName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.testSuite",
+            "name": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.testSuite",
+            "id": "2a00ff57-ae79-454e-8905-91d84b287193",
+            "type": "testSuite",
+            "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table.testSuite"
+        },
+        "displayName": "cdc_table",
+        "description": "学生基本信息",
+        "customMetrics": [],
+        "tableType": "Regular",
+        "database": {
+            "deleted": false,
+            "displayName": "data_test",
+            "name": "data_test",
+            "id": "c44ab471-d353-4440-9463-504632a60148",
+            "type": "database",
+            "fullyQualifiedName": "TEST-MySQL.data_test"
+        },
+        "descriptionStatus": "INCOMPLETE",
+        "tableProfilerConfig": {
+            "sampleDataCount": 50,
+            "profileSampleType": "PERCENTAGE",
+            "includeColumns": [
+                {
+                    "columnName": "id"
+                },
+                {
+                    "columnName": "name"
+                },
+                {
+                    "columnName": "age"
+                },
+                {
+                    "columnName": "adress"
+                }
+            ],
+            "profileSample": 100.0
+        },
+        "columnNames": [
+            "id",
+            "name",
+            "age",
+            "adress"
+        ],
+        "tier": {
+            "tagFQN": "Tier.Tier3",
+            "displayName": "三级",
+            "name": "Tier3",
+            "labelType": "Manual",
+            "description": "**通常是非业务和一般内部系统的部门/组级数据集**\n* 用于产品指标和仪表盘，以推动产品决策\n* 用于跟踪内部系统的运行指标\n* 用于推导其他关键三级数据集的数据源",
+            "style": {},
+            "source": "Classification",
+            "state": "Confirmed"
+        },
+        "totalVotes": 0,
+        "usageSummary": {
+            "date": "2024-08-16",
+            "weeklyStats": {
+                "percentileRank": 0.0,
+                "count": 0
+            },
+            "monthlyStats": {
+                "percentileRank": 0.0,
+                "count": 0
+            },
+            "dailyStats": {
+                "percentileRank": 0.0,
+                "count": 0
+            }
+        },
+        "id": "1eb463ac-9318-42ca-adf8-e3f5a77c45b7",
+        "updatedAt": 1721717361218,
+        "retentionPeriod": "30",
+        "owner": {
+            "deleted": false,
+            "displayName": "模块1产品组",
+            "name": "模块1产品组",
+            "description": "",
+            "id": "5b9afe21-2141-4178-9282-05ba8c6902a0",
+            "type": "team",
+            "fullyQualifiedName": "模块1产品组"
+        },
+        "updatedBy": "zhangyibei",
+        "entityType": "table",
+        "dataProducts": [],
+        "fullyQualifiedName": "TEST-MySQL.data_test.cascade_connection_test.cdc_table",
+        "version": 0.4,
+        "tableConstraints": [],
+        "tags": [
+            {
+                "tagFQN": "PII.NonSensitive",
+                "displayName": "标签4",
+                "name": "NonSensitive",
+                "labelType": "Manual",
+                "description": "PII which is easily accessible from public sources and can include zip code, race, gender, and date of birth.",
+                "style": {},
+                "source": "Classification",
+                "state": "Confirmed"
+            },
+            {
+                "tagFQN": "非敏感数据.非敏感的个人数据",
+                "displayName": "非敏感的个人数据",
+                "name": "非敏感的个人数据",
+                "labelType": "Manual",
+                "description": "非敏感的个人数据",
+                "style": {},
+                "source": "Glossary",
+                "state": "Confirmed"
+            }
+        ],
+        "sourceHash": "b44dd6ebd6026281a27c5c53ccf30f34",
+        "followers": [],
+        "deleted": false,
+        "service": {
+            "deleted": false,
+            "displayName": "TEST-MySQL",
+            "name": "TEST-MySQL",
+            "description": "",
+            "id": "09714f58-4278-4f0e-9cf0-875da26c1774",
+            "type": "databaseService",
+            "fullyQualifiedName": "TEST-MySQL"
+        },
+        "domain": {
+            "displayName": "产品测试域",
+            "name": "产品测试域",
+            "description": "这是一个产品测试域",
+            "id": "3d8d8b45-c1c1-45c5-8dc1-dee693514b5a",
+            "type": "domain",
+            "fullyQualifiedName": "产品测试域"
+        },
+        "name": "cdc_table",
+        "votes": {
+            "upVoters": [],
+            "downVoters": [],
+            "upVotes": 0,
+            "downVotes": 0
+        }
+    }
+}
